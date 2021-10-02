@@ -1,0 +1,8 @@
+### app files ###
+node_modules/
+dist/
+
+.env*
+
+### system files ###
+.DS_Store
