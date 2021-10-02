@@ -1,28 +1,12 @@
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
+const { merge } = require('webpack-merge');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const commonConfig = require('./webpack.common');
 
-const htmlPluginOpts = {
-  template: './src/index.html',
-  scriptLoading: 'defer',
-  favicon: './src/favicon.ico'
-}
-
-module.exports = {
+const devConfig = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: './src/main.js',
-  output: {
-    chunkFilename: '[id].js',
-    clean: true,
-    filename: '[name].[contenthash].bundle.js',
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/'
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
   devServer: {
     client: {
       logging: 'info'
@@ -39,11 +23,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.m?jsx?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
       {
         test: /\.s(a|c)ss$/,
         use: [
@@ -77,8 +56,7 @@ module.exports = {
         ]
       }
     ]
-  },
-  plugins: [
-    new HtmlWebpackPlugin(htmlPluginOpts)
-  ]
+  }
 }
+
+module.exports = merge(commonConfig, devConfig);

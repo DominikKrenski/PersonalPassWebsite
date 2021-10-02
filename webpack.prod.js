@@ -1,42 +1,21 @@
-const path = require('path');
+const { merge } = require('webpack-merge');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-const htmlPluginOpts = {
-  template: './src/index.html',
-  scriptLoading: 'defer',
-  favicon: './src/favicon.ico'
-}
+const commonConfig = require('./webpack.common');
 
 const miniCssPluginOpts = {
   filename: 'assets/css/[name].css'
 }
 
-module.exports = {
+const prodConfig = {
   mode: 'production',
   devtool: 'source-map',
-  entry: './src/main.js',
-  output: {
-    chunkFilename: '[id].js',
-    clean: true,
-    filename: '[name].[contenthash].bundle.js',
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/'
-  },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
   module: {
     rules: [
       {
-        test: /\.m?jsx?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
-      {
-        test: /s(a|c)ss$/,
+        test: /\.s(a|c)ss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader
@@ -79,7 +58,8 @@ module.exports = {
     }
   },
   plugins: [
-    new HtmlWebpackPlugin(htmlPluginOpts),
     new MiniCssExtractPlugin(miniCssPluginOpts)
   ]
 }
+
+module.exports = merge(commonConfig, prodConfig);
