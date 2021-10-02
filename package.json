@@ -21,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/DominikKrenski/PersonalPassWebsite/issues"
   },
-  "homepage": "https://github.com/DominikKrenski/PersonalPassWebsite#readme"
+  "homepage": "https://github.com/DominikKrenski/PersonalPassWebsite#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.0"
+  }
 }
