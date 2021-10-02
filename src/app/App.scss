@@ -1,3 +1,7 @@
-h1 {
-  color: red;
+@use '../assets/scss/colors';
+@use '../../node_modules/bulma/sass/base/minireset.sass';
+
+html {
+  background-color: colors.$white-dark;
+  font-size: 0.9rem;
 }
