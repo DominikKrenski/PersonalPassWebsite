@@ -16,5 +16,13 @@
         "importSource": "react"
       }
     ]
+  ],
+  "plugins": [
+    [
+      "babel-plugin-react-scoped-css",
+      {
+        "include": ".local.(sa|sc|c)ss$"
+      }
+    ]
   ]
 }
