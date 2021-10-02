@@ -26,6 +26,22 @@ module.exports = {
         test: /\.m?jsx?$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.ttf$/,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[hast][ext][query]'
+        }
+      },
+      {
+        test: /\.(png|jpe?g)$/,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/img/[hast][ext][query]'
+        }
       }
     ]
   },
