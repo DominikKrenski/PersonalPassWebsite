@@ -1,0 +1,25 @@
+{
+  "name": "personal-pass",
+  "version": "1.0.0",
+  "description": "Personal Pass Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DominikKrenski/PersonalPassWebsite.git"
+  },
+  "keywords": [
+    "personal pass",
+    "security",
+    "sensitive data",
+    "encryption"
+  ],
+  "author": "Dominik Kreński",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DominikKrenski/PersonalPassWebsite/issues"
+  },
+  "homepage": "https://github.com/DominikKrenski/PersonalPassWebsite#readme"
+}
