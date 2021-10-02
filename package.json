@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config=./webpack.prod.js --color --progress",
+    "serve": "sudo webpack serve --config=./webpack.dev.js --color --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
