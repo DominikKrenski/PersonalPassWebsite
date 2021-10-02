@@ -1,0 +1,20 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "debug": true,
+        "useBuiltIns": "usage",
+        "corejs": { "version": "3.18", "proposals": true }
+      }
+    ],
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic",
+        "throwIfNamespace": true,
+        "importSource": "react"
+      }
+    ]
+  ]
+}
