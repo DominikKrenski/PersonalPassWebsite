@@ -1,0 +1,45 @@
+@import '../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../node_modules/bulma/sass/elements/button.sass';
+@import '../../../../../node_modules/bulma/sass/components/navbar.sass';
+@import '../../../../assets/scss/fonts';
+@import '../../../../assets/scss/colors';
+
+#home-nav {
+  min-height: 63.5px;
+}
+
+.navbar-brand {
+  font-family: 'Anton';
+  font-size: 2.3rem;
+
+  a {
+    color: $blue-dark;
+
+    &:hover, &:active, &:visited, &:active {
+      color: $blue-dark;
+    }
+  }
+
+  span {
+    color: $red;
+  }
+}
+
+.buttons {
+  a:nth-child(1) {
+    font-weight: bold;
+    color: $blue-light !important;
+
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+
+  a:nth-child(2) {
+    background-color: $red;
+    color: $white;
+    font-weight: 900;
+  }
+}
+
+
