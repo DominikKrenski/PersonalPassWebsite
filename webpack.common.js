@@ -32,7 +32,7 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/fonts/[hast][ext][query]'
+          filename: 'assets/fonts/[hash][ext][query]'
         }
       },
       {
@@ -40,7 +40,7 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset/resource',
         generator: {
-          filename: 'assets/img/[hast][ext][query]'
+          filename: 'assets/img/[hash][ext][query]'
         }
       }
     ]
