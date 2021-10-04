@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import Home from './components/home/Home';
+import Registration from './components/registration/Registration';
 
 import './App.scss';
 
@@ -14,6 +15,9 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route path="/signup">
+          <Registration />
         </Route>
       </Switch>
     </Router>
