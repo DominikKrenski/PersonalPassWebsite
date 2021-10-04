@@ -4,13 +4,16 @@
 @import '../../../../../node_modules/bulma/sass/elements/icon.sass';
 @import '../../../../../node_modules/bulma/sass/elements/button.sass';
 @import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/funcs';
 
 #registration-form-wrapper {
   background-color: $white;
   padding-left: 30px;
   padding-right: 30px;
-  padding-bottom: 0px;
+  padding-bottom: 30px;
+  padding-top: 25px;
   margin-top: 5vh;
+  @include border-radius(10px);
 
   label {
     margin-bottom: 0px;
@@ -38,6 +41,5 @@
 
   #registration-button {
     margin-top: 30px;
-    margin-bottom: 30px;
   }
 }
