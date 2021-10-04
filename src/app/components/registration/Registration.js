@@ -1,9 +1,11 @@
+import RegistrationForm from './registration-form/RegistrationForm';
+
 import './Registration.local.scss';
 
 const Registration = () => {
   return (
-    <div id="registration">
-      <p>Registration Component</p>
+    <div id="registration" className="columns">
+      <RegistrationForm />
     </div>
   )
 }
