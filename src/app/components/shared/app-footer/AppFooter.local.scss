@@ -1,0 +1,18 @@
+@import '../../../../../node_modules/bulma/sass/layout/footer.sass';
+@import '../../../../assets/scss/colors';
+
+#app-footer {
+  position: absolute;
+  bottom: 0px;
+  height: 61px;
+  width: 100vw;
+  padding: 20px;
+
+  background-color: $blue-dark;
+
+  p {
+    color: $white;
+    font-weight: bold;
+    text-align: right;
+  }
+}

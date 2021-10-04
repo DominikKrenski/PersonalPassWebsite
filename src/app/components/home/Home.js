@@ -1,6 +1,7 @@
 import HomeNavigation from './home-navigation/HomeNavigation';
 import HomeBanner from './home-banner/HomeBanner';
 import HomeInfo from './home-info/HomeInfo';
+import AppFooter from '../shared/app-footer/AppFooter';
 
 import './Home.local.scss';
 
@@ -10,6 +11,7 @@ const Home = () => {
       <HomeNavigation />
       <HomeBanner />
       <HomeInfo />
+      <AppFooter />
     </div>
   )
 }
