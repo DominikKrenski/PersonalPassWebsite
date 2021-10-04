@@ -50,4 +50,32 @@
   }
 }
 
+.navbar-menu.is-active {
+  position: absolute;
+  top: 63.5px;
+  right: 0px;
+  min-height: 50vh;
+  background-color: $grey-transparent;
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      font-size: 0.8rem;
+      color: $white !important;
+      background-color: transparent;
+    }
+
+    a:nth-child(1) {
+      font-weight: bold;
+    }
+
+    a:nth-child(2) {
+      font-weight: bold;
+      border: none;
+    }
+  }
+}
+
 
