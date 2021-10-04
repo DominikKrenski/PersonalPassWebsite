@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './RegistrationForm.local.scss';
@@ -6,6 +7,18 @@ const RegistrationForm = () => {
   return (
     <div id="registration-form-wrapper" className="column is-half is-offset-one-quarter">
       <form noValidate={true}>
+        {/* FORM HEADER */}
+        <div id="registration-form-header" className="columns is-multiline is-mobile">
+          <div className="column is-two-thirds">
+            <p>Create an account</p>
+          </div>
+
+          <div className="column is-one-third">
+            <p>or <Link to="/signin">Log In</Link></p>
+          </div>
+        </div>
+
+        <hr />
 
         {/* EMAIL FIELD */}
         <div className="field">

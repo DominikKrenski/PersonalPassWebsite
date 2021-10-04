@@ -11,7 +11,7 @@
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 30px;
-  padding-top: 25px;
+  padding-top: 30px;
   margin-top: 5vh;
   @include border-radius(10px);
 
@@ -41,5 +41,39 @@
 
   #registration-button {
     margin-top: 30px;
+  }
+
+  hr {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    background-color: $blue-dark !important;
+  }
+}
+
+#registration-form-header {
+  margin: 0px;
+
+  div {
+    padding: 0px;
+  }
+
+  p {
+    color: $blue-dark;
+    font-weight: bold;
+  }
+
+  a {
+    font-weight: 1rem;
+    color: $blue-light;
+  }
+
+  div:nth-child(1) {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  div:nth-child(2) {
+    text-align: right;
+    padding-top: 5px;
   }
 }
