@@ -1,9 +1,20 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './RegistrationForm.local.scss';
 
 const RegistrationForm = () => {
+  const [passwordFieldType, setPasswordFieldType] = useState("password");
+
+  const handleEyeClick = () => {
+    if (passwordFieldType === 'password') {
+      setPasswordFieldType('text');
+    } else {
+      setPasswordFieldType('password');
+    }
+  }
+
   return (
     <div id="registration-form-wrapper" className="column is-half is-offset-one-quarter">
       <form noValidate={true}>
@@ -35,17 +46,26 @@ const RegistrationForm = () => {
         <div className="field">
           <label className="label" htmlFor="password">Password</label>
           <div className="control has-icons-left has-icons-right">
-            <input className="input" type="password" name="password"/>
+            <input
+              className="input"
+              type={passwordFieldType}
+              name="password"
+            />
             <span className="icon is-left">
               <FontAwesomeIcon icon="lock" size="lg"/>
             </span>
-            <span className="icon is-right">
-              <FontAwesomeIcon icon="eye" size="lg"/>
+            <span id="eye-icon" className="icon is-right" onClick={handleEyeClick}>
+              <FontAwesomeIcon
+                icon={passwordFieldType === 'password' ? 'eye' : 'eye-slash'}
+                size="lg"
+              />
             </span>
           </div>
         </div>
 
         {/* PASSWORD REQUIREMENTS FIELD */}
+        <div id="password-requirements" className="field">
+        </div>
 
         {/* PASSWORD CONFIRM FIELD */}
         <div className="field">

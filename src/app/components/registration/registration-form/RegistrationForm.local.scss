@@ -31,23 +31,12 @@
     border-bottom-color: $blue-dark;
   }
 
-  button {
-    background-color: $red;
-    font-size: 1.3rem !important;
-    font-weight: bold;
-    color: $white;
-    text-align: center !important;
-  }
-
-  #registration-button {
-    margin-top: 30px;
-  }
-
   hr {
     margin-top: 0px;
     margin-bottom: 20px;
     background-color: $blue-dark !important;
   }
+
 }
 
 #registration-form-header {
@@ -75,5 +64,24 @@
   div:nth-child(2) {
     text-align: right;
     padding-top: 5px;
+  }
+}
+
+#eye-icon {
+  pointer-events: visible;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#registration-button {
+  margin-top: 30px;
+
+  button {
+    background-color: $red;
+    font-size: 1.3rem !important;
+    font-weight: bold;
+    color: $white;
+    text-align: center !important;
   }
 }
