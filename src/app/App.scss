@@ -5,3 +5,13 @@ html {
   background-color: $white-dark;
   font-size: 0.9rem;
 }
+
+body {
+  position: relative;
+}
+
+body::after {
+  content: '';
+  display: block;
+  height: 61px;
+}
