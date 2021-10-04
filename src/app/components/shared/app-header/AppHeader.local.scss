@@ -1,0 +1,21 @@
+@import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/fonts';
+
+#app-header {
+  min-height: 63.5px;
+  background-color: $white;
+  padding: 7.25px 0 7.25px 0;
+
+  p {
+    font-family: 'Anton';
+    font-size: 2.3rem;
+    font-weight: bold;
+    text-align: center;
+    color: $blue-dark;
+  }
+
+  span {
+    color: $red;
+  }
+}
