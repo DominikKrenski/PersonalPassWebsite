@@ -10,7 +10,10 @@ import {
   faEnvelope,
   faEye,
   faStickyNote,
-  faEyeSlash
+  faEyeSlash,
+  faCircle,
+  faCheckCircle,
+  faExclamationCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 import Home from './components/home/Home';
@@ -18,7 +21,7 @@ import Registration from './components/registration/Registration';
 
 import './App.scss';
 
-library.add(faLock, faEnvelope, faEye, faStickyNote, faEyeSlash);
+library.add(faLock, faEnvelope, faEye, faStickyNote, faEyeSlash, faCircle, faCheckCircle, faExclamationCircle);
 
 const App = () => {
   return (
