@@ -25,6 +25,14 @@
   }
 }
 
+.navbar-burger {
+  margin-top: 8.35px !important;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
 .buttons {
   a:nth-child(1) {
     font-weight: bold;
