@@ -1,0 +1,43 @@
+@import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../node_modules/bulma/sass/form/_all.sass';
+@import '../../../../../node_modules/bulma/sass/elements/icon.sass';
+@import '../../../../../node_modules/bulma/sass/elements/button.sass';
+@import '../../../../assets/scss/colors';
+
+#registration-form-wrapper {
+  background-color: $white;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 0px;
+  margin-top: 5vh;
+
+  label {
+    margin-bottom: 0px;
+    color: $blue-dark;
+  }
+
+  input {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: $blue-dark;
+  }
+
+  button {
+    background-color: $red;
+    font-size: 1.3rem !important;
+    font-weight: bold;
+    color: $white;
+    text-align: center !important;
+  }
+
+  #registration-button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
