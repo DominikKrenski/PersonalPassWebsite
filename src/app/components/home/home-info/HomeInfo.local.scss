@@ -1,0 +1,18 @@
+@import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/fonts';
+
+#home-info {
+  margin: 0px;
+  background-color: $grey;
+
+  div {
+    text-align: center;
+    color: $white;
+  }
+}
+
+.info-title {
+  font-weight: bold;
+  font-family: 'RobotoMono';
+}
