@@ -1,5 +1,6 @@
 import HomeNavigation from './home-navigation/HomeNavigation';
 import HomeBanner from './home-banner/HomeBanner';
+import HomeInfo from './home-info/HomeInfo';
 
 import './Home.local.scss';
 
@@ -8,6 +9,7 @@ const Home = () => {
     <div id="home">
       <HomeNavigation />
       <HomeBanner />
+      <HomeInfo />
     </div>
   )
 }
