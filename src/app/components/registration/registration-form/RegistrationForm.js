@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './RegistrationForm.local.scss';
 
 const RegistrationForm = () => {
-  const [passwordFieldType, setPasswordFieldType] = useState("password");
+  const [passwordFieldType, setPasswordFieldType] = useState('password');
+  const [requirementsVisible, setRequirementsVisible] = useState(false);
 
   const handleEyeClick = () => {
     if (passwordFieldType === 'password') {
@@ -13,6 +14,10 @@ const RegistrationForm = () => {
     } else {
       setPasswordFieldType('password');
     }
+  }
+
+  const handlePasswordFocus = () => {
+    setRequirementsVisible(true);
   }
 
   return (
@@ -49,6 +54,7 @@ const RegistrationForm = () => {
             <input
               className="input"
               type={passwordFieldType}
+              onFocus={handlePasswordFocus}
               name="password"
             />
             <span className="icon is-left">
@@ -64,8 +70,17 @@ const RegistrationForm = () => {
         </div>
 
         {/* PASSWORD REQUIREMENTS FIELD */}
-        <div id="password-requirements" className="field">
-        </div>
+        {requirementsVisible &&
+          <div id="password-requirements" className="field">
+            <ul>
+              <li>At least 12 characters long</li>
+              <li>At least 1 number</li>
+              <li>At least 1 lowercase letter</li>
+              <li>At least 1 uppercase letter</li>
+              <li>Not your email</li>
+            </ul>
+          </div>
+        }
 
         {/* PASSWORD CONFIRM FIELD */}
         <div className="field">
