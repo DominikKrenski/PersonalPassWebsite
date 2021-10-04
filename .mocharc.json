@@ -1,11 +1,12 @@
 {
   "allowUncaught": false,
-  "asyncOnly": true,
+  "asyncOnly": false,
   "bail": true,
   "checkLeaks": true,
   "failZero": true,
   "forbidPending": true,
   "parallel": true,
+  "require": "@babel/register",
   "timeout": "10000",
   "ui": "bdd",
   "color": true,
