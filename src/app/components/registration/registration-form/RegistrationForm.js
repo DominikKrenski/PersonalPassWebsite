@@ -2,11 +2,42 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import useForm from '../../../hooks/useForm';
+
 import './RegistrationForm.local.scss';
 
 const RegistrationForm = () => {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   const [requirementsVisible, setRequirementsVisible] = useState(false);
+
+  const [data, handleOnChange] = useForm({
+    validators: {
+      email: {
+        required: true,
+        email: true
+      },
+      password: {
+        required: true,
+        minLength: 12,
+        atLeastOneNumber: true,
+        atLeastOneLowercase: true,
+        atLeastOneUppercase: true,
+        notEmail: true
+      },
+      passwordConfirm: {
+        required: true,
+        equalField: 'password'
+      },
+      reminder: {
+        maxLength: 255
+      }
+    }
+  });
+
+  const handleRegisterClick = e => {
+    e.preventDefault();
+    console.log(data);
+  }
 
   const handleEyeClick = () => {
     if (passwordFieldType === 'password') {
@@ -40,7 +71,13 @@ const RegistrationForm = () => {
         <div className="field">
           <label className="label" htmlFor="email">Email</label>
           <div className="control has-icons-left">
-            <input className="input" type="email" name="email"/>
+            <input
+              className="input"
+              type="email"
+              name="email"
+              value={data.email || ''}
+              onChange={handleOnChange('email')}
+            />
             <span className="icon is-left">
               <FontAwesomeIcon icon="envelope" size="lg" />
             </span>
@@ -56,6 +93,8 @@ const RegistrationForm = () => {
               type={passwordFieldType}
               onFocus={handlePasswordFocus}
               name="password"
+              value={data.password || ''}
+              onChange={handleOnChange('password')}
             />
             <span className="icon is-left">
               <FontAwesomeIcon icon="lock" size="lg"/>
@@ -86,7 +125,13 @@ const RegistrationForm = () => {
         <div className="field">
           <label className="label" htmlFor="passwordConfirm">Confirm your password</label>
           <div className="control has-icons-left">
-            <input className="input" type="password" name="passwordConfirm"/>
+            <input
+              className="input"
+              type="password"
+              name="passwordConfirm"
+              value={data.passwordConfirm || ''}
+              onChange={handleOnChange('passwordConfirm')}
+            />
             <span className="icon is-left">
               <FontAwesomeIcon icon="lock" size="lg"/>
             </span>
@@ -97,7 +142,13 @@ const RegistrationForm = () => {
         <div className="field">
           <label className="label" htmlFor="reminder">Reminder (optional)</label>
           <div className="control has-icons-left">
-            <input className="input" type="text" name="reminder"/>
+            <input
+              className="input"
+              type="text"
+              name="reminder"
+              value={data.reminder || ''}
+              onChange={handleOnChange('reminder')}
+            />
             <span className="icon is-left">
               <FontAwesomeIcon icon="sticky-note" size="lg"/>
             </span>
@@ -107,7 +158,7 @@ const RegistrationForm = () => {
         {/* REGISTRATION BUTTON */}
         <div id="registration-button" className="field">
           <div className="control">
-            <button className="button is-fullwidth">Register</button>
+            <button className="button is-fullwidth" onClick={handleRegisterClick}>Register</button>
           </div>
         </div>
       </form>
