@@ -1,0 +1,56 @@
+@import '../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../node_modules/bulma/sass/elements/image.sass';
+@import '../../../../../node_modules/bulma/sass/layout/hero.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/fonts';
+
+#home-banner {
+  min-height: 50vh;
+  background-image: url('../../../../assets/img/mobile-banner.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  p {
+    font-family: 'Courgette';
+    color: $white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: right;
+  }
+}
+
+#lock-icon {
+  display: none;
+}
+
+.hero-body {
+  padding: 20px 20px 0px 20px;
+}
+
+
+@media (min-width: 1024px) {
+  #home-banner {
+    min-height: 470px;
+    background-image: url('../../../../assets/img/desktop-banner.jpeg');
+
+    p {
+      font-size: 2.2rem;
+      text-align: left;
+    }
+  }
+
+  #lock-icon {
+    display: block;
+    position: absolute;
+    top: 501.5px;
+    left: calc(100vw / 2 - 32px);
+  }
+
+  .hero-body {
+    padding-top: calc(470px / 2 - 21.5px);
+  }
+
+}
+
+
