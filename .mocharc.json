@@ -1,0 +1,16 @@
+{
+  "allowUncaught": false,
+  "asyncOnly": true,
+  "bail": true,
+  "checkLeaks": true,
+  "failZero": true,
+  "forbidPending": true,
+  "parallel": true,
+  "timeout": "10000",
+  "ui": "bdd",
+  "color": true,
+  "diff": true,
+  "full-trace": true,
+  "reporter": "spec",
+  "recursive": true
+}
