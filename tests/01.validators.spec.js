@@ -2,7 +2,8 @@ const expect = require('chai').expect;
 const {
   requiredValidator,
   minLengthValidator,
-  maxLengthValidator
+  maxLengthValidator,
+  emailValidator
 } = require('../src/app/utils/validators');
 
 describe('VALIDATORS TEST', () => {
@@ -90,8 +91,32 @@ describe('VALIDATORS TEST', () => {
     it('validator should fail if value is "dom " and max length is 2', () => {
       expect(maxLengthValidator('dom ', 2)).to.equal(2);
     });
+  });
 
+  describe('EMAIL VALIDATOR', () => {
+    it('validator should pass if email is "dominik.krenski@gmail.com"', () => {
+      expect(emailValidator('dominik.krenski@gmail.com')).to.be.null;
+    });
 
+    it('validator should pass if email is "pass.dominik-krenski@ovh"', () => {
+      expect(emailValidator('pass.dominik-krenski@ovh')).to.be.null;
+    });
+
+    it('validator should fail if email is null', () => {
+      expect(emailValidator(null)).to.equal('Email is not valid');
+    });
+
+    it('validator should fail if email is undefined', () => {
+      expect(emailValidator(undefined)).to.equal('Email is not valid');
+    });
+
+    it('validator should pass if email is "dominik@gmail"', () => {
+      expect(emailValidator('dominik@gmail')).to.be.null;
+    });
+
+    it('validator should fail if email is "dominik.yahoo"', () => {
+      expect(emailValidator('dominik.yahoo')).to.equal('Email is not valid');
+    });
   });
 
 
