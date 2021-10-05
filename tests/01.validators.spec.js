@@ -3,7 +3,8 @@ const {
   requiredValidator,
   minLengthValidator,
   maxLengthValidator,
-  emailValidator
+  emailValidator,
+  atLeastOneDigitValidator
 } = require('../src/app/utils/validators');
 
 describe('VALIDATORS TEST', () => {
@@ -119,5 +120,35 @@ describe('VALIDATORS TEST', () => {
     });
   });
 
+  describe('AT_LEAST_ONE_DIGIT VALIDATOR', () => {
+    const message = 'Field must contain at least one digit';
 
+    it('validator should pass if value is "a3"', () => {
+      expect(atLeastOneDigitValidator('a3')).to.be.null;
+    });
+
+    it('validator should pass if value is "akhfja4dsf"', () => {
+      expect(atLeastOneDigitValidator('akhfja4dsf')).to.be.null;
+    });
+
+    it('validator should pass if value is " 4  a"', () => {
+      expect(atLeastOneDigitValidator(' 4 a')).to.be.null;
+    });
+
+    it('validator should fail if value is an empty string', () => {
+      expect(atLeastOneDigitValidator('')).to.equal(message);
+    });
+
+    it('validator should fail if value consists of space', () => {
+      expect(atLeastOneDigitValidator(' ')).to.equal(message);
+    });
+
+    it('validator should fail if value is undefined', () => {
+      expect(atLeastOneDigitValidator(undefined)).to.equal(message);
+    });
+
+    it('validator should fail if value is null', () => {
+      expect(atLeastOneDigitValidator(null)).to.equal(message);
+    });
+  })
 })

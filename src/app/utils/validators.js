@@ -27,3 +27,13 @@ export const maxLengthValidator = (value, maxLength) => {
 
   return maxLength;
 }
+
+export const atLeastOneDigitValidator = value => {
+  const regex = /^.*[0-9].*$/;
+
+  if (value && regex.test(value)) {
+    return null;
+  }
+
+  return 'Field must contain at least one digit';
+}
