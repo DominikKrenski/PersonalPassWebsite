@@ -47,3 +47,13 @@ export const atLeastOneLowercaseValidator = value => {
 
   return 'Field must contain at least one lower-case letter';
 }
+
+export const atLeastOneUppercaseValidator = value => {
+  const regex = /^.*[A-ZĘÓĄŚŁŻŹĆŃ].*$/;
+
+  if (value && regex.test(value)) {
+    return null;
+  }
+
+  return 'Field must contain at least one upper-case letter';
+}

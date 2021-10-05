@@ -5,7 +5,8 @@ const {
   maxLengthValidator,
   emailValidator,
   atLeastOneDigitValidator,
-  atLeastOneLowercaseValidator
+  atLeastOneLowercaseValidator,
+  atLeastOneUppercaseValidator
 } = require('../src/app/utils/validators');
 
 describe('VALIDATORS TEST', () => {
@@ -190,6 +191,46 @@ describe('VALIDATORS TEST', () => {
 
     it('validator should fail if value consists of space', () => {
       expect(atLeastOneLowercaseValidator(' ')).to.equal(message);
+    });
+  });
+
+  describe('AT_LEAST_ONE_UPPERCASE VALIDATOR', () => {
+    const message = 'Field must contain at least one upper-case letter';
+
+    it('validator should pass if value is "DOMINIK"', () => {
+      expect(atLeastOneUppercaseValidator('DOMINIK')).to.be.null;
+    });
+
+    it('validator should pass if value is "Ź"', () => {
+      expect(atLeastOneUppercaseValidator('Ź')).to.be.null;
+    });
+
+    it('validator should pass if value is "ADw2344"', () => {
+      expect(atLeastOneUppercaseValidator('ADw2344')).to.be.null;
+    });
+
+    it('validator should pass if value is " Y  "', () => {
+      expect(atLeastOneUppercaseValidator(' Y  ')).to.be.null;
+    });
+
+    it('validator should pass if value is undefined', () => {
+      expect(atLeastOneUppercaseValidator(undefined)).to.equal(message);
+    });
+
+    it('validator should fail if value is null', () => {
+      expect(atLeastOneUppercaseValidator(null)).to.equal(message);
+    });
+
+    it('validator should fail if value is an empty string', () => {
+      expect(atLeastOneUppercaseValidator('')).to.equal(message);
+    });
+
+    it('validator should fail if value is "df45"', () => {
+      expect(atLeastOneUppercaseValidator('df45')).to.equal(message);
+    });
+
+    it('validator should fail if value consists of 2 spaces', () => {
+      expect(atLeastOneUppercaseValidator('  ')).to.equal(message);
     });
   });
 
