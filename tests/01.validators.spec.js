@@ -4,7 +4,8 @@ const {
   minLengthValidator,
   maxLengthValidator,
   emailValidator,
-  atLeastOneDigitValidator
+  atLeastOneDigitValidator,
+  atLeastOneLowercaseValidator
 } = require('../src/app/utils/validators');
 
 describe('VALIDATORS TEST', () => {
@@ -150,5 +151,47 @@ describe('VALIDATORS TEST', () => {
     it('validator should fail if value is null', () => {
       expect(atLeastOneDigitValidator(null)).to.equal(message);
     });
-  })
+  });
+
+  describe('AT_LEAST_ONE_LOWERCASE VALIDATOR', () => {
+    const message = 'Field must contain at least one lower-case letter';
+
+    it('validator should pass if value is "dom"', () => {
+      expect(atLeastOneLowercaseValidator('dom')).to.be.null;
+    });
+
+    it('validator should pass if value is "ń"', () => {
+      expect(atLeastOneLowercaseValidator('d')).to.be.null;
+    });
+
+    it('validator should pass if value is "ADw2344"', () => {
+      expect(atLeastOneLowercaseValidator('ADw2344')).to.be.null;
+    });
+
+    it('validator should pass if value is "  e   "', () => {
+      expect(atLeastOneLowercaseValidator('  e   ')).to.be.null;
+    });
+
+    it('validator should fail if value is undefined', () => {
+      expect(atLeastOneLowercaseValidator(undefined)).to.equal(message);
+    });
+
+    it('validator should fail if value is null', () => {
+      expect(atLeastOneLowercaseValidator(null)).to.equal(message);
+    });
+
+    it('validator should fail if value is an empty string', () => {
+      expect(atLeastOneLowercaseValidator('')).to.equal(message);
+    });
+
+    it('validator should fail if value is "DF2"', () => {
+      expect(atLeastOneLowercaseValidator('DF2')).to.equal(message);
+    });
+
+    it('validator should fail if value consists of space', () => {
+      expect(atLeastOneLowercaseValidator(' ')).to.equal(message);
+    });
+  });
+
+
 })

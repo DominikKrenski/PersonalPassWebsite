@@ -19,7 +19,7 @@ const RegistrationForm = () => {
       password: {
         required: true,
         minLength: 12,
-        atLeastOneNumber: true,
+        atLeastOneDigit: true,
         atLeastOneLowercase: true,
         atLeastOneUppercase: true,
         notEmail: true

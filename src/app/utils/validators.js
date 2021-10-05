@@ -37,3 +37,13 @@ export const atLeastOneDigitValidator = value => {
 
   return 'Field must contain at least one digit';
 }
+
+export const atLeastOneLowercaseValidator = value => {
+  const regex = /^.*[a-zęóąśłżźćń].*$/;
+
+  if (value && regex.test(value)) {
+    return null;
+  }
+
+  return 'Field must contain at least one lower-case letter';
+}
