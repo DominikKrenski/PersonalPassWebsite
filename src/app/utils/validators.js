@@ -57,3 +57,13 @@ export const atLeastOneUppercaseValidator = value => {
 
   return 'Field must contain at least one upper-case letter';
 }
+
+export const notEmailValidator = (value, email) => {
+  const isEmailInvalid = emailValidator(email);
+
+  if (isEmailInvalid) { return null; }
+
+  const firstPart = email.split('@')[0].toLocaleLowerCase();
+
+  return value.trim().toLocaleLowerCase() === firstPart ? 'Field must not contain email' : null;
+}

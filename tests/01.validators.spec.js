@@ -6,7 +6,8 @@ const {
   emailValidator,
   atLeastOneDigitValidator,
   atLeastOneLowercaseValidator,
-  atLeastOneUppercaseValidator
+  atLeastOneUppercaseValidator,
+  notEmailValidator
 } = require('../src/app/utils/validators');
 
 describe('VALIDATORS TEST', () => {
@@ -234,5 +235,39 @@ describe('VALIDATORS TEST', () => {
     });
   });
 
+  describe('NOT_EMAIL VALIDATOR', () => {
+    const message = 'Field must not contain email';
 
+    it('validator should pass if email is undefined', () => {
+      expect(notEmailValidator('dominik.krenski', undefined)).to.be.null;
+    });
+
+    it('validator should pass if email is null', () => {
+      expect(notEmailValidator('dominik.krenski', null)).to.be.null;
+    });
+
+    it('validator should pass if email is dominik.gmail.com and value is dominik', () => {
+      expect(notEmailValidator('dominik', 'dominik.gmail')).to.be.null;
+    });
+
+    it('validator should pass if email is dom@gmail.com and value is dominik', () => {
+      expect(notEmailValidator('dominik', 'dom@gmail.com')).to.be.null;
+    });
+
+    it('validator should pass if email dominik@gmail.com and value is "  dominik "', () => {
+      expect(notEmailValidator('  dominik ', 'dominik@gmail.com'));
+    });
+
+    it('validator should pass if email is dom@yahoo.com and value is dom84', () => {
+      expect(notEmailValidator('dom84', 'dom@yahoo.com')).to.be.null;
+    })
+
+    it('validator should fail if email is dom@yahoo.com and value is dom', () => {
+      expect(notEmailValidator('dom', 'dom@yahoo.com')).to.equal(message);
+    });
+
+    it('validator should fail if email is dom@yahoo.com and value is DOM', () => {
+      expect(notEmailValidator('DOM', 'dom@yahoo.com')).to.equal(message);
+    });
+  });
 })
