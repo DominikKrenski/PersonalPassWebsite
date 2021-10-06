@@ -15,7 +15,7 @@ const ValidationMessage = props => {
   Object.keys(errors).forEach(key => {
     switch(key) {
       case 'required':
-        el.push(<li key={key}>{capitalize(field)} is required</li>);
+        el.push(<li key={key}>{errors[key]}</li>)
         break;
       case 'email':
         el.push(<li key={key}>{errors[key]}</li>);
