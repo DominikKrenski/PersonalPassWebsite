@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import ValidationMessage from '../../shared/validation-message/ValidationMessage';
+
 import useForm from '../../../hooks/useForm';
 
 import './RegistrationForm.local.scss';
@@ -75,7 +77,7 @@ const RegistrationForm = () => {
           <label className="label" htmlFor="email">Email</label>
           <div className="control has-icons-left">
             <input
-              className="input"
+              className={`input ${errors.email ? "error" : ""}`}
               type="email"
               name="email"
               value={data.email || ''}
@@ -85,6 +87,10 @@ const RegistrationForm = () => {
               <FontAwesomeIcon icon="envelope" size="lg" />
             </span>
           </div>
+          {
+            errors.email &&
+            <ValidationMessage field="email" errors={errors.email} />
+          }
         </div>
 
         {/* PASSWORD FIELD */}
@@ -92,7 +98,7 @@ const RegistrationForm = () => {
           <label className="label" htmlFor="password">Password</label>
           <div className="control has-icons-left has-icons-right">
             <input
-              className="input"
+              className={`input ${errors.password ? "error" : ""}`}
               type={passwordFieldType}
               onFocus={handlePasswordFocus}
               name="password"
@@ -129,7 +135,7 @@ const RegistrationForm = () => {
           <label className="label" htmlFor="passwordConfirm">Confirm your password</label>
           <div className="control has-icons-left">
             <input
-              className="input"
+              className={`input ${errors.passwordConfirm ? "error" : ""}`}
               type="password"
               name="passwordConfirm"
               value={data.passwordConfirm || ''}
@@ -139,6 +145,10 @@ const RegistrationForm = () => {
               <FontAwesomeIcon icon="lock" size="lg"/>
             </span>
           </div>
+          {
+            errors.passwordConfirm &&
+            <ValidationMessage field="passwordConfirm" errors={errors.passwordConfirm}/>
+          }
         </div>
 
         {/* REMINDER FIELD */}
@@ -146,7 +156,7 @@ const RegistrationForm = () => {
           <label className="label" htmlFor="reminder">Reminder (optional)</label>
           <div className="control has-icons-left">
             <input
-              className="input"
+              className={`input ${errors.reminder ? "error" : ""}`}
               type="text"
               name="reminder"
               value={data.reminder || ''}
@@ -156,6 +166,10 @@ const RegistrationForm = () => {
               <FontAwesomeIcon icon="sticky-note" size="lg"/>
             </span>
           </div>
+          {
+            errors.reminder &&
+            <ValidationMessage field="reminder" errors={errors.reminder}/>
+          }
         </div>
 
         {/* REGISTRATION BUTTON */}
