@@ -15,6 +15,7 @@ import {
 const useForm = options => {
   const [data, setData] = useState(options.initialValues || {});
   const [errors, setErrors] = useState({});
+  const [isFormValidated, setFormValidated] = useState(false);
 
   const handleOnChange = key => e => {
     setData({
@@ -94,6 +95,8 @@ const useForm = options => {
 
     console.log(validationErrors);
 
+    setFormValidated(true);
+
     setErrors({
       ...validationErrors
     });
@@ -104,6 +107,7 @@ const useForm = options => {
   return [
     data,
     errors,
+    isFormValidated,
     handleOnChange,
     performValidation
   ]
