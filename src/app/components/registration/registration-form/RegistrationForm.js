@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ValidationMessage from '../../shared/validation-message/ValidationMessage';
+import StatusIcon from '../status-icon/StatusIcon';
 
 import useForm from '../../../hooks/useForm';
 
@@ -12,7 +13,7 @@ const RegistrationForm = () => {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   const [requirementsVisible, setRequirementsVisible] = useState(false);
 
-  const [data, errors, handleOnChange, performValidation] = useForm({
+  const [data, errors, isFormValidated, handleOnChange, performValidation] = useForm({
     validators: {
       email: {
         required: true,
@@ -39,7 +40,13 @@ const RegistrationForm = () => {
   const handleRegisterClick = e => {
     e.preventDefault();
 
-    if (!performValidation()) { return; }
+    if (!performValidation()) {
+      if (!requirementsVisible) {
+        setRequirementsVisible(true);
+      }
+
+      return;
+    }
 
     console.log(data);
   }
@@ -120,12 +127,38 @@ const RegistrationForm = () => {
         {/* PASSWORD REQUIREMENTS FIELD */}
         {requirementsVisible &&
           <div id="password-requirements" className="field">
+            <p>Our minimum password requirements:</p>
             <ul>
-              <li>At least 12 characters long</li>
-              <li>At least 1 number</li>
-              <li>At least 1 lowercase letter</li>
-              <li>At least 1 uppercase letter</li>
-              <li>Not your email</li>
+              <li>
+                <StatusIcon
+                  validated={isFormValidated}
+                  error={errors.password?.minLength}
+                /> At least 12 characters long
+              </li>
+              <li>
+                <StatusIcon
+                  validated={isFormValidated}
+                  error={errors.password?.atLeastOneDigit}
+                /> At least 1 number
+              </li>
+              <li>
+                <StatusIcon
+                  validated={isFormValidated}
+                  error={errors.password?.atLeastOneLowercase}
+                /> At least 1 lowercase letter
+              </li>
+              <li>
+                <StatusIcon
+                  validated={isFormValidated}
+                  error={errors.password?.atLeastOneUppercase}
+                /> At least 1 uppercase letter
+              </li>
+              <li>
+                <StatusIcon
+                  validated={isFormValidated}
+                  error={errors.password?.notEmail}
+                /> Not your email
+              </li>
             </ul>
           </div>
         }
