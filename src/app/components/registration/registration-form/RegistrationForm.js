@@ -10,7 +10,7 @@ const RegistrationForm = () => {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   const [requirementsVisible, setRequirementsVisible] = useState(false);
 
-  const [data, handleOnChange] = useForm({
+  const [data, errors, handleOnChange, performValidation] = useForm({
     validators: {
       email: {
         required: true,
@@ -22,7 +22,7 @@ const RegistrationForm = () => {
         atLeastOneDigit: true,
         atLeastOneLowercase: true,
         atLeastOneUppercase: true,
-        notEmail: true
+        notEmail: 'email'
       },
       passwordConfirm: {
         required: true,
@@ -36,6 +36,9 @@ const RegistrationForm = () => {
 
   const handleRegisterClick = e => {
     e.preventDefault();
+
+    if (!performValidation()) { return; }
+
     console.log(data);
   }
 
