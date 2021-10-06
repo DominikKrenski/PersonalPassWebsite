@@ -39,7 +39,7 @@ const ValidationMessage = props => {
         el.push(<li key={key}>{capitalize(field)} must not contain email</li>);
         break;
       case 'equalField':
-        el.push(<li>{errors[key]}</li>);
+        el.push(<li key={key}>{errors[key]}</li>);
         break
     }
   });
