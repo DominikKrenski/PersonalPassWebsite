@@ -13,7 +13,7 @@ export const emailValidator = value => {
 }
 
 export const minLengthValidator = (value, minLength) => {
-  if(value && value.trim().length >= minLength) {
+  if(value && value.length >= minLength) {
     return null;
   }
 
@@ -21,7 +21,7 @@ export const minLengthValidator = (value, minLength) => {
 }
 
 export const maxLengthValidator = (value, maxLength) => {
-  if (!value || value.trim().length <= maxLength) {
+  if (!value || value.length <= maxLength) {
     return null;
   }
 
@@ -61,9 +61,16 @@ export const atLeastOneUppercaseValidator = value => {
 export const notEmailValidator = (value, email) => {
   const isEmailInvalid = emailValidator(email);
 
-  if (isEmailInvalid) { return null; }
+  if (!value || isEmailInvalid) { return null; }
 
   const firstPart = email.split('@')[0].toLocaleLowerCase();
 
-  return value.trim().toLocaleLowerCase() === firstPart ? 'Field must not contain email' : null;
+  return value.toLocaleLowerCase().includes(firstPart) ? 'Field must not contain email' : null;
+}
+
+export const equalFieldValidator = (sourceValue, targetValue) => {
+  // if source or target is empty, null or undefined validator should be skipped
+  if (!(sourceValue && targetValue)) { return null; }
+
+  return sourceValue === targetValue ? null : 'Fields are not equal';
 }

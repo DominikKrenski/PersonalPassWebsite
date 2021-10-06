@@ -7,7 +7,8 @@ const {
   atLeastOneDigitValidator,
   atLeastOneLowercaseValidator,
   atLeastOneUppercaseValidator,
-  notEmailValidator
+  notEmailValidator,
+  equalFieldValidator
 } = require('../src/app/utils/validators');
 
 describe('VALIDATORS TEST', () => {
@@ -41,13 +42,13 @@ describe('VALIDATORS TEST', () => {
     });
   });
 
-  describe('MINLENGTH VALIDATOR', () => {
+  describe('MIN_LENGTH VALIDATOR', () => {
     it('validator should pass if minlength is 12 and value is Dominik1984!', () => {
       expect(minLengthValidator('Dominik1984!', 12)).to.be.null;
     });
 
-    it('validator should fail if minlength is 10 and value is " Dominik  "', () => {
-      expect(minLengthValidator(' Dominik  ', 10)).to.equal(10);
+    it('validator should pass if minlength is 10 and value is " Dominik  "', () => {
+      expect(minLengthValidator(' Dominik  ', 10)).to.be.null;
     });
 
     it('validator should fails if value is null', () => {
@@ -58,12 +59,12 @@ describe('VALIDATORS TEST', () => {
       expect(minLengthValidator(undefined, 1)).to.equal(1);
     });
 
-    it('validator should fail if value consists of 2 spaces', () => {
-      expect(minLengthValidator('  ', 2)).to.equal(2);
+    it('validator should fail if value consists of 2 spaces and minlength is 2', () => {
+      expect(minLengthValidator('  ', 2)).to.be.null;
     });
   });
 
-  describe('MAXLENGTH VALIDATOR', () => {
+  describe('MAX_LENGTH VALIDATOR', () => {
     it('validator should pass if value is unefined', () => {
       expect(maxLengthValidator(undefined, 10)).to.be.null;
     });
@@ -77,15 +78,15 @@ describe('VALIDATORS TEST', () => {
     });
 
     it('validator should pass if value consists of 4 spaces and max length is 2', () => {
-      expect(maxLengthValidator('    ', 2)).to.be.null;
+      expect(maxLengthValidator('    ', 2)).to.equal(2);
     })
 
-    it('validator should pass if value is "   dominik"', () => {
-      expect(maxLengthValidator('   dominik', 7)).to.be.null;
+    it('validator should fail if value is "   dominik" and maxlength is 7', () => {
+      expect(maxLengthValidator('   dominik', 7)).to.equal(7);
     });
 
-    it('validator should pass if value is "dom  "', () => {
-      expect(maxLengthValidator('dom  ', 3)).to.be.null;
+    it('validator should fail if value is "dom  "', () => {
+      expect(maxLengthValidator('dom  ', 3)).to.equal(3);
     });
 
     it('validator should fail if value is "dom" and max length is 2', () => {
@@ -250,16 +251,16 @@ describe('VALIDATORS TEST', () => {
       expect(notEmailValidator('dominik', 'dominik.gmail')).to.be.null;
     });
 
-    it('validator should pass if email is dom@gmail.com and value is dominik', () => {
-      expect(notEmailValidator('dominik', 'dom@gmail.com')).to.be.null;
+    it('validator should fail if email is dom@gmail.com and value is dominik', () => {
+      expect(notEmailValidator('dominik', 'dom@gmail.com')).to.equal(message);
     });
 
     it('validator should pass if email dominik@gmail.com and value is "  dominik "', () => {
       expect(notEmailValidator('  dominik ', 'dominik@gmail.com'));
     });
 
-    it('validator should pass if email is dom@yahoo.com and value is dom84', () => {
-      expect(notEmailValidator('dom84', 'dom@yahoo.com')).to.be.null;
+    it('validator should fail if email is dom@yahoo.com and value is dom84', () => {
+      expect(notEmailValidator('dom84', 'dom@yahoo.com')).to.equal(message);
     })
 
     it('validator should fail if email is dom@yahoo.com and value is dom', () => {
@@ -268,6 +269,42 @@ describe('VALIDATORS TEST', () => {
 
     it('validator should fail if email is dom@yahoo.com and value is DOM', () => {
       expect(notEmailValidator('DOM', 'dom@yahoo.com')).to.equal(message);
+    });
+
+    it('validator should pass if email is dominik@gmail.com and value is undefined', () => {
+      expect(notEmailValidator(undefined, 'dominik.krenski@gmail.com')).to.be.null;
+    });
+
+    it('validator should pass if value is null and email is dom@yahoo.com', () => {
+      expect(notEmailValidator(null, 'dom@yahoo.com')).to.be.null;
+    });
+
+    it('validator should pass if value is an empty string and email is dom@gmail.com', () => {
+      expect(notEmailValidator('', 'dom@gmail.com')).to.be.null;
+    })
+  });
+
+  describe('EQUAL_FIELD VALIDATOR', () => {
+    const message = 'Fields are not equal';
+
+    it('validator should pass if sourceValue is undefined and targetValue is bla', () => {
+      expect(equalFieldValidator(undefined, 'bla')).to.be.null;
+    });
+
+    it('validator should pass if sourceValue is null and targetValue is bla', () => {
+      expect(equalFieldValidator(null, 'bla')).to.be.null;
+    });
+
+    it('validator should pass if source value is "" and targetValue is bla', () => {
+      expect(equalFieldValidator('', 'bla')).to.be.null;
+    });
+
+    it('validator should pass if sourceValue is bla and targetValue is undefined', () => {
+      expect(equalFieldValidator('bla', undefined)).to.be.null;
+    });
+
+    it('validator should fail if sourceValue consists of 2 spaces and target value is bla', () => {
+      expect(equalFieldValidator('  ', 'bla')).to.be.equal(message);
     });
   });
 })
