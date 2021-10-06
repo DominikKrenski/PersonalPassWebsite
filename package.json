@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config=./webpack.prod.js --color --progress",
     "serve": "sudo webpack serve --config=./webpack.dev.js --color --progress",
+    "cypress:open": "cypress open",
     "test": "mocha ./tests/**/*.spec.js"
   },
   "repository": {
