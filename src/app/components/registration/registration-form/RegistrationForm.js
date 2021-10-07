@@ -80,7 +80,7 @@ const RegistrationForm = () => {
         <hr />
 
         {/* EMAIL FIELD */}
-        <div className="field">
+        <div className="field" id="email-field">
           <label className="label" htmlFor="email">Email</label>
           <div className="control has-icons-left">
             <input
@@ -101,7 +101,7 @@ const RegistrationForm = () => {
         </div>
 
         {/* PASSWORD FIELD */}
-        <div className="field">
+        <div className="field" id="password-field">
           <label className="label" htmlFor="password">Password</label>
           <div className="control has-icons-left has-icons-right">
             <input
@@ -164,7 +164,7 @@ const RegistrationForm = () => {
         }
 
         {/* PASSWORD CONFIRM FIELD */}
-        <div className="field">
+        <div className="field" id="password-confirm-field">
           <label className="label" htmlFor="passwordConfirm">Confirm your password</label>
           <div className="control has-icons-left">
             <input
@@ -185,7 +185,7 @@ const RegistrationForm = () => {
         </div>
 
         {/* REMINDER FIELD */}
-        <div className="field">
+        <div className="field" id="reminder-field">
           <label className="label" htmlFor="reminder">Reminder (optional)</label>
           <div className="control has-icons-left">
             <input
