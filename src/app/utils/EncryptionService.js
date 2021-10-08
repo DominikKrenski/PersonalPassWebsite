@@ -15,6 +15,24 @@ class EncryptionService {
     return tmp.join('');
   }
 
+  #converHexIntoTypedArray(hex) {
+    if (hex.length % 2 !== 0) {
+      throw new Error('HEX string has invalid number of characters');
+    }
+
+    if (!/[0-9A-F]/i.test(hex)) {
+      throw new Error('Not valid HEX');
+    }
+
+    // split string into 2 char pairs
+    const pairs = hex.match(/[0-9A-F]{2}/ig);
+
+    // convert each pair into corresponing UINT_16
+    const ints = pairs.map(el => parseInt(el, 16));
+
+    return new Uint8Array(ints);
+  }
+
   async #importKey(str) {
     const keyData = this.#convertStringIntoUint8Array(str);
 
@@ -29,6 +47,22 @@ class EncryptionService {
 
   async #generateDerivationKey(data, salt) {
     const key = await this.#importKey(data);
+
+    return window.crypto.subtle.deriveBits(
+      {
+        name: 'PBKDF2',
+        hash: 'SHA-256',
+        salt: salt,
+        iterations: 100100
+      },
+      key,
+      256
+    );
+  }
+
+  async regenerateDerivationKey(password, saltHex) {
+    const salt = this.#converHexIntoTypedArray(saltHex);
+    const key = await this.#importKey(password);
 
     return window.crypto.subtle.deriveBits(
       {
