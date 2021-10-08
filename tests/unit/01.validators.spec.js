@@ -9,7 +9,7 @@ const {
   atLeastOneUppercaseValidator,
   notEmailValidator,
   equalFieldValidator
-} = require('../src/app/utils/validators');
+} = require('../../src/app/utils/validators');
 
 describe('VALIDATORS TEST', () => {
   describe('REQUIRED VALIDATOR', () => {
