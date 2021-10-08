@@ -7,6 +7,7 @@ import StatusIcon from '../status-icon/StatusIcon';
 
 import useForm from '../../../hooks/useForm';
 import encryptionService from '../../../utils/EncryptionService';
+import httpClient from '../../../utils/HttpClient';
 
 import './RegistrationForm.local.scss';
 

@@ -9,6 +9,7 @@ class HttpClient {
       timeout: 10000,
       withCredentials: true,
       responseType: 'json',
+      responseEncoding: 'utf-8',
       maxContentLength: 2000,
       decompress: true
     });
