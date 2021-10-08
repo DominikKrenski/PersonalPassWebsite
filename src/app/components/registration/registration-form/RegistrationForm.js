@@ -6,6 +6,7 @@ import ValidationMessage from '../../shared/validation-message/ValidationMessage
 import StatusIcon from '../status-icon/StatusIcon';
 
 import useForm from '../../../hooks/useForm';
+import encryptionService from '../../../utils/EncryptionService';
 
 import './RegistrationForm.local.scss';
 
@@ -37,7 +38,7 @@ const RegistrationForm = () => {
     }
   });
 
-  const handleRegisterClick = e => {
+  const handleRegisterClick = async e => {
     e.preventDefault();
 
     if (!performValidation()) {
@@ -48,7 +49,12 @@ const RegistrationForm = () => {
       return;
     }
 
-    console.log(data);
+    try {
+      const registrationData = await encryptionService.prepareRegistrationData(data);
+      console.log(registrationData);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const handleEyeClick = () => {
