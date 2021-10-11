@@ -15,6 +15,10 @@ class HttpClient {
     });
   }
 
+  get(url, opts) {
+    return this.#instance.get(url, opts);
+  }
+
   post(url, data, opts) {
     return this.#instance.post(url, data, opts);
   }
