@@ -5,7 +5,7 @@ class HttpClient {
 
   constructor() {
     this.#instance = axios.create({
-      baseURL: 'https://personal-pass.dev:8443',
+      baseURL: process.env.SERVER_URL,
       timeout: 10000,
       withCredentials: true,
       responseType: 'json',
@@ -13,6 +13,10 @@ class HttpClient {
       maxContentLength: 2000,
       decompress: true
     });
+  }
+
+  post(url, data, opts) {
+    return this.#instance.post(url, data, opts);
   }
 }
 
