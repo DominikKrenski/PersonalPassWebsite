@@ -1,0 +1,87 @@
+@import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../node_modules/bulma/sass/form/_all.sass';
+@import '../../../../../node_modules/bulma/sass/elements/icon.sass';
+@import '../../../../../node_modules/bulma/sass/elements/button.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/funcs';
+
+#login-form-wrapper {
+  background-color: $white;
+  padding: 30px;
+  margin-top: 5vh;
+  @include border-radius(10px);
+
+  label {
+    margin-bottom: 0px;
+    color: $blue-dark;
+  }
+
+  input {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: $blue-dark;
+  }
+
+  .error {
+    border-bottom-color: $orange;
+  }
+
+  hr {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    background-color: $blue-dark !important;
+  }
+}
+
+#login-form-header {
+  margin: 0px;
+
+  div {
+    padding: 0px
+  }
+
+  p {
+    color: $blue-dark;
+    font-weight: bold;
+  }
+
+  a {
+    font-weight: 1rem;
+    color: $blue-light;
+  }
+
+  div:nth-child(1) {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  div:nth-child(2) {
+    text-align: right;
+    padding-top: 5px;
+  }
+}
+
+#eye-icon {
+  pointer-events: visible;
+  &:hover {
+    cursor: pointer
+  }
+}
+
+#login-button {
+  margin-top: 30px;
+
+  button {
+    background-color: $red;
+    font-size: 1.3rem !important;
+    font-weight: bold;
+    color: $white;
+    text-align: center !important;
+  }
+}
