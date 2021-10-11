@@ -106,6 +106,15 @@ class EncryptionService {
 
     return registrationData;
   }
+
+  async prepareLoginData(email, derivationKey) {
+    const derivationKeyHash = await this.#generateDerivationKeyHash(derivationKey);
+
+    return {
+      email: email,
+      password: derivationKeyHash
+    }
+  }
 }
 
 const encryptionService = new EncryptionService();
