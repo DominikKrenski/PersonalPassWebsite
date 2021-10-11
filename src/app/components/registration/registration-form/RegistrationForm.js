@@ -8,6 +8,7 @@ import StatusIcon from '../status-icon/StatusIcon';
 import useForm from '../../../hooks/useForm';
 import encryptionService from '../../../utils/EncryptionService';
 import httpClient from '../../../utils/HttpClient';
+import urls from '../../../utils/urls';
 
 import './RegistrationForm.local.scss';
 
@@ -54,7 +55,7 @@ const RegistrationForm = () => {
 
     try {
       const registrationData = await encryptionService.prepareRegistrationData(data);
-      const res = await httpClient.post('/signup', registrationData);
+      const res = await httpClient.post(urls.signup, registrationData);
       history.push('/signin');
     } catch (err) {
       if (err.response) {
