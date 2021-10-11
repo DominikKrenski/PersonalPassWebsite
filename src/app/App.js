@@ -18,6 +18,7 @@ import {
 
 import Home from './components/home/Home';
 import Registration from './components/registration/Registration';
+import Login from './components/login/Login';
 
 import './App.scss';
 
@@ -32,6 +33,9 @@ const App = () => {
         </Route>
         <Route path="/signup">
           <Registration />
+        </Route>
+        <Route path="/signin">
+          <Login />
         </Route>
       </Switch>
     </Router>
