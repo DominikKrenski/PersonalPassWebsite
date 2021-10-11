@@ -16,7 +16,7 @@ const RegistrationForm = () => {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   const [requirementsVisible, setRequirementsVisible] = useState(false);
 
-  const [data, errors, isFormValidated, handleOnChange, performValidation] = useForm({
+  const [handleOnChange, performValidation, data, errors, isFormValidated] = useForm({
     validators: {
       email: {
         required: true,
@@ -66,6 +66,7 @@ const RegistrationForm = () => {
         console.log(err.request)
       } else {
         // something happened in setting up the request that triggered an Error
+        console.log(err);
       }
     }
   }
