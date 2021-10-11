@@ -93,8 +93,6 @@ const useForm = options => {
       if (Object.keys(fieldErrors).length !== 0) { validationErrors[field] = fieldErrors; isFormValid = false; }
     });
 
-    console.log(validationErrors);
-
     setFormValidated(true);
 
     setErrors({
@@ -105,11 +103,11 @@ const useForm = options => {
   }
 
   return [
+    handleOnChange,
+    performValidation,
     data,
     errors,
-    isFormValidated,
-    handleOnChange,
-    performValidation
+    isFormValidated
   ]
 }
 
