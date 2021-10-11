@@ -5,13 +5,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useForm from '../../../hooks/useForm';
 
 import ValidationMessage from '../../shared/validation-message/ValidationMessage';
+import encryptionService from '../../../utils/EncryptionService';
+import httpClient from '../../../utils/HttpClient';
+import urls from '../../../utils/urls';
 
 import './LoginForm.local.scss';
 
 const LoginForm = () => {
   const [passwordFieldType, setPasswordFieldType] = useState('password');
 
-  const [data, errors, isFormValidated, handleOnChange, performValidation] = useForm({
+  const [handleOnChange, performValidation, data, errors] = useForm({
     validators: {
       email: {
         required: true,
@@ -37,9 +40,31 @@ const LoginForm = () => {
     if (!performValidation()) { return; }
 
     try {
-      console.log(data);
+      // get salt related to given email
+      const saltHEX = await httpClient.post(urls.salt, {email: data.email})
+
+      // restore derivation key
+      const derivationKey = await encryptionService.regenerateDerivationKey(data.password, saltHEX);
+
+      // prepare login data
+      const loginData = await encryptionService.prepareLoginData(data.email, derivationKey);
+
+      // send login request
+      const res = await httpClient.post(urls.signin, loginData);
+
+      // TODO after successful response -> encrypt derivationKey and store it in IndexedDB
+
     } catch(err) {
-      console.log(err);
+      if (err.response) {
+        // request was made and server responded with status code that falls out of range of 2xx
+        console.log(err.response);
+      } else if (err.request) {
+        // request was made but no response was received
+        console.log(err.request);
+      } else {
+        // something happened in setting up the request that triggered an Error
+        console.log(err);
+      }
     }
   }
 
