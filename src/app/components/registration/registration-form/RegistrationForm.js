@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ValidationMessage from '../../shared/validation-message/ValidationMessage';
@@ -39,6 +39,8 @@ const RegistrationForm = () => {
     }
   });
 
+  const history = useHistory();
+
   const handleRegisterClick = async e => {
     e.preventDefault();
 
@@ -52,9 +54,18 @@ const RegistrationForm = () => {
 
     try {
       const registrationData = await encryptionService.prepareRegistrationData(data);
-      console.log(registrationData);
+      const res = await httpClient.post('/signup', registrationData);
+      history.push('/signin');
     } catch (err) {
-      console.log(err);
+      if (err.response) {
+        // request was made and server responded with a status code that falls out of the range of 2xx
+        console.log(err.response);
+      } else if (err.request) {
+        //request was made but no response was received
+        console.log(err.request)
+      } else {
+        // something happened in setting up the request that triggered an Error
+      }
     }
   }
 
