@@ -112,7 +112,7 @@ class EncryptionService {
 
     return {
       email: email,
-      password: derivationKeyHash
+      password: this.#convertTypedArrayIntoHex(derivationKeyHash)
     }
   }
 }
