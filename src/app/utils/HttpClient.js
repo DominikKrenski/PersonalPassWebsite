@@ -7,7 +7,7 @@ class HttpClient {
     this.#instance = axios.create({
       baseURL: process.env.SERVER_URL,
       timeout: 10000,
-      withCredentials: true,
+      withCredentials: false,
       responseType: 'json',
       responseEncoding: 'utf-8',
       maxContentLength: 2000,
