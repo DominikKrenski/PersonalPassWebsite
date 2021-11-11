@@ -41,10 +41,10 @@ const LoginForm = () => {
 
     try {
       // get salt related to given email
-      const saltHEX = await httpClient.post(urls.salt, {email: data.email})
+      const saltRes = await httpClient.post(urls.salt, {email: data.email});
 
       // restore derivation key
-      const derivationKey = await encryptionService.regenerateDerivationKey(data.password, saltHEX);
+      const derivationKey = await encryptionService.regenerateDerivationKey(data.password, saltRes.data.salt);
 
       // prepare login data
       const loginData = await encryptionService.prepareLoginData(data.email, derivationKey);
@@ -53,7 +53,6 @@ const LoginForm = () => {
       const res = await httpClient.post(urls.signin, loginData);
 
       // TODO after successful response -> encrypt derivationKey and store it in IndexedDB
-
     } catch(err) {
       if (err.response) {
         // request was made and server responded with status code that falls out of range of 2xx
