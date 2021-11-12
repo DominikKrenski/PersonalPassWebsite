@@ -1,3 +1,11 @@
+/**
+ * Urls module
+ * @module urls
+ */
+
+/**
+ * Exposed server endpoints
+ */
 const urls = {
   signup: '/auth/signup',
   signin: '/auth/signin',
