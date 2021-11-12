@@ -1,6 +1,7 @@
 ### app files ###
 node_modules/
 dist/
+docs/
 
 .env*
 
