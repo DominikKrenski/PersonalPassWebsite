@@ -7,6 +7,8 @@ import useForm from '../../../hooks/useForm';
 import ValidationMessage from '../../shared/validation-message/ValidationMessage';
 import encryptionService from '../../../utils/EncryptionService';
 import httpClient from '../../../utils/HttpClient';
+import sessionService from '../../../utils/SessionService';
+import dbService from '../../../utils/DatabaseService';
 import urls from '../../../utils/urls';
 
 import './LoginForm.local.scss';
@@ -52,7 +54,37 @@ const LoginForm = () => {
       // send login request
       const res = await httpClient.post(urls.signin, loginData);
 
-      // TODO after successful response -> encrypt derivationKey and store it in IndexedDB
+      // get user from access token
+      const accessToken = res.data.accessToken;
+      const refreshToken = res.data.refreshToken;
+
+      const user = JSON.parse(encryptionService.convertBase64ToString(accessToken.split(".")[1]));
+
+      // save user's public id in session storage
+      sessionService.clear();
+      sessionService.set('account_id', user.sub);
+
+      // encrypt derivation key
+      const encryptedMaster = await encryptionService.encryptMasterKey(derivationKey, process.env.PRIVATE_KEY);
+
+      // encrypt access_token
+      const encryptedAccessToken = await encryptionService.encryptData(accessToken, derivationKey);
+
+      // encrypt refresh_token
+      const encryptedRefreshToken = await encryptionService.encryptData(refreshToken, derivationKey);
+
+      // save derivation key access_token's and refresh_token's vector in Session Storage
+      sessionService.set('private_vector', encryptedMaster.vector);
+      sessionService.set('access_vector', encryptedAccessToken.vector);
+      sessionService.set('refresh_vector', encryptedRefreshToken.vector);
+
+      // save encrypted master key, access token and refresh token in IndexedDB
+      const id = await dbService.accounts.put({
+        account_id: user.sub,
+        master_key: encryptedMaster.masterKey,
+        access_token: encryptedAccessToken.encryptedData,
+        refresh_token: encryptedRefreshToken.encryptedData
+      });
     } catch(err) {
       if (err.response) {
         // request was made and server responded with status code that falls out of range of 2xx
@@ -62,7 +94,7 @@ const LoginForm = () => {
         console.log(err.request);
       } else {
         // something happened in setting up the request that triggered an Error
-        console.log(err);
+        console.log(err.name);
       }
     }
   }
