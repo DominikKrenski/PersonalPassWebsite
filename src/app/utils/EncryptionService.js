@@ -140,7 +140,7 @@ class EncryptionService {
    * Converts UTF-16 string into CryptoKey that can be used to generate derivatation key with PBKDF2 algorithm.
    *
    * @param {string} str string to be coverted into CryptoKey
-   * @returns {Promise} Promise object representing CryptoKey
+   * @returns {Promise<Uint8Array>} Promise object representing CryptoKey
    * @throws {SyntaxError} raised when `keyUsages is empty but the unwrapped key is of type `secret` or `private`
    * @throws {TypeError} raised when trying to use an invalid format or if the `keyData` is not suited for that format
    */
@@ -160,7 +160,7 @@ class EncryptionService {
    * Converts Uint8Array into CryptoKey that can be used to encrypt/decrypt text with AES-GCM algorithm
    *
    * @param {Uint8Array} keyBytes key stored as raw byte array
-   * @returns {Promise} Promise object representing CryptoKey
+   * @returns {Promise<Uint8Array>} Promise object representing CryptoKey
    * @throws {SyntaxError} raised when `keyUsages` is empty but the unwrapped key is of type `secret` or `private`
    * @throws {TypeError} raised when trying to use an invalid format or if the `keyData` is not suited for that format
    */
@@ -181,7 +181,7 @@ class EncryptionService {
    *
    * @param {string} data Key's string representation
    * @param {Uint8Array} salt array containing salt used during processing
-   * @returns {Promise} Promise object representing derived bits
+   * @returns {Promise<Uint8Array>} Promise object representing derived bits
    */
   async #generateDerivationKey(data, salt) {
     const key = await this.#importPbkdfKey(data);
@@ -202,7 +202,7 @@ class EncryptionService {
    * Computes double SHA-256 hash from given input array
    *
    * @param {Uint8Array} derivationKey input array
-   * @returns {Promise} Promise object representing  computed hash
+   * @returns {Promise<Uint8Array>} Promise object representing  computed hash
    */
   async #generateDerivationKeyHash(derivationKey) {
     const firstHash = await window.crypto.subtle.digest('SHA-256', derivationKey);
@@ -215,7 +215,7 @@ class EncryptionService {
    *
    * @param {string} data text to be encrypted
    * @param {Uint8Array} masterKeyBytes array of bytes representing encryption key
-   * @returns {Promise} Promise object representing encrypted text {@link DataEncryption}
+   * @returns {Promise<Uint8Array>} Promise object representing encrypted text {@link DataEncryption}
    * @throws {InvalidAccessError} raised when the requested operation is not valid for the provided key
    * (invalid encryption algorithm, or invalid key for the specified encryption algorithm)
    * @throws {OperationError} raised when operation failed for an operation specific reason (algorithm parameters
@@ -247,7 +247,7 @@ class EncryptionService {
    * @param {string} encryptedDataHEX HEX-encoded encrypted data
    * @param {string} vectorHEX HEX-encoded initialization vector
    * @param {Uint8Array} masterKeyRaw byte array containing encryption key
-   * @returns {Promise} Promise object representing decrypted text
+   * @returns {Promise<string>} Promise object representing decrypted text
    * @throws {InvalidAccessError} raised when the requested operation is not valid for the provided key
    * (invalid encryption algorithm, or invalid key for the specified encryption algorithm)
    * @throws {OperationError} raised when operation failed for an operation specific reason (algorithm parameters
@@ -283,7 +283,7 @@ class EncryptionService {
    *
    * @param {Uint8Array} masterKeyBytes byte array representing master key
    * @param {string} encryptionKeyHEX application's encryption key stored in HEX format
-   * @returns {Promise} Promise object representing encrypted master key {@link MasterKeyEncryption}
+   * @returns {Promise<Uint8Array>} Promise object representing encrypted master key {@link MasterKeyEncryption}
    * @throws {InvalidAccessError} raised when the requested operation is not valid for the provided key
    * (invalid encryption algorithm, or invalid key for the specified encryption algorithm)
    * @throws {OperationError} raised when operation failed for an operation specific reason (algorithm parameters
@@ -315,7 +315,7 @@ class EncryptionService {
    * @param {string} masterKeyHEX encrypted master key in HEX format
    * @param {string} encryptionKeyHEX application's encryption key in HEX format
    * @param {string} vectorHEX application's initialization vector in HEX format
-   * @returns {Promise} Promise object representing dedcrypted master key as Uint8Array
+   * @returns {Promise<Uint8Array>} Promise object representing dedcrypted master key as Uint8Array
    * @throws {InvalidAccessError} raised when the requested operation is not valid for the provided key
    * (invalid encryption algorithm, or invalid key for the specified encryption algorithm)
    * @throws {OperationError} raised when operation failed for an operation specific reason (algorithm parameters
@@ -342,7 +342,7 @@ class EncryptionService {
    *
    * @param {string} password plain password
    * @param {string} saltHex salt in HEX format
-   * @returns {Promise} Promise object representing regenerated derivation key
+   * @returns {Promise<Uint8Array>} Promise object representing regenerated derivation key
    */
   async regenerateDerivationKey(password, saltHex) {
     if (!this.#checkHexString(saltHex)) {
