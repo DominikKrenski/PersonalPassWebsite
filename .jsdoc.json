@@ -2,6 +2,7 @@
   "plugins": [],
   "recurseDepth": 10,
   "source": {
+    "include": ["src/app"],
     "includePattern": ".+\\.js(doc|x)?$",
     "excludePattern": "(^|\\/|\\\\)_"
   },
@@ -11,7 +12,14 @@
     "dictionares": ["jsdoc", "closure"]
   },
   "templates": {
+    "referenceTitle": "Personal Pass",
     "cleverLinks": false,
     "monospaceLinks": false
+  },
+  "opts": {
+    "destination": "./docs/",
+    "encoding": "utf8",
+    "private": true,
+    "recurse": true
   }
 }
