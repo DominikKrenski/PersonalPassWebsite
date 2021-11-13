@@ -9,7 +9,7 @@
     "cypress:open": "cypress open",
     "test:server": "http-server -p 8443 -a personal-pass.dev -c-1 -S -C ../certs/personal-pass.crt -K ../certs/personal-pass.key",
     "test": "mocha ./tests/unit/**/*.spec.js",
-    "doc": "jsdoc ./src/app -c ./jsdoc.config.json -d ./docs -r"
+    "doc": "jsdoc -c .jsdoc.json"
   },
   "repository": {
     "type": "git",
