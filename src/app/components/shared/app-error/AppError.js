@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import './ServerError.local.scss';
+import './AppError.local.scss';
 
-const ServerError = () => {
+const AppError = () => {
   return (
     <div id="server-error-wrapper" className="column is-half is-offset-one-quarter">
       <div id="server-error" className="columns is-vcentered is-mobile">
@@ -17,4 +17,4 @@ const ServerError = () => {
   )
 }
 
-export default ServerError;
+export default AppError;
