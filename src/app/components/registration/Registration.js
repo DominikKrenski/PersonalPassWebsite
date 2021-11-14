@@ -1,6 +1,7 @@
 import RegistrationForm from './registration-form/RegistrationForm';
 import AppHeader from '../shared/app-header/AppHeader';
 import AppFooter from '../shared/app-footer/AppFooter';
+import ServerError from '../shared/server-error/ServerError';
 
 import './Registration.local.scss';
 
@@ -8,6 +9,7 @@ const Registration = () => {
   return (
     <div id="registration" className="columns is-multiline">
       <AppHeader />
+      <ServerError />
       <RegistrationForm />
       <AppFooter />
     </div>
