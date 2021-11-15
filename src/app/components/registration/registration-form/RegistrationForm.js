@@ -7,6 +7,7 @@ import StatusIcon from '../status-icon/StatusIcon';
 
 import useForm from '../../../hooks/useForm';
 import encryptionService from '../../../utils/EncryptionService';
+import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
 import urls from '../../../utils/urls';
 
@@ -60,7 +61,7 @@ const RegistrationForm = () => {
     } catch (err) {
       if (err.response) {
         // request was made and server responded with a status code that falls out of the range of 2xx
-        console.log(err.response);
+        errorService.updateError(err.response.data);
       } else if (err.request) {
         //request was made but no response was received
         console.log(err.request)
