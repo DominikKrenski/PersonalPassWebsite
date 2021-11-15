@@ -7,6 +7,8 @@ import useForm from '../../../hooks/useForm';
 import ValidationMessage from '../../shared/validation-message/ValidationMessage';
 import encryptionService from '../../../utils/EncryptionService';
 import httpClient from '../../../utils/HttpClient';
+import dateService from '../../../utils/DateService';
+import errorService from '../../../utils/ErrorService';
 import sessionService from '../../../utils/SessionService';
 import dbService from '../../../utils/DatabaseService';
 import urls from '../../../utils/urls';
@@ -88,13 +90,29 @@ const LoginForm = () => {
     } catch(err) {
       if (err.response) {
         // request was made and server responded with status code that falls out of range of 2xx
-        console.log(err.response);
+        if (err.response.status < 500) {
+          errorService.updateError(err.response.data);
+        } else {
+          errorService.updateError({
+            status: 'Internal Server Error',
+            timestamp: err.response.data.timestamp,
+            message: 'Something went wrong. Please, try later'
+          });
+        }
       } else if (err.request) {
         // request was made but no response was received
-        console.log(err.request);
+        errorService.updateError({
+          status: 'Internal Server Error',
+          timestamp: dateService.getTimestamp(),
+          message: 'Somethin went wrong. Please, try later'
+        });
       } else {
         // something happened in setting up the request that triggered an Error
-        console.log(err.name);
+        errorService.updateError({
+          status: 'Internal App Error',
+          timestamp: dateService.getTimestamp(),
+          message: 'Something went wrong during data encryption'
+        });
       }
     }
   }
