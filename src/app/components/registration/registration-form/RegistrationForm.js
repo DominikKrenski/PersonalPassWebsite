@@ -8,6 +8,7 @@ import StatusIcon from '../status-icon/StatusIcon';
 import useForm from '../../../hooks/useForm';
 import encryptionService from '../../../utils/EncryptionService';
 import errorService from '../../../utils/ErrorService';
+import dateService from '../../../utils/DateService';
 import httpClient from '../../../utils/HttpClient';
 import urls from '../../../utils/urls';
 
@@ -61,13 +62,29 @@ const RegistrationForm = () => {
     } catch (err) {
       if (err.response) {
         // request was made and server responded with a status code that falls out of the range of 2xx
-        errorService.updateError(err.response.data);
+        if (err.response.status < 500) {
+          errorService.updateError(err.response.data);
+        } else {
+          errorService.updateError({
+            status: 'Internal Server Error',
+            timestamp: err.response.data.timestamp,
+            message: 'Something went wrong. Please, try later'
+          });
+        }
       } else if (err.request) {
         //request was made but no response was received
-        console.log(err.request)
+        errorService.updateError({
+          status: 'Internal Server Error',
+          timestamp: dateService.getTimestamp(),
+          message: 'Something went wrong. Please, try later'
+        })
       } else {
-        // something happened in setting up the request that triggered an Error
-        console.log(err);
+        // something crashed before sending request
+        errorService.updateError({
+          status: 'Internal App Error',
+          timestamp: dateService.getTimestamp(),
+          message: 'Something went wrong during data encryption'
+        });
       }
     }
   }
