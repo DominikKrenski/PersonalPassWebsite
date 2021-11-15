@@ -77,7 +77,7 @@ const RegistrationForm = () => {
           status: 'Internal Server Error',
           timestamp: dateService.getTimestamp(),
           message: 'Something went wrong. Please, try later'
-        })
+        });
       } else {
         // something crashed before sending request
         errorService.updateError({
