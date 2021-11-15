@@ -5,13 +5,22 @@
  */
 
 /**
+ * Object defining validation error
+ *
+ * @typedef {Object} ValidationError
+ * @property {string} field - validated field's name
+ * @property {string|number} rejectedValue - rejected value
+ * @property {string[]} validationMessages - validation messages for given field
+ */
+
+/**
  * Object defining server error
  *
  * @typedef {Object} ApiError
  * @property {string} status - error response status
  * @property {string} timestamp - date when error occurred
  * @property {string} message - error's description
- * @property {string[]} validationMessages - optional validation messages
+ * @property {ValidationError[]} errors - optional validation errors
  */
 
 import { BehaviorSubject, Observable } from 'rxjs';
