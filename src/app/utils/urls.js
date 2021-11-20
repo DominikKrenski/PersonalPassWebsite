@@ -10,6 +10,10 @@ const urls = {
   signup: '/auth/signup',
   signin: '/auth/signin',
   salt: '/auth/salt',
+  accountDetails: '/accounts',
+  updateEmail: '/accounts/email',
+  updateReminder: '/accounts/reminder',
+  sendHint: '/accounts/hint'
 }
 
 export default urls;
