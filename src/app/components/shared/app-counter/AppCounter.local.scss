@@ -1,0 +1,15 @@
+@import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/fonts';
+
+#app-counter {
+  padding: 0px;
+  text-align: center;
+
+  p {
+    font-family: 'RobotoMono';
+    color: $blue-dark;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+}
