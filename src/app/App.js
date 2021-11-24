@@ -13,7 +13,11 @@ import {
   faEyeSlash,
   faCircle,
   faCheckCircle,
-  faExclamationCircle
+  faExclamationCircle,
+  faAddressBook,
+  faRssSquare,
+  faHome,
+  faCog
 } from '@fortawesome/free-solid-svg-icons';
 
 import Home from './components/home/Home';
@@ -23,7 +27,20 @@ import SecureArea from './components/secure-area/SecureArea';
 
 import './App.scss';
 
-library.add(faLock, faEnvelope, faEye, faStickyNote, faEyeSlash, faCircle, faCheckCircle, faExclamationCircle);
+library.add(
+  faLock,
+  faEnvelope,
+  faEye,
+  faStickyNote,
+  faEyeSlash,
+  faCircle,
+  faCheckCircle,
+  faExclamationCircle,
+  faAddressBook,
+  faRssSquare,
+  faHome,
+  faCog
+  );
 
 const App = () => {
   return (
