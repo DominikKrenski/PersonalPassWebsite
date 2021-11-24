@@ -1,0 +1,44 @@
+@import '../../../../../node_modules/bulma/sass/components/menu.sass';
+@import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../assets/scss/colors';
+
+#secure-nav {
+  background-color: $secure-nav-background;
+  padding: 20px 0px 20px 0px;
+
+  min-height: calc(100vh - 125px);
+
+  .menu-list {
+    min-height: calc(100vh - 165px) !important;
+
+    li {
+      &:hover {
+        background-color: $secure-nav-hover-color;
+      }
+
+      &:active {
+        background-color: $secure-nav-clicked-color;
+      }
+    }
+
+    a {
+      color: $secure-nav-color;
+      font-size: 1.2rem;
+      font-weight: bolder;
+      &:hover, &:active, &:visited {
+        background-color: transparent;
+      }
+    }
+
+    span {
+      display: inline-block;
+      min-width: 26px;
+      text-align: center;
+      margin-right: 15px;
+    }
+  }
+
+  #last-item {
+    margin-top: calc(100vh - 404px);
+  }
+}
