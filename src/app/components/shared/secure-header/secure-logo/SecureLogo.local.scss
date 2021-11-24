@@ -1,0 +1,19 @@
+@import '../../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../../assets/scss/colors';
+@import '../../../../../assets/scss/fonts';
+
+#secure-logo {
+  padding: 0px;
+
+  p {
+    font-family: 'Anton';
+    font-size: 2.3rem;
+    font-weight: 400;
+    text-align: left;
+    color: $blue-dark;
+  }
+
+  span {
+    color: $red;
+  }
+}
