@@ -1,0 +1,10 @@
+@import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/fonts';
+
+#secure-header {
+  min-height: 63.5px;
+  background-color: $white;
+  padding: 7.25px 10px 7.25px 10px;
+  margin: 0px;
+}
