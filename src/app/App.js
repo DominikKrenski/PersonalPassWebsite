@@ -19,6 +19,7 @@ import {
 import Home from './components/home/Home';
 import Registration from './components/registration/Registration';
 import Login from './components/login/Login';
+import SecureArea from './components/secure-area/SecureArea';
 
 import './App.scss';
 
@@ -36,6 +37,9 @@ const App = () => {
         </Route>
         <Route path="/signin">
           <Login />
+        </Route>
+        <Route path="/secure">
+          <SecureArea />
         </Route>
       </Switch>
     </Router>
