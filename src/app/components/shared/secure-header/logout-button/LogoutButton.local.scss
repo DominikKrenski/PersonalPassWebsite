@@ -1,6 +1,22 @@
+@import '../../../../../../node_modules/bulma/sass/utilities/_all.sass';
 @import '../../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../../../node_modules/bulma/sass/elements/button.sass';
 
-#logout-button {
+@import '../../../../../assets/scss/colors';
+
+#logout-button-wrapper {
   padding: 0px;
   text-align: right;
+}
+
+#logout-button {
+  background-color: $red;
+  color: $white;
+  font-weight: 900;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 }

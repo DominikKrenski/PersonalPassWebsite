@@ -2,8 +2,8 @@ import './LogoutButton.local.scss';
 
 const LogoutButton = () => {
   return (
-    <div id="logout-button" className="column is-4">
-      <p>Logout Button</p>
+    <div id="logout-button-wrapper" className="column is-4">
+      <button id="logout-button" className="button is-rounded">SIGN OUT</button>
     </div>
   )
 }
