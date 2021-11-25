@@ -1,46 +1,49 @@
+import { Link, useRouteMatch } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './SecureNav.local.scss';
 
 const SecureNav = () => {
+  const { url } = useRouteMatch();
+
   return (
     <aside id="secure-nav" className="menu column is-3">
       <ul className="menu-list">
         <li>
-          <a>
+          <Link to={`${url}`}>
             <span><FontAwesomeIcon icon="home" size="lg" /></span>
             All Items
-          </a>
+          </Link>
         </li>
         <li>
-          <a>
+          <Link to={`${url}/password`}>
             <span><FontAwesomeIcon icon="lock" size="lg" /></span>
             Passwords
-          </a>
+          </Link>
         </li>
         <li>
-          <a>
+          <Link to={`${url}/addresses`}>
             <span><FontAwesomeIcon icon="address-book" size="lg" /></span>
             Addresses
-          </a>
+          </Link>
         </li>
         <li>
-          <a>
+          <Link to={`${url}/websites`}>
             <span><FontAwesomeIcon icon="rss-square" size="lg" /></span>
             Websites
-          </a>
+          </Link>
         </li>
         <li>
-          <a>
+          <Link to={`${url}/notes`}>
             <span><FontAwesomeIcon icon="sticky-note" size="lg" /></span>
              Notes
-            </a>
+            </Link>
         </li>
         <li id="last-item">
-          <a>
+          <Link to={`${url}/account`}>
             <span><FontAwesomeIcon icon="cog" size="lg" /></span>
             Account
-          </a>
+          </Link>
         </li>
       </ul>
     </aside>
