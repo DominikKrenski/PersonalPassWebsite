@@ -25,7 +25,7 @@ const SecureArea = () => {
   return (
     <div id="secure-area">
       <SecureHeader />
-      <div id="content-area" className="columns">
+      <div id="content-area" className="columns is-mobile">
       <SecureNav />
         <Switch>
           <Route exact path={path}>
