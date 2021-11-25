@@ -1,5 +1,31 @@
 @import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../assets/scss/colors';
 
 #account-details {
   margin: 0px;
+  padding-top: 27px;
+  color: $blue-dark;
+
+  h1 {
+    font-size: 1.2rem;
+    font-weight: bolder;
+  }
+
+  table {
+    width: 100%;
+    background-color: $white;
+    border: 1px solid $black;
+
+    th {
+      background-color: $secure-nav-background;
+      color: $white;
+    }
+
+    td, th {
+      border: 1px solid $black;
+      padding: 5px;
+    }
+
+
+  }
 }
