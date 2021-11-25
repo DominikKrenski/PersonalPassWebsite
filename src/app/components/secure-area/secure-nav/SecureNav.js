@@ -7,7 +7,7 @@ const SecureNav = () => {
   const { url } = useRouteMatch();
 
   return (
-    <aside id="secure-nav" className="menu column is-3">
+    <aside id="secure-nav" className="menu column is-2">
       <ul className="menu-list">
         <li>
           <Link to={`${url}`}>
