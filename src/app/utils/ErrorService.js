@@ -55,6 +55,13 @@ class ErrorService {
   updateError(error) {
     this.#subject.next(error);
   }
+
+  /**
+   * Set next emitted value to null to avoid displaying error messages in other components
+   */
+  clearError() {
+    this.#subject.next(null);
+  }
 }
 
 /**
