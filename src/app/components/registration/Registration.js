@@ -13,10 +13,11 @@ const Registration = () => {
   const [apiError, setApiError] = useState(null);
 
   useEffect(() => {
+    errorService.clearError();
     const errorServiceSubscription = errorService.getError().subscribe(err => setApiError(err));
 
     return () => errorServiceSubscription.unsubscribe();
-  });
+  }, []);
 
   return (
     <div id="registration" className="columns is-multiline">
