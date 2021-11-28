@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useForm from '../../../hooks/useForm';
@@ -16,6 +16,8 @@ import urls from '../../../utils/urls';
 import './LoginForm.local.scss';
 
 const LoginForm = () => {
+  const history = useHistory();
+
   const [passwordFieldType, setPasswordFieldType] = useState('password');
 
   const [handleOnChange, performValidation, data, errors] = useForm({
@@ -87,6 +89,9 @@ const LoginForm = () => {
         access_token: encryptedAccessToken.encryptedData,
         refresh_token: encryptedRefreshToken.encryptedData
       });
+
+      // redirect to secure area
+      history.push('/secure');
     } catch(err) {
       if (err.response) {
         // request was made and server responded with status code that falls out of range of 2xx
