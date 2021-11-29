@@ -1,4 +1,10 @@
 @import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../../node_modules/bulma/sass/helpers/_all.sass';
+@import '../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../node_modules/bulma/sass/elements/button.sass';
+@import '../../../../../node_modules/bulma/sass/elements/table.sass';
+@import '../../../../../node_modules/bulma/sass/form/shared.sass';
+@import '../../../../../node_modules/bulma/sass/form/select.sass';
 @import '../../../../assets/scss/colors';
 
 #account-details {
@@ -12,20 +18,31 @@
   }
 
   table {
-    width: 100%;
-    background-color: $white;
-    border: 1px solid $black;
-
     th {
       background-color: $secure-nav-background;
       color: $white;
     }
 
-    td, th {
-      border: 1px solid $black;
-      padding: 5px;
+    .text-with-button {
+      display: flex;
+      align-items: center;
     }
 
+    button {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
 
+    span {
+      margin-right: 20px;
+    }
+
+    .reminder-visible {
+      display: inline;
+    }
+
+    .reminder-invisible {
+      display: none;
+    }
   }
 }
