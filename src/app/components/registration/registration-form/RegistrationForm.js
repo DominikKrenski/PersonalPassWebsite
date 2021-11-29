@@ -60,32 +60,7 @@ const RegistrationForm = () => {
       const res = await httpClient.post(urls.signup, registrationData);
       history.push('/signin');
     } catch (err) {
-      if (err.response) {
-        // request was made and server responded with a status code that falls out of the range of 2xx
-        if (err.response.status < 500) {
-          errorService.updateError(err.response.data);
-        } else {
-          errorService.updateError({
-            status: 'Internal Server Error',
-            timestamp: err.response.data.timestamp,
-            message: 'Something went wrong. Please, try later'
-          });
-        }
-      } else if (err.request) {
-        //request was made but no response was received
-        errorService.updateError({
-          status: 'Internal Server Error',
-          timestamp: dateService.getTimestamp(),
-          message: 'Something went wrong. Please, try later'
-        });
-      } else {
-        // something crashed before sending request
-        errorService.updateError({
-          status: 'Internal App Error',
-          timestamp: dateService.getTimestamp(),
-          message: 'Something went wrong during data encryption'
-        });
-      }
+      errorService.updateError(err);
     }
   }
 
