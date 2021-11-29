@@ -4,6 +4,8 @@
  * @module HttpClient
  */
 
+import accessService from './AccessService';
+import urls from './urls';
 
 /**
  * Axios instance
@@ -16,6 +18,7 @@ const axios = require('axios').default;
  */
 class HttpClient {
   #instance
+  #accessData
 
   /**
    * Creates HttpClient instance and sets default request's settings
@@ -29,6 +32,37 @@ class HttpClient {
       responseEncoding: 'utf-8',
       maxContentLength: 2000,
       decompress: true
+    });
+
+    accessService.getAccessData().subscribe(data => this.#accessData = data);
+
+    this.#instance.interceptors.request.use(config => {
+      const url = config.url;
+
+      if (url === urls.refresh) {
+        config.headers.Authorization = `Bearer ${this.#accessData.refreshToken}`;
+        return config;
+      }
+
+      if (url !== urls.signup && url !== urls.signin && url !== urls.salt && url !== urls.sendHint) {
+        config.headers.Authorization = `Bearer ${this.#accessData.accessToken}`;
+      }
+
+      return config;
+    }, err => {
+      return Promise.reject(err);
+    });
+
+    this.#instance.interceptors.response.use(undefined , async err => {
+      const originalConfig = err.config;
+
+      if (originalConfig.url !== urls.refresh && err.response.status === 403 && err.response.data.message === 'Access token expired') {
+        const refreshRes = await this.get(urls.refresh);
+        await accessService.updateTokens(refreshRes.data.accessToken, refreshRes.data.refreshToken, this.#accessData.masterKey);
+        return this.#instance(originalConfig);
+      }
+
+      return Promise.reject(err);
     });
   }
 
