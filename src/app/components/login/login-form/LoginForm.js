@@ -9,8 +9,7 @@ import encryptionService from '../../../utils/EncryptionService';
 import httpClient from '../../../utils/HttpClient';
 import dateService from '../../../utils/DateService';
 import errorService from '../../../utils/ErrorService';
-import sessionService from '../../../utils/SessionService';
-import dbService from '../../../utils/DatabaseService';
+import accessService from '../../../utils/AccessService';
 import urls from '../../../utils/urls';
 
 import './LoginForm.local.scss';
@@ -64,31 +63,8 @@ const LoginForm = () => {
 
       const user = JSON.parse(encryptionService.convertBase64ToString(accessToken.split(".")[1]));
 
-      // save user's public id in session storage
-      sessionService.clear();
-      sessionService.set('account_id', user.sub);
-
-      // encrypt derivation key
-      const encryptedMaster = await encryptionService.encryptMasterKey(derivationKey, process.env.PRIVATE_KEY);
-
-      // encrypt access_token
-      const encryptedAccessToken = await encryptionService.encryptData(accessToken, derivationKey);
-
-      // encrypt refresh_token
-      const encryptedRefreshToken = await encryptionService.encryptData(refreshToken, derivationKey);
-
-      // save derivation key access_token's and refresh_token's vector in Session Storage
-      sessionService.set('private_vector', encryptedMaster.vector);
-      sessionService.set('access_vector', encryptedAccessToken.vector);
-      sessionService.set('refresh_vector', encryptedRefreshToken.vector);
-
-      // save encrypted master key, access token and refresh token in IndexedDB
-      const id = await dbService.accounts.put({
-        account_id: user.sub,
-        master_key: encryptedMaster.masterKey,
-        access_token: encryptedAccessToken.encryptedData,
-        refresh_token: encryptedRefreshToken.encryptedData
-      });
+      // encrypt and save all data
+      await accessService.saveAccessData(user.sub, accessToken, refreshToken, derivationKey);
 
       // redirect to secure area
       history.push('/secure');
@@ -113,6 +89,7 @@ const LoginForm = () => {
         });
       } else {
         // something happened in setting up the request that triggered an Error
+        console.error(err);
         errorService.updateError({
           status: 'Internal App Error',
           timestamp: dateService.getTimestamp(),
