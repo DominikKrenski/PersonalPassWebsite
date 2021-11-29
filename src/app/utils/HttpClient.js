@@ -5,6 +5,7 @@
  */
 
 import accessService from './AccessService';
+import dateService from './DateService';
 import urls from './urls';
 
 /**
@@ -50,7 +51,12 @@ class HttpClient {
 
       return config;
     }, err => {
-      return Promise.reject(err);
+      console.log('Something happened in setting up the request');
+      return Promise.reject({
+        status: 'Internal Server Error',
+        timestamp: dateService.getTimestamp(),
+        message: 'Something went wrong. Please, try later.'
+      });
     });
 
     this.#instance.interceptors.response.use(undefined , async err => {
@@ -62,7 +68,29 @@ class HttpClient {
         return this.#instance(originalConfig);
       }
 
-      return Promise.reject(err);
+
+      if (err.response) {
+        // server responded with status code falls out of range of 2xx
+        if (err.response.status < 500) {
+          console.log('Server responded with status code > 2xx');
+          return Promise.reject(err.response.data);
+        } else {
+          console.log('Server responded with status code > 500');
+          return Promise.reject({
+            status: 'Internal Server Error',
+            timestamp: err.response.data.timestamp,
+            message: 'Something went wrong. Please, try later.'
+          });
+        }
+      } else {
+        console.log('Request was made but no response was received');
+        // request was made but no response was received
+        return Promise.reject({
+          status: 'Internal Server Error',
+          timestamp: dateService.getTimestamp(),
+          message: 'Something went wrong. Please, try later.'
+        })
+      }
     });
   }
 
