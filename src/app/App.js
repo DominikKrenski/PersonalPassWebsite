@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -44,6 +46,7 @@ library.add(
 
 const App = () => {
   return (
+    <Suspense fallback="loading">
     <Router>
       <Switch>
         <Route exact path="/">
@@ -60,6 +63,7 @@ const App = () => {
         </Route>
       </Switch>
     </Router>
+    </Suspense>
   )
 }
 
