@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import urls from '../../../utils/urls';
 import accessService from '../../../utils/AccessService';
@@ -13,6 +14,8 @@ const Account = () => {
   const [reminderVisible, setReminderVisible] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState('english');
   const [apiError, setApiError] = useState(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -52,29 +55,29 @@ const Account = () => {
     <div id="account-details" className="column is-10">
       { apiError && <AppError error={apiError} /> }
 
-      <h1>Account Settings</h1>
+      <h1>{t('account.header')}</h1>
 
       <table className="table is-bordered is-fullwidth">
         <thead>
           <tr>
-            <th colSpan={2}>Login Credentials</th>
+            <th colSpan={2}>{t('account.loginTable.header')}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Account Email</td>
+            <td>{t('account.loginTable.emailAccount')}</td>
             <td>
               <div className="text-with-button">
-              <span>{accountData ? accountData.email : ''}</span> <button className="button is-outlined is-primary is-small">Change email</button>
+              <span>{accountData ? accountData.email : ''}</span> <button className="button is-outlined is-primary is-small">{t('account.loginTable.buttons.changeEmail')}</button>
               </div>
             </td>
           </tr>
           <tr>
-            <td>Master Password</td>
-            <td><button className="button is-outlined is-primary is-small">Change Master Password</button></td>
+            <td>{t('account.loginTable.masterPassword')}</td>
+            <td><button className="button is-outlined is-primary is-small">{t('account.loginTable.buttons.changeMasterPassword')}</button></td>
           </tr>
           <tr>
-            <td>Master Password Reminder</td>
+            <td>{t('account.loginTable.masterPasswordReminder')}</td>
             <td>
               <div className="text-with-button">
                 <span className={reminderVisible ? 'reminder-visible' : 'reminder-invisible'}>
@@ -84,7 +87,7 @@ const Account = () => {
                   onClick={handleShowReminderClick}
                   className="button is-outlined is-primary is-small"
                 >
-                    {reminderVisible ? 'Hide reminder' : 'Show reminder'}
+                    {reminderVisible ? t('account.loginTable.buttons.masterPassReminderVisible') : t('account.loginTable.buttons.masterPassReminderHidden')}
                 </button>
               </div>
             </td>
@@ -92,35 +95,34 @@ const Account = () => {
         </tbody>
       </table>
 
-      <h1>Account Information</h1>
-      <table className="table is-bordered is-fullwidth">
+      <table id="account-info-table" className="table is-bordered is-fullwidth">
         <thead>
           <tr>
-            <th colSpan={2}>Account Information</th>
+            <th colSpan={2}>{t('account.infoTable.header')}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Created At</td>
+            <td>{t('account.infoTable.createdAt')}</td>
             <td>{accountData ? accountData.createdAt : ''}</td>
           </tr>
           <tr>
-            <td>Last Modified At</td>
+            <td>{t('account.infoTable.updatedAt')}</td>
             <td>{accountData ? accountData.updatedAt : ''}</td>
           </tr>
           <tr>
-            <td>Language</td>
+            <td>{t('account.infoTable.language')}</td>
             <td>
               <div className="select is-success" value={currentLanguage} onChange={handleLanguageChange}>
                 <select>
-                  <option value="english">English</option>
-                  <option value="polish">Polish</option>
+                  <option value="english">{t('account.infoTable.langSelect.en')}</option>
+                  <option value="polish">{t('account.infoTable.langSelect.pl')}</option>
                 </select>
               </div>
             </td>
           </tr>
           <tr>
-            <td>Time Zone</td>
+            <td>{t('account.infoTable.timeZone')}</td>
             <td>Select</td>
           </tr>
         </tbody>
