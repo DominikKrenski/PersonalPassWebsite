@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import timerService from '../../../utils/TimerService';
 
@@ -7,6 +8,8 @@ import './AppCounter.local.scss';
 const AppCounter = () => {
   const [min, setMin] = useState(1);
   const [sec, setSec] = useState(50);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const subscription = timerService.getActivity().subscribe(activity => {
@@ -36,7 +39,7 @@ const AppCounter = () => {
 
   return (
     <div id="app-counter" className="column is-4">
-      <p>Your session expires in: {min}:{sec.toString().padStart(2, '0')}</p>
+      <p>{t('appCounter.text')}: {min}:{sec.toString().padStart(2, '0')}</p>
     </div>
   )
 }

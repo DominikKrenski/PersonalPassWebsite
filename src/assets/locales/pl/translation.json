@@ -33,5 +33,9 @@
     "websites": "Strony",
     "notes": "Notatki",
     "account": "Konto"
+  },
+
+  "appCounter": {
+    "text": "Twoja sesja wygaśnie za"
   }
 }

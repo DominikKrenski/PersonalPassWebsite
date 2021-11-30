@@ -33,5 +33,9 @@
     "websites": "Websites",
     "notes": "Notes",
     "account": "Account"
+  },
+
+  "appCounter": {
+    "text": "Your session expires in"
   }
 }
