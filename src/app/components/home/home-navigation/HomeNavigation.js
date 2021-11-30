@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import './HomeNavigation.local.scss';
 
 const HomeNavigation = () => {
+  const { t } = useTranslation();
   const [burgerActive, toggleBurgerActive] = useState(false);
 
   const handleBurgerClick = () => {
@@ -39,8 +41,8 @@ const HomeNavigation = () => {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <Link to="/signin" className="button is-rounded is-inverted is-primary">SIGN IN</Link>
-              <Link to="/signup" className="button is-rounded">CREATE AN ACCOUNT</Link>
+              <Link to="/signin" className="button is-rounded is-inverted is-primary">{t('homeNavigation.loginButton')}</Link>
+              <Link to="/signup" className="button is-rounded">{t('homeNavigation.registerButton')}</Link>
             </div>
           </div>
         </div>
