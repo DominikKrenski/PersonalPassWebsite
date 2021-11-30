@@ -5,7 +5,7 @@ import urls from '../../../utils/urls';
 import accessService from '../../../utils/AccessService';
 import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
-import i18n from '../../../../../i18n';
+import i18n from '../../../i18n';
 
 import AppError from '../../shared/app-error/AppError';
 
