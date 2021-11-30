@@ -84,7 +84,7 @@ const LoginForm = () => {
           </div>
 
           <div className="column is-two-thirds">
-            <p>or <Link to="/signup">{t('loginForm.registerLink')}</Link></p>
+            <p>{t('loginForm.or')} <Link to="/signup">{t('loginForm.registerLink')}</Link></p>
           </div>
         </div>
 

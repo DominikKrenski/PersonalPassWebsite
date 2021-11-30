@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import ValidationMessage from '../../shared/validation-message/ValidationMessage';
@@ -8,13 +9,13 @@ import StatusIcon from '../status-icon/StatusIcon';
 import useForm from '../../../hooks/useForm';
 import encryptionService from '../../../utils/EncryptionService';
 import errorService from '../../../utils/ErrorService';
-import dateService from '../../../utils/DateService';
 import httpClient from '../../../utils/HttpClient';
 import urls from '../../../utils/urls';
 
 import './RegistrationForm.local.scss';
 
 const RegistrationForm = () => {
+  const { t } = useTranslation();
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   const [requirementsVisible, setRequirementsVisible] = useState(false);
 
@@ -82,11 +83,11 @@ const RegistrationForm = () => {
         {/* FORM HEADER */}
         <div id="registration-form-header" className="columns is-multiline is-mobile">
           <div className="column is-two-thirds">
-            <p>Create an account</p>
+            <p>{t('registrationForm.header')}</p>
           </div>
 
           <div className="column is-one-third">
-            <p>or <Link to="/signin">Log In</Link></p>
+            <p>{t('registrationForm.or')} <Link to="/signin">{t('registrationForm.loginLink')}</Link></p>
           </div>
         </div>
 
@@ -94,7 +95,7 @@ const RegistrationForm = () => {
 
         {/* EMAIL FIELD */}
         <div className="field" id="email-field">
-          <label className="label" htmlFor="email">Email</label>
+          <label className="label" htmlFor="email">{t('registrationForm.emailLabel')}</label>
           <div className="control has-icons-left">
             <input
               className={`input ${errors.email ? "error" : ""}`}
@@ -115,7 +116,7 @@ const RegistrationForm = () => {
 
         {/* PASSWORD FIELD */}
         <div className="field" id="password-field">
-          <label className="label" htmlFor="password">Password</label>
+          <label className="label" htmlFor="password">{t('registrationForm.passwordLabel')}</label>
           <div className="control has-icons-left has-icons-right">
             <input
               className={`input ${errors.password ? "error" : ""}`}
@@ -140,37 +141,37 @@ const RegistrationForm = () => {
         {/* PASSWORD REQUIREMENTS FIELD */}
         {requirementsVisible &&
           <div id="password-requirements" className="field">
-            <p>Our minimum password requirements:</p>
+            <p>{t('registrationForm.requirements.header')}</p>
             <ul>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.minLength}
-                /> At least 12 characters long
+                /> {t('registrationForm.requirements.minLength')}
               </li>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.atLeastOneDigit}
-                /> At least 1 number
+                /> {t('registrationForm.requirements.digit')}
               </li>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.atLeastOneLowercase}
-                /> At least 1 lowercase letter
+                /> {t('registrationForm.requirements.lowercase')}
               </li>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.atLeastOneUppercase}
-                /> At least 1 uppercase letter
+                /> {t('registrationForm.requirements.uppercase')}
               </li>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.notEmail}
-                /> Not your email
+                /> {t('registrationForm.requirements.email')}
               </li>
             </ul>
           </div>
@@ -178,7 +179,7 @@ const RegistrationForm = () => {
 
         {/* PASSWORD CONFIRM FIELD */}
         <div className="field" id="password-confirm-field">
-          <label className="label" htmlFor="passwordConfirm">Confirm your password</label>
+          <label className="label" htmlFor="passwordConfirm">{t('registrationForm.confirmLabel')}</label>
           <div className="control has-icons-left">
             <input
               className={`input ${errors.passwordConfirm ? "error" : ""}`}
@@ -199,7 +200,7 @@ const RegistrationForm = () => {
 
         {/* REMINDER FIELD */}
         <div className="field" id="reminder-field">
-          <label className="label" htmlFor="reminder">Reminder (optional)</label>
+          <label className="label" htmlFor="reminder">{t('registrationForm.reminderLabel')}</label>
           <div className="control has-icons-left">
             <input
               className={`input ${errors.reminder ? "error" : ""}`}
@@ -221,7 +222,7 @@ const RegistrationForm = () => {
         {/* REGISTRATION BUTTON */}
         <div id="registration-button" className="field">
           <div className="control">
-            <button className="button is-fullwidth" onClick={handleRegisterClick}>Register</button>
+            <button className="button is-fullwidth" onClick={handleRegisterClick}>{t('registrationForm.button')}</button>
           </div>
         </div>
       </form>
