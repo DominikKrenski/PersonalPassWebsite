@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import useForm from '../../../hooks/useForm';
@@ -7,7 +8,6 @@ import useForm from '../../../hooks/useForm';
 import ValidationMessage from '../../shared/validation-message/ValidationMessage';
 import encryptionService from '../../../utils/EncryptionService';
 import httpClient from '../../../utils/HttpClient';
-import dateService from '../../../utils/DateService';
 import errorService from '../../../utils/ErrorService';
 import accessService from '../../../utils/AccessService';
 import urls from '../../../utils/urls';
@@ -15,6 +15,7 @@ import urls from '../../../utils/urls';
 import './LoginForm.local.scss';
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   const history = useHistory();
 
   const [passwordFieldType, setPasswordFieldType] = useState('password');
@@ -79,11 +80,11 @@ const LoginForm = () => {
         {/* FORM HEADER */}
         <div id="login-form-header" className="columns is-multiline is-mobile">
           <div className="column is-one-third">
-            <p>Log in</p>
+            <p>{t('loginForm.header')}</p>
           </div>
 
           <div className="column is-two-thirds">
-            <p>or <Link to="/signup">Create an account</Link></p>
+            <p>or <Link to="/signup">{t('loginForm.registerLink')}</Link></p>
           </div>
         </div>
 
@@ -91,7 +92,7 @@ const LoginForm = () => {
 
         {/* EMAIL FIELD */}
         <div className="field" id="email-field">
-          <label className="label" htmlFor="email">Email</label>
+          <label className="label" htmlFor="email">{t('loginForm.emailLabel')}</label>
           <div className="control has-icons-left">
             <input
               className={`input ${errors.email ? "error": ""}`}
@@ -112,7 +113,7 @@ const LoginForm = () => {
 
         {/* PASSWORD FIELD */}
         <div className="field" id="password-field">
-          <label className="label" htmlFor="password">Password</label>
+          <label className="label" htmlFor="password">{t('loginForm.passwordLabel')}</label>
           <div className="control has-icons-left has-icons-right">
             <input
               className={`input ${errors.password ? "error": ""}`}
@@ -140,7 +141,7 @@ const LoginForm = () => {
         {/* LOGIN BUTTON */}
         <div id="login-button" className="field">
           <div className="control">
-            <button className="button is-fullwidth" onClick={handleLoginClick}>Log In</button>
+            <button className="button is-fullwidth" onClick={handleLoginClick}>{t('loginForm.button')}</button>
           </div>
         </div>
       </form>

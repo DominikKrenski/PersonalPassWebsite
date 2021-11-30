@@ -65,5 +65,13 @@
   "homeNavigation": {
     "loginButton": "SIGN IN",
     "registerButton": "CREATE AN ACCOUNT"
+  },
+
+  "loginForm": {
+    "header": "Log in",
+    "registerLink": "Create an account",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "button": "Log In"
   }
 }

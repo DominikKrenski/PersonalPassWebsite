@@ -65,5 +65,13 @@
   "homeNavigation": {
     "loginButton": "ZALOGUJ",
     "registerButton": "UTWÓRZ KONTO"
+  },
+
+  "loginForm": {
+    "header": "Zaloguj",
+    "registerLink": "Utwórz konto",
+    "emailLabel": "Adres email",
+    "passwordLabel": "Hasło",
+    "button": "Zaloguj"
   }
 }
