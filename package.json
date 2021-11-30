@@ -61,6 +61,7 @@
     "babel-plugin-react-scoped-css": "^1.1.1",
     "bulma": "^0.9.3",
     "chai": "^4.3.4",
+    "copy-webpack-plugin": "^9.1.0",
     "css-loader": "^6.3.0",
     "css-minimizer-webpack-plugin": "^3.0.2",
     "cypress": "^4.2.0",
