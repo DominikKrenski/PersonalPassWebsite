@@ -1,0 +1,37 @@
+{
+  "account": {
+    "header": "Ustawienia konta",
+    "loginTable": {
+      "header": "Dane logowania",
+      "emailAccount": "Adres email",
+      "masterPassword": "Hasło",
+      "masterPasswordReminder": "Wskazówka",
+      "buttons": {
+        "changeEmail": "Zmień adres",
+        "changeMasterPassword": "Zmień hasło",
+        "masterPassReminderHidden": "Pokaż wskazówkę",
+        "masterPassReminderVisible": "Ukryj wskazówkę"
+      }
+    },
+    "infoTable": {
+      "header": "Informacje o koncie",
+      "createdAt": "Utworzone",
+      "updatedAt": "Ostatnio modyfikowane",
+      "language": "Język",
+      "timeZone": "Strefa czasowa",
+      "langSelect": {
+        "en": "Angielski",
+        "pl": "Polski"
+      }
+    }
+  },
+
+  "secureNav": {
+    "allItems": "Wszystko",
+    "passwords": "Hasła",
+    "addresses": "Adresy",
+    "websites": "Strony",
+    "notes": "Notatki",
+    "account": "Konto"
+  }
+}

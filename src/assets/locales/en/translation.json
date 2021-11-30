@@ -1,0 +1,37 @@
+{
+  "account": {
+    "header": "Account Setting",
+    "loginTable": {
+      "header": "Login Data",
+      "emailAccount": "Account Email",
+      "masterPassword": "Master Password",
+      "masterPasswordReminder": "Master Password Reminder",
+      "buttons": {
+        "changeEmail": "Change Email",
+        "changeMasterPassword": "Change Master Password",
+        "masterPassReminderHidden": "Show Reminder",
+        "masterPassReminderVisible": "Hide Reminder"
+      }
+    },
+    "infoTable": {
+      "header": "Account Information",
+      "createdAt": "Created At",
+      "updatedAt": "Last Modified At",
+      "language": "Language",
+      "timeZone": "Time Zone",
+      "langSelect": {
+        "en": "English",
+        "pl": "Polish"
+      }
+    }
+  },
+
+  "secureNav": {
+    "allItems": "All Items",
+    "passwords": "Passwords",
+    "addresses": "Addresses",
+    "websites": "Websites",
+    "notes": "Notes",
+    "account": "Account"
+  }
+}
