@@ -5,14 +5,15 @@ import urls from '../../../utils/urls';
 import accessService from '../../../utils/AccessService';
 import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
+import i18n from '../../../../../i18n';
+
+import AppError from '../../shared/app-error/AppError';
 
 import './Account.local.scss';
-import AppError from '../../shared/app-error/AppError';
 
 const Account = () => {
   const [accountData, setAccountData] = useState(null);
   const [reminderVisible, setReminderVisible] = useState(false);
-  const [currentLanguage, setCurrentLanguage] = useState('english');
   const [apiError, setApiError] = useState(null);
 
   const { t } = useTranslation();
@@ -47,8 +48,7 @@ const Account = () => {
   }
 
   const handleLanguageChange = e => {
-    console.log(e.target.value);
-    setCurrentLanguage(e.target.value);
+    i18n.changeLanguage(e.target.value);
   }
 
   return (
@@ -113,10 +113,10 @@ const Account = () => {
           <tr>
             <td>{t('account.infoTable.language')}</td>
             <td>
-              <div className="select is-success" value={currentLanguage} onChange={handleLanguageChange}>
-                <select>
-                  <option value="english">{t('account.infoTable.langSelect.en')}</option>
-                  <option value="polish">{t('account.infoTable.langSelect.pl')}</option>
+              <div className="select is-success">
+                <select value={i18n.language} onChange={handleLanguageChange}>
+                  <option value="en">{t('account.infoTable.langSelect.en')}</option>
+                  <option value="pl">{t('account.infoTable.langSelect.pl')}</option>
                 </select>
               </div>
             </td>
