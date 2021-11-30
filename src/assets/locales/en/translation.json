@@ -37,5 +37,33 @@
 
   "appCounter": {
     "text": "Your session expires in"
+  },
+
+  "homeBanner": {
+    "title": "Store your data securely"
+  },
+
+  "homeInfo": {
+    "algorithm": {
+      "title": "Strong algorithms",
+      "text": "PersonalPass implements AES-256 bit encryption with PBKDF2 SHA-256 and salted hashes to ensure complete security in the web. You'll create a password manager account with an email address and a strong master password to locally generate a unique encryption key."
+    },
+    "encryption": {
+      "title": "Local-only encryption",
+      "text": "Your data is encrypted and decrypted at the device level. Data stored on our servers is kept secret, even from PersonalPass. Your master password, and the keys used to encrypt and decrypt data, are never sent to our servers."
+    },
+    "openSource": {
+      "title": "Open Source",
+      "text": "PersonalPass is an open source project so anyone can verify the code that protects your data"
+    },
+    "anyDevice": {
+      "title": "On Any Device",
+      "text": "Our dedicated applications for Android and desktops let you store data everywhere. Our fast web client apps make sure data encryption is a pleasant experience."
+    }
+  },
+
+  "homeNavigation": {
+    "loginButton": "SIGN IN",
+    "registerButton": "CREATE AN ACCOUNT"
   }
 }
