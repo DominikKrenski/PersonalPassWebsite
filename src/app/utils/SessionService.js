@@ -27,7 +27,7 @@ class SessionService {
    * Retrieves data stored at given key.
    *
    * @param {string} key the name of the key
-   * @returns {(string|null)} null if given key does not exists; value otherwise
+   * @returns {(string|null)} null if given key does not exist; value otherwise
    */
   get(key) {
     return this.#storage.getItem(key);
