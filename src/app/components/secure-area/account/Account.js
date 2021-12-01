@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import urls from '../../../utils/urls';
 import accessService from '../../../utils/AccessService';
+import localService from '../../../utils/LocalService';
+import dateService from '../../../utils/DateService';
 import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
 import i18n from '../../../i18n';
@@ -14,6 +16,7 @@ import './Account.local.scss';
 const Account = () => {
   const [accountData, setAccountData] = useState(null);
   const [reminderVisible, setReminderVisible] = useState(false);
+  const [currentTimeZone, setCurrentTimeZone] = useState(null);
   const [apiError, setApiError] = useState(null);
 
   const { t } = useTranslation();
@@ -35,6 +38,14 @@ const Account = () => {
   useEffect(() => {
     errorService.clearError();
     const errorSubscription = errorService.getError().subscribe(err => setApiError(err));
+    const tz = localService.get('timezone');
+
+    if (tz) {
+      setCurrentTimeZone(tz);
+    } else {
+      localService.set('timezone', 'Europe/London');
+      setCurrentTimeZone('Europe/London');
+    }
 
     return () => errorSubscription.unsubscribe();
   }, []);
@@ -52,7 +63,8 @@ const Account = () => {
   }
 
   const handleTimeZoneChange = e => {
-    console.log(e.target.value);
+    localService.set('timezone', e.target.value);
+    setCurrentTimeZone(e.target.value);
   }
 
   return (
@@ -108,11 +120,11 @@ const Account = () => {
         <tbody>
           <tr>
             <td>{t('account.infoTable.createdAt')}</td>
-            <td>{accountData ? accountData.createdAt : ''}</td>
+            <td>{accountData ? dateService.displayDate(accountData.createdAt, currentTimeZone) : ''}</td>
           </tr>
           <tr>
             <td>{t('account.infoTable.updatedAt')}</td>
-            <td>{accountData ? accountData.updatedAt : ''}</td>
+            <td>{accountData ? dateService.displayDate(accountData.updatedAt, currentTimeZone) : ''}</td>
           </tr>
           <tr>
             <td>{t('account.infoTable.language')}</td>
@@ -129,33 +141,32 @@ const Account = () => {
             <td>{t('account.infoTable.timeZone')}</td>
             <td>
               <div className="select is-success is-small">
-                <select onChange={handleTimeZoneChange}>
-                  <option value="-12">(-12:00) {t('timeZones.0')}</option>
-                  <option value="-11">(-11:00) {t('timeZones.1')}</option>
-                  <option value="-10">(-10:00) {t('timeZones.2')}</option>
-                  <option value="-9">(-09:00) {t('timeZones.3')}</option>
-                  <option value="-8">(-08:00) {t('timeZones.4')}</option>
-                  <option value="-7">(-07:00) {t('timeZones.5')}</option>
-                  <option value="-6">(-06:00) {t('timeZones.6')}</option>
-                  <option value="-5">(-05:00) {t('timeZones.7')})</option>
-                  <option value="-4">(-04:00) {t('timeZones.8')}</option>
-                  <option value="-3">(-03:00) {t('timeZones.9')}</option>
-                  <option value="-2">(-02:00) {t('timeZones.10')}</option>
-                  <option value="-1">(-01:00) {t('timeZones.11')}</option>
-                  <option value="0">(0:00) {t('timeZones.12')}</option>
-                  <option value="1">(+01:00) {t('timeZones.13')}</option>
-                  <option value="2">(+02:00) {t('timeZones.14')}</option>
-                  <option value="3">(+03:00) {t('timeZones.15')}</option>
-                  <option value="4">(+04:00) {t('timeZones.16')}</option>
-                  <option value="5">(+05:00) {t('timeZones.17')}</option>
-                  <option value="6">(+06:00) {t('timeZones.18')}</option>
-                  <option value="7">(+07:00) {t('timeZones.19')}</option>
-                  <option value="8">(+08:00) {t('timeZones.20')}</option>
-                  <option value="9">(+09:00) {t('timeZones.21')}</option>
-                  <option value="10">(+10:00) {t('timeZones.22')}</option>
-                  <option value="11">(+11:00) {t('timeZones.23')}</option>
-                  <option value="12">(+12:00) {t('timeZones.24')}</option>
-                  <option value="13">(+13:00) {t('timeZones.25')}</option>
+                <select value={currentTimeZone || 'Europe/London'} onChange={handleTimeZoneChange}>
+                  <option value="Pacific/Fiji">(-12:00) {t('timeZones.0')}</option>
+                  <option value="US/Samoa">(-11:00) {t('timeZones.1')}</option>
+                  <option value="US/Hawaii">(-10:00) {t('timeZones.2')}</option>
+                  <option value="US/Alaska">(-09:00) {t('timeZones.3')}</option>
+                  <option value="US/Pacific">(-08:00) {t('timeZones.4')}</option>
+                  <option value="US/Arizona">(-07:00) {t('timeZones.5')}</option>
+                  <option value="US/Central">(-06:00) {t('timeZones.6')}</option>
+                  <option value="US/Eastern">(-05:00) {t('timeZones.7')})</option>
+                  <option value="Canada/Atlantic">(-04:00) {t('timeZones.8')}</option>
+                  <option value="Brazil/East">(-03:00) {t('timeZones.9')}</option>
+                  <option value="Brazil/DeNoronha">(-02:00) {t('timeZones.10')}</option>
+                  <option value="Atlantic/Azores">(-01:00) {t('timeZones.11')}</option>
+                  <option value="Europe/London">(0:00) {t('timeZones.12')}</option>
+                  <option value="Europe/Brussels">(+01:00) {t('timeZones.13')}</option>
+                  <option value="Europe/Athens">(+02:00) {t('timeZones.14')}</option>
+                  <option value="Europe/Moscow">(+03:00) {t('timeZones.15')}</option>
+                  <option value="Asia/Tbilisi">(+04:00) {t('timeZones.16')}</option>
+                  <option value="Asia/Yekaterinburg">(+05:00) {t('timeZones.17')}</option>
+                  <option value="Asia/Novosibirsk">(+06:00) {t('timeZones.18')}</option>
+                  <option value="Asia/Krasnoyarsk">(+07:00) {t('timeZones.19')}</option>
+                  <option value="Asia/Irkutsk">(+08:00) {t('timeZones.20')}</option>
+                  <option value="Asia/Yakutsk">(+09:00) {t('timeZones.21')}</option>
+                  <option value="Australia/Canberra">(+10:00) {t('timeZones.22')}</option>
+                  <option value="Asia/Magadan">(+11:00) {t('timeZones.23')}</option>
+                  <option value="Pacific/Auckland">(+12:00) {t('timeZones.24')}</option>
                 </select>
               </div>
             </td>
