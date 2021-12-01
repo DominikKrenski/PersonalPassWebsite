@@ -1,4 +1,8 @@
 {
+  "secureArea": {
+    "logoutButton": "SIGN OUT"
+  },
+
   "account": {
     "header": "Account Setting",
     "loginTable": {
@@ -93,5 +97,34 @@
       "uppercase": "At least 1 uppercase letter",
       "email": "Not your email"
     }
-  }
+  },
+
+  "timeZones": [
+    "International Date Line West",
+    "Midway Island, Samoa",
+    "Hawaii",
+    "Alaska",
+    "Pacific Time (US & Canada)",
+    "Arizona",
+    "Central Time (US & Canada), Guadalajara, Mexico City",
+    "Eeaster Time (US & Canada)",
+    "Atlantic Time (Canada), Manaus, Santiago",
+    "Greenland, Brasilia, Montevideo",
+    "Mid-Atlantic",
+    "Azores",
+    "GMT: Dublin, Edinburgh, Lisbon, London",
+    "Amsterdam, Berlin, Rome, Vienna, Prague, Brussels",
+    "Amman, Athens, Instanbul, Beirut, Cairo, Jerusalem",
+    "Kuwait, Riyadh, Nairobi, Moscow, St. Petersburg, Volgograd",
+    "Abu Dhabi, Muscat, Tbilisi, Izhevsk",
+    "Islamabad, Karachi, Tashkent, Ekaterinburd",
+    "Astana, Dhaka, Novosibirsk",
+    "Bangkok, Hanoi, Jakarta, Krasnoyarsk",
+    "Beijing, Hong Kong, Singapore, Taipei, Irkutsk",
+    "Seoul, Osaka, Sapporo, Tokyo, Yarkutsk",
+    "Canberra, Melbourne, Sydney, Hobart",
+    "Magadan, Solomon Is., New Caledonia",
+    "Auckland, Wellington",
+    "Nuku'alofa"
+  ]
 }
