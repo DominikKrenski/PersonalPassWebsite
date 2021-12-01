@@ -51,6 +51,10 @@ const Account = () => {
     i18n.changeLanguage(e.target.value);
   }
 
+  const handleTimeZoneChange = e => {
+    console.log(e.target.value);
+  }
+
   return (
     <div id="account-details" className="column is-10">
       { apiError && <AppError error={apiError} /> }
@@ -113,7 +117,7 @@ const Account = () => {
           <tr>
             <td>{t('account.infoTable.language')}</td>
             <td>
-              <div className="select is-success">
+              <div className="select is-success is-small">
                 <select value={i18n.language} onChange={handleLanguageChange}>
                   <option value="en">{t('account.infoTable.langSelect.en')}</option>
                   <option value="pl">{t('account.infoTable.langSelect.pl')}</option>
@@ -123,7 +127,38 @@ const Account = () => {
           </tr>
           <tr>
             <td>{t('account.infoTable.timeZone')}</td>
-            <td>Select</td>
+            <td>
+              <div className="select is-success is-small">
+                <select onChange={handleTimeZoneChange}>
+                  <option value="-12">(-12:00) {t('timeZones.0')}</option>
+                  <option value="-11">(-11:00) {t('timeZones.1')}</option>
+                  <option value="-10">(-10:00) {t('timeZones.2')}</option>
+                  <option value="-9">(-09:00) {t('timeZones.3')}</option>
+                  <option value="-8">(-08:00) {t('timeZones.4')}</option>
+                  <option value="-7">(-07:00) {t('timeZones.5')}</option>
+                  <option value="-6">(-06:00) {t('timeZones.6')}</option>
+                  <option value="-5">(-05:00) {t('timeZones.7')})</option>
+                  <option value="-4">(-04:00) {t('timeZones.8')}</option>
+                  <option value="-3">(-03:00) {t('timeZones.9')}</option>
+                  <option value="-2">(-02:00) {t('timeZones.10')}</option>
+                  <option value="-1">(-01:00) {t('timeZones.11')}</option>
+                  <option value="0">(0:00) {t('timeZones.12')}</option>
+                  <option value="1">(+01:00) {t('timeZones.13')}</option>
+                  <option value="2">(+02:00) {t('timeZones.14')}</option>
+                  <option value="3">(+03:00) {t('timeZones.15')}</option>
+                  <option value="4">(+04:00) {t('timeZones.16')}</option>
+                  <option value="5">(+05:00) {t('timeZones.17')}</option>
+                  <option value="6">(+06:00) {t('timeZones.18')}</option>
+                  <option value="7">(+07:00) {t('timeZones.19')}</option>
+                  <option value="8">(+08:00) {t('timeZones.20')}</option>
+                  <option value="9">(+09:00) {t('timeZones.21')}</option>
+                  <option value="10">(+10:00) {t('timeZones.22')}</option>
+                  <option value="11">(+11:00) {t('timeZones.23')}</option>
+                  <option value="12">(+12:00) {t('timeZones.24')}</option>
+                  <option value="13">(+13:00) {t('timeZones.25')}</option>
+                </select>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
