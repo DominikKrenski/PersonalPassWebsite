@@ -19,7 +19,8 @@ import {
   faAddressBook,
   faRssSquare,
   faHome,
-  faCog
+  faCog,
+  faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 import Home from './components/home/Home';
@@ -41,7 +42,8 @@ library.add(
   faAddressBook,
   faRssSquare,
   faHome,
-  faCog
+  faCog,
+  faTimesCircle
   );
 
 const App = () => {
