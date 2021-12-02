@@ -125,5 +125,18 @@
     "Canberra, Melbourne, Sydney, Hobart",
     "Magadan, Wyspy Salomona, Nowa Kaledonia",
     "Auckland, Wellington"
-  ]
+  ],
+
+  "accountUpdate": {
+    "email": {
+      "title": "Aktualizacja adresu email",
+      "label": "Nowy adres email",
+      "button": "Aktualizuj email"
+    },
+    "password": {
+      "title": "Aktualizuj hasło",
+      "label": "Nowe hasło",
+      "button": "Aktualizuj hasło"
+    }
+  }
 }

@@ -125,5 +125,18 @@
     "Canberra, Melbourne, Sydney, Hobart",
     "Magadan, Solomon Is., New Caledonia",
     "Auckland, Wellington"
-  ]
+  ],
+
+  "accountUpdate": {
+    "email": {
+      "title": "Update Email Address",
+      "label": "New email",
+      "button": "Update email"
+    },
+    "password": {
+      "title": "Update Master Password",
+      "label": "New Master Password",
+      "button": "Update master password"
+    }
+  }
 }
