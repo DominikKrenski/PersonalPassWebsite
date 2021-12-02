@@ -9,6 +9,7 @@ import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
 import i18n from '../../../i18n';
 
+import EmailUpdateForm from '../../shared/email-update-form/EmailUpdateForm';
 import AppError from '../../shared/app-error/AppError';
 
 import './Account.local.scss';
@@ -17,6 +18,7 @@ const Account = () => {
   const [accountData, setAccountData] = useState(null);
   const [reminderVisible, setReminderVisible] = useState(false);
   const [currentTimeZone, setCurrentTimeZone] = useState(null);
+  const [emailFormVisible, setEmailFormVisible] = useState(null);
   const [apiError, setApiError] = useState(null);
 
   const { t } = useTranslation();
@@ -67,8 +69,18 @@ const Account = () => {
     setCurrentTimeZone(e.target.value);
   }
 
+  const handleUpdateEmailClick = () => {
+    setEmailFormVisible({
+      initialValue: accountData?.email,
+      successCallback: setAccountData,
+      closeCallback: setEmailFormVisible
+    });
+  }
+
   return (
     <div id="account-details" className="column is-10">
+      { emailFormVisible && <EmailUpdateForm opts={emailFormVisible} /> }
+
       { apiError && <AppError error={apiError} /> }
 
       <h1>{t('account.header')}</h1>
@@ -84,13 +96,25 @@ const Account = () => {
             <td>{t('account.loginTable.emailAccount')}</td>
             <td>
               <div className="text-with-button">
-              <span>{accountData ? accountData.email : ''}</span> <button className="button is-outlined is-primary is-small">{t('account.loginTable.buttons.changeEmail')}</button>
+              <span>{accountData ? accountData.email : ''}</span>
+              <button
+                className="button is-outlined is-primary is-small"
+                onClick={handleUpdateEmailClick}
+              >
+                {t('account.loginTable.buttons.changeEmail')}
+              </button>
               </div>
             </td>
           </tr>
           <tr>
             <td>{t('account.loginTable.masterPassword')}</td>
-            <td><button className="button is-outlined is-primary is-small">{t('account.loginTable.buttons.changeMasterPassword')}</button></td>
+            <td>
+              <button
+                className="button is-outlined is-primary is-small"
+                >
+                  {t('account.loginTable.buttons.changeMasterPassword')}
+                </button>
+            </td>
           </tr>
           <tr>
             <td>{t('account.loginTable.masterPasswordReminder')}</td>
@@ -99,6 +123,7 @@ const Account = () => {
                 <span className={reminderVisible ? 'reminder-visible' : 'reminder-invisible'}>
                   {accountData ? accountData.reminder : ''}
                 </span>
+
                 <button
                   onClick={handleShowReminderClick}
                   className="button is-outlined is-primary is-small"
