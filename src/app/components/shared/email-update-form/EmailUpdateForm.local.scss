@@ -1,0 +1,74 @@
+@import '../../../../../node_modules/bulma/sass/grid/columns.sass';
+@import '../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../node_modules/bulma/sass/form/_all.sass';
+@import '../../../../../node_modules/bulma/sass/elements/icon.sass';
+@import '../../../../../node_modules/bulma/sass/elements/button.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/fonts';
+
+#email-wrapper {
+  position: absolute;
+  z-index: 9999;
+  min-height: 200px;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  margin: 0px;
+  background-color: $modal-background-color;
+}
+
+#email-form {
+  background-color: $white-dark;
+  min-height: 100px;
+}
+
+#email-form-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $red;
+  padding: 10px;
+
+  h1 {
+    color: $white;
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-family: 'Anton';
+  }
+
+  #close-icon {
+    color: $white;
+  }
+}
+
+#email-form-content {
+  padding: 15px;
+
+  label {
+    margin-bottom: 0px;
+    color: $blue-dark;
+  }
+
+  input {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-color: $blue-dark;
+    background-color: $white-dark;
+  }
+}
+
+#email-update-button {
+  margin-top: 20px;
+
+  button {
+    background-color: $red;
+    color: $white;
+    font-weight: bold;
+  }
+}
