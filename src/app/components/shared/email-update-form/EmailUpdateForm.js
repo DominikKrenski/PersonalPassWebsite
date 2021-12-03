@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 
 import useForm from '../../../hooks/useForm';
+import httpClient from '../../../utils/HttpClient';
+import errorService from '../../../utils/ErrorService';
+import urls from '../../../utils/urls';
+
 import ValidationMessage from '../validation-message/ValidationMessage';
 
 import './EmailUpdateForm.local.scss';
@@ -26,13 +30,27 @@ const EmailUpdateForm = props => {
 
   const handleUpdateButtonClick = async e => {
     e.preventDefault();
-    console.log(data);
 
     if (!performValidation()) {
       return;
     }
 
-    // TODO implement real request
+    // check if new email is the same as old email, if so close form
+    if (data.email.toLocaleLowerCase() === initialValue.toLocaleLowerCase()) {
+      closeCallback(null);
+      return;
+    }
+
+    try {
+      const res = await httpClient.put(urls.updateEmail, { email: data.email });
+      // invoke update function and close form
+      successCallback(res.data);
+      closeCallback(null);
+    } catch (err) {
+      console.log(err);
+      errorService.updateError(err);
+      closeCallback(null);
+    }
   }
 
   return (
