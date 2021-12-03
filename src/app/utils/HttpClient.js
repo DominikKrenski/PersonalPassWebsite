@@ -52,6 +52,7 @@ class HttpClient {
       return config;
     }, err => {
       console.log('Something happened in setting up the request');
+      console.error(err);
       return Promise.reject({
         status: 'Internal Server Error',
         timestamp: dateService.getTimestamp(),
@@ -115,6 +116,17 @@ class HttpClient {
    */
   post(url, data, opts) {
     return this.#instance.post(url, data, opts);
+  }
+
+  /**
+   *
+   * @param {string} url server's endpoint address
+   * @param {object} data data to be send
+   * @param {object} opts request's configuration
+   * @returns {Promise<AxiosResponse<any>>} Promise object representing response
+   */
+  put(url, data, opts) {
+    return this.#instance.put(url, data, opts);
   }
 }
 
