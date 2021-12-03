@@ -28,7 +28,6 @@ const Account = () => {
       try {
         await accessService.passAccessData();
         const res = await httpClient.get(urls.accountDetails);
-        console.log(res);
         setAccountData(res.data);
       } catch (err) {
         console.log('Account useEffect catch');
@@ -102,6 +101,14 @@ const Account = () => {
                 onClick={handleUpdateEmailClick}
               >
                 {t('account.loginTable.buttons.changeEmail')}
+              </button>
+
+              <span style={{marginRight: "15px"}}></span>
+
+              <button
+                className="button is-outlined is-primary is-small"
+              >
+                {t('account.loginTable.buttons.sendTestEmail')}
               </button>
               </div>
             </td>
