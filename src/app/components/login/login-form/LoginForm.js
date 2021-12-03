@@ -145,6 +145,11 @@ const LoginForm = () => {
           </div>
         </div>
       </form>
+
+      {/* PASSWORD HINT LINK */}
+      <div id="password-hint">
+        <Link to="/password-hint">FORGOT PASSWORD?</Link>
+      </div>
     </div>
   )
 }
