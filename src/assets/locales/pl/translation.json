@@ -12,6 +12,7 @@
       "masterPasswordReminder": "Wskazówka",
       "buttons": {
         "changeEmail": "Zmień adres",
+        "sendTestEmail": "Wyślij testowy email",
         "changeMasterPassword": "Zmień hasło",
         "masterPassReminderHidden": "Pokaż wskazówkę",
         "masterPassReminderVisible": "Ukryj wskazówkę"

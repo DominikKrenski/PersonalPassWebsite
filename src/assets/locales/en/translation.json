@@ -12,6 +12,7 @@
       "masterPasswordReminder": "Master Password Reminder",
       "buttons": {
         "changeEmail": "Change Email",
+        "sendTestEmail": "Send test email",
         "changeMasterPassword": "Change Master Password",
         "masterPassReminderHidden": "Show Reminder",
         "masterPassReminderVisible": "Hide Reminder"
