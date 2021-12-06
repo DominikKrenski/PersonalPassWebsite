@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,8 +18,21 @@ const RegistrationForm = () => {
   const { t } = useTranslation();
   const [passwordFieldType, setPasswordFieldType] = useState('password');
   const [requirementsVisible, setRequirementsVisible] = useState(false);
+  const [isFormValidated, setFormValidated] = useState(false);
+  const [renderCount, setRenderCount] = useState(0);
+  const history = useHistory();
 
-  const [handleOnChange, performValidation, data, errors, isFormValidated] = useForm({
+  const submit = async data => {
+    try {
+      const registrationData = await encryptionService.prepareRegistrationData(data);
+      const res = await httpClient.post(urls.signup, registrationData);
+      history.push('/signin');
+    } catch (err) {
+      errorService.updateError(err);
+    }
+  }
+
+  const [handleChange, handleSubmit, data, errors] = useForm({
     validators: {
       email: {
         required: true,
@@ -43,27 +56,16 @@ const RegistrationForm = () => {
     }
   });
 
-  const history = useHistory();
-
-  const handleRegisterClick = async e => {
-    e.preventDefault();
-
-    if (!performValidation()) {
+  useEffect(() => {
+    if (renderCount !== 0) {
       if (!requirementsVisible) {
         setRequirementsVisible(true);
       }
-
-      return;
+      setFormValidated(true);
     }
 
-    try {
-      const registrationData = await encryptionService.prepareRegistrationData(data);
-      const res = await httpClient.post(urls.signup, registrationData);
-      history.push('/signin');
-    } catch (err) {
-      errorService.updateError(err);
-    }
-  }
+    setRenderCount(prev => prev + 1);
+  }, [errors]);
 
   const handleEyeClick = () => {
     if (passwordFieldType === 'password') {
@@ -79,7 +81,7 @@ const RegistrationForm = () => {
 
   return (
     <div id="registration-form-wrapper" className="column is-half is-offset-one-quarter">
-      <form noValidate={true}>
+      <form noValidate={true} autoComplete="off" onSubmit={handleSubmit(submit)}>
         {/* FORM HEADER */}
         <div id="registration-form-header" className="columns is-multiline is-mobile">
           <div className="column is-two-thirds">
@@ -102,7 +104,7 @@ const RegistrationForm = () => {
               type="email"
               name="email"
               value={data.email || ''}
-              onChange={handleOnChange('email')}
+              onChange={handleChange('email')}
             />
             <span className="icon is-left">
               <FontAwesomeIcon icon="envelope" size="lg" />
@@ -124,7 +126,7 @@ const RegistrationForm = () => {
               onFocus={handlePasswordFocus}
               name="password"
               value={data.password || ''}
-              onChange={handleOnChange('password')}
+              onChange={handleChange('password')}
             />
             <span className="icon is-left">
               <FontAwesomeIcon icon="lock" size="lg"/>
@@ -186,7 +188,7 @@ const RegistrationForm = () => {
               type="password"
               name="passwordConfirm"
               value={data.passwordConfirm || ''}
-              onChange={handleOnChange('passwordConfirm')}
+              onChange={handleChange('passwordConfirm')}
             />
             <span className="icon is-left">
               <FontAwesomeIcon icon="lock" size="lg"/>
@@ -207,7 +209,7 @@ const RegistrationForm = () => {
               type="text"
               name="reminder"
               value={data.reminder || ''}
-              onChange={handleOnChange('reminder')}
+              onChange={handleChange('reminder')}
             />
             <span className="icon is-left">
               <FontAwesomeIcon icon="sticky-note" size="lg"/>
@@ -222,7 +224,7 @@ const RegistrationForm = () => {
         {/* REGISTRATION BUTTON */}
         <div id="registration-button" className="field">
           <div className="control">
-            <button className="button is-fullwidth" onClick={handleRegisterClick}>{t('registrationForm.button')}</button>
+            <button type="submit" className="button is-fullwidth">{t('registrationForm.button')}</button>
           </div>
         </div>
       </form>
