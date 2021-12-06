@@ -10,6 +10,7 @@ import httpClient from '../../../utils/HttpClient';
 import i18n from '../../../i18n';
 
 import EmailUpdateForm from '../../shared/email-update-form/EmailUpdateForm';
+import AppInfo from '../../shared/app-info/AppInfo';
 import AppError from '../../shared/app-error/AppError';
 
 import './Account.local.scss';
@@ -19,6 +20,7 @@ const Account = () => {
   const [reminderVisible, setReminderVisible] = useState(false);
   const [currentTimeZone, setCurrentTimeZone] = useState(null);
   const [emailFormVisible, setEmailFormVisible] = useState(null);
+  const [appInfoVisible, setAppInfoVisible] = useState(false);
   const [apiError, setApiError] = useState(null);
 
   const { t } = useTranslation();
@@ -79,6 +81,7 @@ const Account = () => {
   const handleSendTestEmailClick = async () => {
     try {
       await httpClient.get(urls.testEmail);
+      setAppInfoVisible(true);
     } catch (err) {
       errorService.updateError(err);
     }
@@ -87,6 +90,8 @@ const Account = () => {
   return (
     <div id="account-details" className="column is-10">
       { emailFormVisible && <EmailUpdateForm opts={emailFormVisible} /> }
+
+      { appInfoVisible && <AppInfo msg={t('appInfo.testEmailMessage')} closeCallback={setAppInfoVisible}/> }
 
       { apiError && <AppError error={apiError} /> }
 
