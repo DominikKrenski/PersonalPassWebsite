@@ -218,6 +218,11 @@ const Account = () => {
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <th colSpan={2}><button id="delete-account-button" className="button is-small">{t('account.infoTable.deleteButton')}</button></th>
+          </tr>
+        </tfoot>
       </table>
     </div>
   )

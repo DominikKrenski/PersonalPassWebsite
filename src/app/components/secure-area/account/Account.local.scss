@@ -50,5 +50,17 @@
     .reminder-invisible {
       display: none;
     }
+
+    tfoot {
+      th {
+        text-align: center;
+      }
+    }
+  }
+
+  #delete-account-button {
+    background-color: $red;
+    color: $white;
+    font-weight: bold;
   }
 }

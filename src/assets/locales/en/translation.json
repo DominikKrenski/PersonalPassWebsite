@@ -27,7 +27,8 @@
       "langSelect": {
         "en": "English",
         "pl": "Polish"
-      }
+      },
+      "deleteButton": "Delete Account"
     }
   },
 
