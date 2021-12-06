@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   const [passwordFieldType, setPasswordFieldType] = useState('password');
 
-  const [handleOnChange, performValidation, data, errors] = useForm({
+  const [handleChange, handleSubmit, data, errors] = useForm({
     validators: {
       email: {
         required: true,
@@ -32,19 +32,7 @@ const LoginForm = () => {
     }
   });
 
-  const handleEyeClick = () => {
-    if (passwordFieldType === 'password') {
-      setPasswordFieldType('text')
-    } else {
-      setPasswordFieldType('password')
-    }
-  }
-
-  const handleLoginClick = async e => {
-    e.preventDefault();
-
-    if (!performValidation()) { return; }
-
+  const submit = async data => {
     try {
       // get salt related to given email
       const saltRes = await httpClient.post(urls.salt, {email: data.email});
@@ -69,14 +57,22 @@ const LoginForm = () => {
 
       // redirect to secure area
       history.push('/secure');
-    } catch(err) {
+    } catch (err) {
       errorService.updateError(err);
+    }
+  }
+
+  const handleEyeClick = () => {
+    if (passwordFieldType === 'password') {
+      setPasswordFieldType('text')
+    } else {
+      setPasswordFieldType('password')
     }
   }
 
   return (
     <div id="login-form-wrapper" className="column is-half is-offset-one-quarter">
-      <form noValidate={true}>
+      <form noValidate={true} autoComplete="off" onSubmit={handleSubmit(submit)}>
         {/* FORM HEADER */}
         <div id="login-form-header" className="columns is-multiline is-mobile">
           <div className="column is-one-third">
@@ -99,7 +95,7 @@ const LoginForm = () => {
               type="email"
               name="email"
               value={data.email || ''}
-              onChange={handleOnChange('email')}
+              onChange={handleChange('email')}
             />
             <span className="icon is-left">
               <FontAwesomeIcon icon="envelope" size="lg" />
@@ -120,7 +116,7 @@ const LoginForm = () => {
               type={passwordFieldType}
               name="password"
               value={data.password || ''}
-              onChange={handleOnChange('password')}
+              onChange={handleChange('password')}
             />
             <span className="icon is-left">
               <FontAwesomeIcon icon="lock" size="lg" />
@@ -141,7 +137,7 @@ const LoginForm = () => {
         {/* LOGIN BUTTON */}
         <div id="login-button" className="field">
           <div className="control">
-            <button className="button is-fullwidth" onClick={handleLoginClick}>{t('loginForm.button')}</button>
+            <button className="button is-fullwidth">{t('loginForm.button')}</button>
           </div>
         </div>
       </form>
