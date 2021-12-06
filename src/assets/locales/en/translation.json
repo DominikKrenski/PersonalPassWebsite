@@ -139,5 +139,14 @@
       "label": "New Master Password",
       "button": "Update master password"
     }
+  },
+
+  "passwordHint": {
+    "headerFirst": "Forgot Password?",
+    "headerSecond": "Enter your email and we'll send your password hint",
+    "label": "Email address",
+    "errorMessage": "Yout must enter your email address",
+    "confirmMessage": "We've sent a reminder to _. Be sure to check your spam folder. If you receive nothing, make sure the email you used is actually registered as a PersonalPass account",
+    "buttonText": "Send hint"
   }
 }
