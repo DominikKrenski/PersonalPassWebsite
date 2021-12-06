@@ -76,6 +76,14 @@ const Account = () => {
     });
   }
 
+  const handleSendTestEmailClick = async () => {
+    try {
+      await httpClient.get(urls.testEmail);
+    } catch (err) {
+      errorService.updateError(err);
+    }
+  }
+
   return (
     <div id="account-details" className="column is-10">
       { emailFormVisible && <EmailUpdateForm opts={emailFormVisible} /> }
@@ -107,6 +115,7 @@ const Account = () => {
 
               <button
                 className="button is-outlined is-primary is-small"
+                onClick={handleSendTestEmailClick}
               >
                 {t('account.loginTable.buttons.sendTestEmail')}
               </button>
