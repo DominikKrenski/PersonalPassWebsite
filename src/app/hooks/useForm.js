@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   requiredValidator,
@@ -12,12 +12,13 @@ import {
   equalFieldValidator
 } from '../utils/validators';
 
-const useForm = options => {
+const useForm = (options) => {
   const [data, setData] = useState(options.initialValues || {});
   const [errors, setErrors] = useState({});
-  const [isFormValidated, setFormValidated] = useState(false);
+  const [func, setFunc] = useState(() => () => {})
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleOnChange = key => e => {
+  const handleChange = key => e => {
     setData({
       ...data,
       [key]: e.target.value
@@ -79,35 +80,40 @@ const useForm = options => {
     return fieldErrors;
   }
 
-  const performValidation = () => {
-    const validators = options.validators;
+  const handleSubmit = callback => {
+    return e => {
+      e.preventDefault();
+      setFunc(() => callback);
+      const validators = options.validators;
 
-    if (!validators) { return; }
+      if (!validators) { callback(data); return; }
 
-    const validationErrors = {};
-    let isFormValid = true;
+      const validationErrors = {};
 
-    Object.keys(validators).forEach(field => {
-      const fieldErrors = validateField(field, validators[field]);
+      Object.keys(validators).forEach(field => {
+        const fieldErrors = validateField(field, validators[field]);
 
-      if (Object.keys(fieldErrors).length !== 0) { validationErrors[field] = fieldErrors; isFormValid = false; }
-    });
+        if (Object.keys(fieldErrors).length !== 0) {
+          validationErrors[field] = fieldErrors;
+        }
+      });
 
-    setFormValidated(true);
-
-    setErrors({
-      ...validationErrors
-    });
-
-    return isFormValid;
+      setErrors({...validationErrors});
+      setIsSubmitted(true);
+    }
   }
 
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmitted) {
+      func(data);
+    }
+  }, [errors])
+
   return [
-    handleOnChange,
-    performValidation,
+    handleChange,
+    handleSubmit,
     data,
-    errors,
-    isFormValidated
+    errors
   ]
 }
 
