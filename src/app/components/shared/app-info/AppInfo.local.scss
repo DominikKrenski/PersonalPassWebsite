@@ -1,0 +1,42 @@
+@import '../../../../../node_modules/bulma/sass/grid/columns.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/fonts';
+
+#app-info-wrapper {
+  position: absolute;
+  z-index: 9999;
+  min-height: 200px;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  margin: 0px;
+  background-color: $modal-background-color;
+}
+
+#app-info {
+  background-color: $white-dark;
+}
+
+#app-info-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $red;
+  padding: 10px;
+
+  h1 {
+    color: $white;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-family: 'Anton';
+  }
+
+  #close-icon {
+    color: $white
+  }
+}
+
+#app-info-content {
+  padding: 10px;
+}
