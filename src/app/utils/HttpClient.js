@@ -63,17 +63,17 @@ class HttpClient {
     this.#instance.interceptors.response.use(undefined , async err => {
       const originalConfig = err.config;
 
-      if (originalConfig.url !== urls.refresh && err.response.status === 403 && err.response.data.message === 'Access token expired') {
-        const refreshRes = await this.get(urls.refresh);
-        await accessService.updateTokens(refreshRes.data.accessToken, refreshRes.data.refreshToken, this.#accessData.masterKey);
-        return this.#instance(originalConfig);
-      }
-
-
       if (err.response) {
         // server responded with status code falls out of range of 2xx
         if (err.response.status < 500) {
           console.log('Server responded with status code > 2xx');
+
+          if (originalConfig.url !== urls.refresh && err.response.status === 403 && err.response.data.message === 'Access token expired') {
+            const refreshRes = await this.get(urls.refresh);
+            await accessService.updateTokens(refreshRes.data.accessToken, refreshRes.data.refreshToken, this.#accessData.masterKey);
+            return this.#instance(originalConfig);
+          }
+
           return Promise.reject(err.response.data);
         } else {
           console.log('Server responded with status code > 500');
