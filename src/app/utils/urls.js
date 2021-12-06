@@ -14,6 +14,7 @@ const urls = {
   salt: '/auth/salt',
   accountDetails: '/accounts/',
   updateEmail: '/accounts/email',
+  testEmail: '/accounts/test-email',
   sendHint: '/accounts/hint'
 }
 
