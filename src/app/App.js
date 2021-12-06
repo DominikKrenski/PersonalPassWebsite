@@ -26,6 +26,7 @@ import {
 import Home from './components/home/Home';
 import Registration from './components/registration/Registration';
 import Login from './components/login/Login';
+import PasswordHint from './components/password-hint/PasswordHint';
 import SecureArea from './components/secure-area/SecureArea';
 
 import './App.scss';
@@ -59,6 +60,9 @@ const App = () => {
         </Route>
         <Route path="/signin">
           <Login />
+        </Route>
+        <Route path="/password-hint">
+          <PasswordHint />
         </Route>
         <Route path="/secure">
           <SecureArea />
