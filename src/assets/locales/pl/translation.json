@@ -148,5 +148,9 @@
     "errorMessage": "Musisz wprowadzić swój adres email",
     "confirmMessage": "Wysłaliśmy wskazówkę na adres _. Sprawdź folder spam. Jeśli nic nie otrzymałeś, upewnij się, że wprowadzony adres email został zarejestrowany w serwisie PersonalPass.",
     "buttonText": "Wyślij wskazówkę"
+  },
+
+  "appInfo": {
+    "testEmailMessage": "Email wysłany! Pamiętaj, konieczne może być sprawdzenie folderu spam."
   }
 }
