@@ -32,7 +32,6 @@ const Account = () => {
         const res = await httpClient.get(urls.accountDetails);
         setAccountData(res.data);
       } catch (err) {
-        console.log('Account useEffect catch');
         errorService.updateError(err);
       }
     })();
