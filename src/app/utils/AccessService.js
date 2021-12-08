@@ -177,6 +177,17 @@ class AccessService {
     });
   }
 
+  async deleteAllAccessData() {
+    await dbService.accounts.where('account_id').equals(sessionService.get('account_id')).delete();
+
+    sessionService.remove('refresh_vector');
+    sessionService.remove('private_vector');
+    sessionService.remove('account_id');
+    sessionService.remove('access_vector');
+
+    this.#subject.next(null);
+  }
+
 }
 
 /**
