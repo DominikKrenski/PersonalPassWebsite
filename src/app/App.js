@@ -28,6 +28,7 @@ import Registration from './components/registration/Registration';
 import Login from './components/login/Login';
 import PasswordHint from './components/password-hint/PasswordHint';
 import SecureArea from './components/secure-area/SecureArea';
+import SecureRoute from './guards/SecureRoute';
 
 import './App.scss';
 
@@ -64,9 +65,9 @@ const App = () => {
         <Route path="/password-hint">
           <PasswordHint />
         </Route>
-        <Route path="/secure">
+        <SecureRoute path="/secure">
           <SecureArea />
-        </Route>
+        </SecureRoute>
       </Switch>
     </Router>
     </Suspense>
