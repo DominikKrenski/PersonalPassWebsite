@@ -1,0 +1,23 @@
+@import '../../../../../node_modules/bulma/sass/grid/_all.sass';
+@import '../../../../../node_modules/bulma/sass/helpers/_all.sass';
+@import '../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../node_modules/bulma/sass/elements/button.sass';
+@import '../../../../../node_modules/bulma/sass/elements/table.sass';
+@import '../../../../../node_modules/bulma/sass/form/shared.sass';
+@import '../../../../../node_modules/bulma/sass/form/select.sass';
+@import '../../../../assets/scss/colors';
+
+#addresses {
+  position: relative;
+  margin: 0px;
+  padding-top: 27px;
+  color: $blue-dark
+}
+
+#add-address-icon {
+  position: absolute;
+  z-index: 9999;
+  right: 20px;
+  bottom: 20px;
+  color: $red;
+}
