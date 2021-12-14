@@ -137,7 +137,7 @@ const LoginForm = () => {
         {/* LOGIN BUTTON */}
         <div id="login-button" className="field">
           <div className="control">
-            <button className="button is-fullwidth">{t('loginForm.button')}</button>
+            <button type="submit" className="button is-fullwidth">{t('loginForm.button')}</button>
           </div>
         </div>
       </form>
