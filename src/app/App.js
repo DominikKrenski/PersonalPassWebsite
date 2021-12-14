@@ -20,7 +20,8 @@ import {
   faRssSquare,
   faHome,
   faCog,
-  faTimesCircle
+  faTimesCircle,
+  faPlusCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 import Home from './components/home/Home';
@@ -45,7 +46,8 @@ library.add(
   faRssSquare,
   faHome,
   faCog,
-  faTimesCircle
+  faTimesCircle,
+  faPlusCircle
   );
 
 const App = () => {
@@ -65,9 +67,12 @@ const App = () => {
         <Route path="/password-hint">
           <PasswordHint />
         </Route>
-        <SecureRoute path="/secure">
+        <Route path="/secure">
           <SecureArea />
-        </SecureRoute>
+        </Route>
+        {/*<SecureRoute path="/secure">
+          <SecureArea />
+        </SecureRoute>*/}
       </Switch>
     </Router>
     </Suspense>
