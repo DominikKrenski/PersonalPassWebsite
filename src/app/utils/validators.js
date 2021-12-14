@@ -150,3 +150,17 @@ export const equalFieldValidator = (sourceValue, targetValue) => {
 
   return sourceValue === targetValue ? null : 'Fields are not equal';
 }
+
+/**
+ *
+ * @param {string} value field's value
+ * @param {RegExp} regex regex to be tested against
+ * @returns {null|string} returns null if value is valid; string otherwise
+ */
+export const patternValidator = (value, regex) => {
+  if (!value || regex.test(value)) {
+    return null;
+  }
+
+  return 'Field is not valid';
+}
