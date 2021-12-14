@@ -24,19 +24,19 @@ const SecureNav = () => {
           </Link>
         </li>
         <li>
-          <Link to={`${url}/addresses`}>
+          <Link to={`${url}/address`}>
             <span><FontAwesomeIcon icon="address-book" size="lg" /></span>
             {t('secureNav.addresses')}
           </Link>
         </li>
         <li>
-          <Link to={`${url}/websites`}>
+          <Link to={`${url}/website`}>
             <span><FontAwesomeIcon icon="rss-square" size="lg" /></span>
             {t('secureNav.websites')}
           </Link>
         </li>
         <li>
-          <Link to={`${url}/notes`}>
+          <Link to={`${url}/note`}>
             <span><FontAwesomeIcon icon="sticky-note" size="lg" /></span>
              {t('secureNav.notes')}
             </Link>
