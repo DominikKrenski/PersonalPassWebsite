@@ -8,6 +8,7 @@ import SecureNav from './secure-nav/SecureNav';
 import AppFooter from '../shared/app-footer/AppFooter';
 import Items from './items/Items';
 import Account from './account/Account';
+import Address from './address/Address';
 
 import './SecureArea.local.scss';
 
@@ -33,6 +34,9 @@ const SecureArea = () => {
           </Route>
           <Route path={`${path}/account`}>
             <Account />
+          </Route>
+          <Route path={`${path}/address`}>
+            <Address />
           </Route>
         </Switch>
       </div>
