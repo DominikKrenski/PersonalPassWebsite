@@ -9,7 +9,8 @@ import {
   atLeastOneLowercaseValidator,
   atLeastOneUppercaseValidator,
   notEmailValidator,
-  equalFieldValidator
+  equalFieldValidator,
+  patternValidator
 } from '../utils/validators';
 
 const useForm = (options) => {
@@ -77,7 +78,32 @@ const useForm = (options) => {
       if (result) { fieldErrors.equalField = result; }
     }
 
+    if (fieldValidators.patternValidator) {
+      result = patternValidator(value, fieldValidators.pattern);
+      if (result) { fieldErrors.pattern = result; }
+    }
+
     return fieldErrors;
+  }
+
+  const sanitizeField = (field, fieldSanitizers) => {
+    let value = data[field];
+
+    if (!fieldSanitizers) { return value; }
+
+    if (fieldSanitizers.trim) {
+      value = !value ? value : value.trim();
+    }
+
+    if (fieldSanitizers.date) {
+      if (value) {
+        let splitted = value.split('-');
+        splitted = splitted.reverse();
+        value = splitted.join('/');
+      }
+    }
+
+    return value;
   }
 
   const handleSubmit = callback => {
@@ -86,7 +112,11 @@ const useForm = (options) => {
       setFunc(() => callback);
       const validators = options.validators;
 
-      if (!validators) { callback(data); return; }
+      //if (!validators) { callback(data); return; }
+      if (!validators) {
+        setErrors({});
+        return;
+      }
 
       const validationErrors = {};
 
@@ -105,9 +135,34 @@ const useForm = (options) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitted) {
+      const sanitizers = options.sanitizers;
+
+      if (!sanitizers) {
+        func(data);
+        return;
+      }
+
+      const sanitizedValues = {};
+
+      Object.keys(sanitizers).forEach(field => {
+        sanitizedValues[field] = sanitizeField(field, sanitizers[field]);
+      });
+
+      func(sanitizedValues);
+
+      /*setData({
+        ...data,
+        ...sanitizedValues
+      });*/
+    }
+  }, [errors]);
+
+  /*useEffect(() => {
+    if (isSubmitted) {
+      console.log(data);
       func(data);
     }
-  }, [errors])
+  }, [data]);*/
 
   return [
     handleChange,
