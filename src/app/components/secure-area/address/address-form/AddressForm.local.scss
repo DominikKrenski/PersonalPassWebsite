@@ -1,0 +1,65 @@
+@import '../../../../../../node_modules/bulma/sass/grid/columns.sass';
+@import '../../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../../node_modules/bulma/sass/form/_all.sass';
+@import '../../../../../../node_modules/bulma/sass/elements/table.sass';
+@import '../../../../../../node_modules/bulma/sass/elements/button.sass';
+@import '../../../../../assets/scss/colors';
+@import '../../../../../assets/scss/fonts';
+
+#address-form-wrapper {
+  position: absolute;
+  z-index: 99999;
+  min-height: 200px;
+  overflow: scroll;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  margin: 0px;
+  background-color: $modal-background-color;
+}
+
+#address-form {
+  table {
+    th {
+      background-color: $red;
+      color: $white;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+
+    span {
+      color: $red;
+    }
+
+    button {
+      font-weight: bold;
+    }
+
+    h1 {
+      font-weight: 400;
+      font-family: 'Anton';
+      font-size: 1.3rem;
+    }
+  }
+
+  input {
+    outline: none;
+    box-shadow: none;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-color: $blue-dark;
+  }
+
+  .error {
+    border-color: $orange;
+  }
+}
+
+#send-button {
+  background-color: $red;
+  color: $white;
+
+}
