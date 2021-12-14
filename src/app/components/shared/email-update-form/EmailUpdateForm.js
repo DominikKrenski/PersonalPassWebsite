@@ -94,6 +94,7 @@ const EmailUpdateForm = props => {
               <div id="email-update-button">
                 <div className="control">
                   <button
+                    type="submit"
                     className="button is-fullwidth"
                     onClick={handleUpdateButtonClick}
                   >
