@@ -128,6 +128,16 @@ class HttpClient {
   put(url, data, opts) {
     return this.#instance.put(url, data, opts);
   }
+
+  /**
+   *
+   * @param {string} url server's endpoint address
+   * @param {object} opts request's configuration
+   * @returns {Promise<AxiosResponse<any>>} Promise object representing response
+   */
+  delete(url, opts) {
+    return this.#instance.delete(url, opts);
+  }
 }
 
 /**
