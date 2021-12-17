@@ -9,17 +9,22 @@ import urls from '../../../utils/urls';
 
 import AddressForm from './address-form/AddressForm';
 import DataTable from '../../shared/data-table/DataTable';
+import Confirmation from '../../shared/confirmation/Confirmation';
 import AppError from '../../shared/app-error/AppError';
 
 import './Address.local.scss';
 
 const Address = () => {
-  const [serverData, setServerData] = useState(null);
-  const [decodedData, setDecodedData] = useState([]);
-  const [formResponse, setFormResponse] = useState(null);
-  const [addFormVisible, setAddFormVisible] = useState(false);
-  const [accessData, setAccessData] = useState(null);
-  const [apiError, setApiError] = useState(null);
+  const [serverData, setServerData] = useState(null);  // raw encrypted data from server
+  const [decodedData, setDecodedData] = useState([]); // decoded data
+  const [successfulResponse, setSuccessfulResponse] = useState(false);
+  const [currentAddress, setCurrentAddress] = useState(null); // current address for edit and show forms
+  const [addFormVisible, setAddFormVisible] = useState(false); // if add address form is visible
+  const [editFormVisible, setEditFormVisible] = useState(false); // if edit address form is visible
+  const [showFormVisible, setShowFormVisible] = useState(false); // if show address form is visible
+  const [confirmationVisible, setConfirmationVisible] = useState(false);
+  const [accessData, setAccessData] = useState(null); // data required for encrypt/decrypt entries
+  const [apiError, setApiError] = useState(null); // error that may be throws by application
 
   useEffect(() => {
     errorService.clearError();
@@ -49,6 +54,19 @@ const Address = () => {
 
   useEffect(() => {
     (async () => {
+      if (successfulResponse) {
+        try {
+          const res = await httpClient.get(urls.addresses);
+          setServerData(res.data);
+        } catch (err) {
+          errorService.updateError(err);
+        }
+      }
+    })();
+  }, [successfulResponse]);
+
+  useEffect(() => {
+    (async () => {
       let arr = [];
 
       if (serverData && serverData.length > 0) {
@@ -71,24 +89,48 @@ const Address = () => {
         }
       }
 
+      arr.sort((a,b) => a.entry.entryTitle.toLocaleLowerCase().localeCompare(b.entry.entryTitle.toLocaleLowerCase()));
       setDecodedData(arr);
     })();
   }, [serverData]);
 
   const handleAddAddressClick = () => {
+    setSuccessfulResponse(false);
     setAddFormVisible(true);
   }
 
   const handleShowButtonClick = e => {
-    const entry = decodedData.find(el => el.id === e.target.value);
+    const address = decodedData.find(el => el.id === e.target.value);
+    setCurrentAddress(address);
+    setShowFormVisible(true);
   }
 
   const handleEditButtonClick = e => {
-    console.log(e.target.value);
+    const address = decodedData.find(el => el.id === e.target.value);
+    setCurrentAddress(address);
+    setSuccessfulResponse(false);
+    setEditFormVisible(true);
   }
 
   const handleDeleteButtonClick = e => {
-    console.log(e.target.value);
+    const address = decodedData.find(el => el.id === e.target.value);
+    setCurrentAddress(address);
+    setSuccessfulResponse(false);
+    setConfirmationVisible(true);
+  }
+
+  const handleCancelButtonClick = () => {
+    setConfirmationVisible(false);
+  }
+
+  const handleConfirmButtonClick = async () => {
+    try {
+      await httpClient.delete(`${urls.addresses}/${currentAddress.id}`);
+      setConfirmationVisible(false);
+      setSuccessfulResponse(true);
+    } catch (err) {
+      errorService.updateError(err);
+    }
   }
 
 
@@ -96,11 +138,51 @@ const Address = () => {
   return (
     <div id="addresses" className="column is-10">
       { apiError && <AppError error={apiError} /> }
-      { addFormVisible && <AddressForm closeCallback={setAddFormVisible} successCallback={setFormResponse} /> }
+
+      {
+        confirmationVisible &&
+        <Confirmation
+          msg="Do you really want to delete this address?"
+          cancelButtonText="Cancel"
+          confirmButtonText="Delete Address"
+          cancelCallback={handleCancelButtonClick}
+          confirmCallback={handleConfirmButtonClick}
+        />
+      }
+
+      {
+        addFormVisible &&
+        <AddressForm
+          closeCallback={setAddFormVisible}
+          successCallback={setSuccessfulResponse}
+          type="add"
+        />
+      }
+
+      {
+        editFormVisible &&
+        <AddressForm
+          closeCallback={setEditFormVisible}
+          successCallback={setSuccessfulResponse}
+          address={currentAddress}
+          type="edit"
+        />
+      }
+
+      {
+        showFormVisible &&
+        <AddressForm
+          closeCallback={setShowFormVisible}
+          successCallback={setSuccessfulResponse}
+          address={currentAddress}
+          type="show"
+        />
+      }
 
       <h1>Addresses</h1>
 
-      { decodedData.length > 0 &&
+      {
+        decodedData.length > 0 &&
         <DataTable
           arr={decodedData}
           showButtonClick={handleShowButtonClick}
