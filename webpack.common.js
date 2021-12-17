@@ -11,8 +11,32 @@ const htmlPluginOpts = {
 
 const copyPluginOpts = {
   patterns: [
-    { from: './src/assets/locales/en/translation.json', to: 'assets/locales/en/translation.json', force: true },
-    { from: './src/assets/locales/pl/translation.json', to: 'assets/locales/pl/translation.json', force: true }
+    { from: './src/assets/locales/en/home_banner.json', to: 'assets/locales/en/home_banner.json', force: true },
+    { from: './src/assets/locales/pl/home_banner.json', to: 'assets/locales/pl/home_banner.json', force: true },
+    { from: './src/assets/locales/en/home_info.json', to: 'assets/locales/en/home_info.json', force: true },
+    { from: './src/assets/locales/pl/home_info.json', to: 'assets/locales/pl/home_info.json', force: true },
+    { from: './src/assets/locales/en/home_navigation.json', to: 'assets/locales/en/home_navigation.json', force: true },
+    { from: './src/assets/locales/pl/home_navigation.json', to: 'assets/locales/pl/home_navigation.json', force: true },
+    { from: './src/assets/locales/en/login_form.json', to: 'assets/locales/en/login_form.json', force: true },
+    { from: './src/assets/locales/pl/login_form.json', to: 'assets/locales/pl/login_form.json', force: true },
+    { from: './src/assets/locales/en/registration_form.json', to: 'assets/locales/en/registration_form.json', force: true },
+    { from: './src/assets/locales/pl/registration_form.json', to: 'assets/locales/pl/registration_form.json', force: true },
+    { from: './src/assets/locales/en/app_counter.json', to: 'assets/locales/en/app_counter.json', force: true },
+    { from: './src/assets/locales/pl/app_counter.json', to: 'assets/locales/pl/app_counter.json', force: true },
+    { from: './src/assets/locales/en/confirmation.json', to: 'assets/locales/en/confirmation.json', force: true },
+    { from: './src/assets/locales/pl/confirmation.json', to: 'assets/locales/pl/confirmation.json', force: true },
+    { from: './src/assets/locales/en/logout_button.json', to: 'assets/locales/en/logout_button.json', force: true },
+    { from: './src/assets/locales/pl/logout_button.json', to: 'assets/locales/pl/logout_button.json', force: true },
+    { from: './src/assets/locales/en/secure_nav.json', to: 'assets/locales/en/secure_nav.json', force: true },
+    { from: './src/assets/locales/pl/secure_nav.json', to: 'assets/locales/pl/secure_nav.json', force: true },
+    { from: './src/assets/locales/en/password_hint.json', to: 'assets/locales/en/password_hint.json', force: true },
+    { from: './src/assets/locales/pl/password_hint.json', to: 'assets/locales/pl/password_hint.json', force: true },
+    { from: './src/assets/locales/en/account.json', to: 'assets/locales/en/account.json', force: true },
+    { from: './src/assets/locales/pl/account.json', to: 'assets/locales/pl/account.json', force: true },
+    { from: './src/assets/locales/en/email_update.json', to: 'assets/locales/en/email_update.json', force: true },
+    { from: './src/assets/locales/pl/email_update.json', to: 'assets/locales/pl/email_update.json', force: true },
+    { from: './src/assets/locales/en/password_update.json', to: 'assets/locales/en/password_update.json', force: true },
+    { from: './src/assets/locales/pl/password_update.json', to: 'assets/locales/pl/password_update.json', force: true }
   ]
 }
 
