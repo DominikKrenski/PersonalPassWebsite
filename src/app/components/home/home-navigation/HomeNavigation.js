@@ -41,8 +41,8 @@ const HomeNavigation = () => {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <Link to="/signin" className="button is-rounded is-inverted is-primary">{t('homeNavigation.loginButton')}</Link>
-              <Link to="/signup" className="button is-rounded">{t('homeNavigation.registerButton')}</Link>
+              <Link to="/signin" className="button is-rounded is-inverted is-primary">{t('loginButton', { ns: 'home_navigation' })}</Link>
+              <Link to="/signup" className="button is-rounded">{t('registerButton', { ns: 'home_navigation' })}</Link>
             </div>
           </div>
         </div>

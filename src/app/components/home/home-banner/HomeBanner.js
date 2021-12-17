@@ -9,7 +9,7 @@ const HomeBanner = () => {
   return (
     <section id="home-banner" className="hero">
       <div className="hero-body">
-        <p className="title">{t('homeBanner.title')}</p>
+        <p className="title">{t('title', { ns: 'home_banner'})}</p>
       </div>
       <figure id="lock-icon" className="image is-64x64">
         <img src={LockIcon} alt="lock icon"/>

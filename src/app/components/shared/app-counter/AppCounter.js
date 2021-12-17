@@ -65,7 +65,7 @@ const AppCounter = () => {
 
   return (
     <div id="app-counter" className="column is-4">
-      <p>{t('appCounter.text')}: {min}:{sec.toString().padStart(2, '0')}</p>
+      <p>{t('text', { ns: 'app_counter' })}: {min}:{sec.toString().padStart(2, '0')}</p>
     </div>
   )
 }

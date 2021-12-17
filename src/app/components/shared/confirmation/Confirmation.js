@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import './Confirmation.local.scss';
@@ -11,11 +12,13 @@ const Confirmation = props => {
     confirmCallback
   } = props;
 
+  const { t } = useTranslation();
+
   return (
     <div id="confirmation-wrapper">
       <div id="confirmation" className="column is-half is-offset-one-quarter">
         <div id="confirmation-header">
-          <h1>Warning</h1>
+          <h1>{t('header', { ns: 'confirmation' })}</h1>
         </div>
         <div id="confirmation-body">
           {msg}

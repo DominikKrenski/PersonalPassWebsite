@@ -9,37 +9,37 @@ const HomeInfo = () => {
     <section id="home-info" className="columns is-multiline">
       <div className="column is-two-fifhts">
         <div className="info-title">
-          <p>{t('homeInfo.algorithm.title')}</p>
+          <p>{t('algorithm.title', { ns: 'home_info' })}</p>
         </div>
         <div className="info-text">
-          <p>{t('homeInfo.algorithm.text')}</p>
+          <p>{t('algorithm.text', { ns: 'home_info' })}</p>
         </div>
       </div>
 
       <div className="column is-two-fifths is-offset-one-fifth">
         <div className="info-title">
-          <p>{t('homeInfo.encryption.title')}</p>
+          <p>{t('encryption.title', { ns: 'home_info' })}</p>
         </div>
         <div className="info-text">
-          <p>{t('homeInfo.encryption.text')}</p>
+          <p>{t('encryption.text', { ns: 'home_info' })}</p>
         </div>
       </div>
 
       <div className="column is-two-fifths">
         <div className="info-title">
-          <p>{t('homeInfo.openSource.title')}</p>
+          <p>{t('openSource.title', { ns: 'home_info' })}</p>
         </div>
         <div className="info-text">
-          <p>{t('homeInfo.openSource.text')}</p>
+          <p>{t('openSource.text', { ns: 'home_info' })}</p>
         </div>
       </div>
 
       <div className="column is-two-fifhts is-offset-one-fifth">
         <div className="info-title">
-          <p>{t('homeInfo.anyDevice.title')}</p>
+          <p>{t('anyDevice.title', { ns: 'home_info' })}</p>
         </div>
         <div className="info-text">
-          <p>{t('homeInfo.anyDevice.text')}</p>
+          <p>{t('anyDevice.text', { ns: 'home_info' })}</p>
         </div>
       </div>
     </section>

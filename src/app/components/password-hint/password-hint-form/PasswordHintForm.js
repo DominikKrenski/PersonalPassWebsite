@@ -16,7 +16,7 @@ const PasswordHintForm = () => {
   const submit = async data => {
     try {
       await httpClient.post(urls.sendHint, data);
-      alert(t('passwordHint.confirmMessage').replace('_', `${data.email}`));
+      alert(t('confirmMessage', { ns: 'password_hint' }).replace('_', `${data.email}`));
       history.push('/signin');
     } catch (err) {
       errorService.updateError(err);
@@ -37,8 +37,7 @@ const PasswordHintForm = () => {
 
   useEffect(() => {
     if (Object.keys(errors).length !== 0) {
-      alert(t('passwordHint.errorMessage'));
-      //alert('You must enter your email address');
+      alert(t('errorMessage', { ns: 'password_hint' }));
     }
   }, [errors]);
 
@@ -47,13 +46,13 @@ const PasswordHintForm = () => {
       <form noValidate={true} autoComplete="off" onSubmit={handleSubmit(submit)}>
         {/* FORM HEADER */}
         <div id="password-hint-form-header" className="column is-fullwidth">
-          <p id="first-line">{t('passwordHint.headerFirst')}</p>
-          <p>{t('passwordHint.headerSecond')}</p>
+          <p id="first-line">{t('headerFirst', { ns: 'password_hint' })}</p>
+          <p>{t('headerSecond', { ns: 'password_hint' })}</p>
         </div>
 
         {/* EMAIL FIELD */}
         <div id="label" className="field">
-          <label className="label" htmlFor="email">{t('passwordHint.label')}</label>
+          <label className="label" htmlFor="email">{t('label', { ns: 'password_hint' })}</label>
         </div>
         <div className="field is-grouped">
           <p className="control is-expanded">
@@ -70,7 +69,7 @@ const PasswordHintForm = () => {
               className="button"
               type="submit"
             >
-              {t('passwordHint.buttonText')}
+              {t('buttonText', { ns: 'password_hint' })}
             </button>
           </p>
         </div>

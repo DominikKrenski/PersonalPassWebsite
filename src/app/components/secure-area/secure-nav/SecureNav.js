@@ -14,37 +14,37 @@ const SecureNav = () => {
         <li>
           <Link to={`${url}`}>
             <span><FontAwesomeIcon icon="home" size="lg" /></span>
-            {t('secureNav.allItems')}
+            {t('allItems', { ns: 'secure_nav' })}
           </Link>
         </li>
         <li>
           <Link to={`${url}/password`}>
             <span><FontAwesomeIcon icon="lock" size="lg" /></span>
-            {t('secureNav.passwords')}
+            {t('passwords', { ns: 'secure_nav' })}
           </Link>
         </li>
         <li>
           <Link to={`${url}/address`}>
             <span><FontAwesomeIcon icon="address-book" size="lg" /></span>
-            {t('secureNav.addresses')}
+            {t('addresses', { ns: 'secure_nav' })}
           </Link>
         </li>
         <li>
           <Link to={`${url}/website`}>
             <span><FontAwesomeIcon icon="rss-square" size="lg" /></span>
-            {t('secureNav.websites')}
+            {t('websites', { ns: 'secure_nav' })}
           </Link>
         </li>
         <li>
           <Link to={`${url}/note`}>
             <span><FontAwesomeIcon icon="sticky-note" size="lg" /></span>
-             {t('secureNav.notes')}
+             {t('notes', { ns: 'secure_nav' })}
             </Link>
         </li>
         <li id="last-item">
           <Link to={`${url}/account`}>
             <span><FontAwesomeIcon icon="cog" size="lg" /></span>
-            {t('secureNav.account')}
+            {t('account', { ns: 'secure_nav' })}
           </Link>
         </li>
       </ul>

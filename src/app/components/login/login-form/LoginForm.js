@@ -76,11 +76,11 @@ const LoginForm = () => {
         {/* FORM HEADER */}
         <div id="login-form-header" className="columns is-multiline is-mobile">
           <div className="column is-one-third">
-            <p>{t('loginForm.header')}</p>
+            <p>{t('header', { ns: 'login_form' })}</p>
           </div>
 
           <div className="column is-two-thirds">
-            <p>{t('loginForm.or')} <Link to="/signup">{t('loginForm.registerLink')}</Link></p>
+            <p>{t('or', { ns: 'login_form' })} <Link to="/signup">{t('registerLink', { ns: 'login_form' })}</Link></p>
           </div>
         </div>
 
@@ -88,7 +88,7 @@ const LoginForm = () => {
 
         {/* EMAIL FIELD */}
         <div className="field" id="email-field">
-          <label className="label" htmlFor="email">{t('loginForm.emailLabel')}</label>
+          <label className="label" htmlFor="email">{t('emailLabel', { ns: 'login_form' })}</label>
           <div className="control has-icons-left">
             <input
               className={`input ${errors.email ? "error": ""}`}
@@ -109,7 +109,7 @@ const LoginForm = () => {
 
         {/* PASSWORD FIELD */}
         <div className="field" id="password-field">
-          <label className="label" htmlFor="password">{t('loginForm.passwordLabel')}</label>
+          <label className="label" htmlFor="password">{t('passwordLabel', { ns: 'login_form' })}</label>
           <div className="control has-icons-left has-icons-right">
             <input
               className={`input ${errors.password ? "error": ""}`}
@@ -137,14 +137,14 @@ const LoginForm = () => {
         {/* LOGIN BUTTON */}
         <div id="login-button" className="field">
           <div className="control">
-            <button type="submit" className="button is-fullwidth">{t('loginForm.button')}</button>
+            <button type="submit" className="button is-fullwidth">{t('button', { ns: 'login_form' })}</button>
           </div>
         </div>
       </form>
 
       {/* PASSWORD HINT LINK */}
       <div id="password-hint">
-        <Link to="/password-hint">FORGOT PASSWORD?</Link>
+        <Link to="/password-hint">{t('forgotLink', { ns: 'login_form' })}</Link>
       </div>
     </div>
   )

@@ -30,7 +30,7 @@ const LogoutButton = () => {
         className="button is-rounded"
         onClick={handleLogoutButtonClick}
       >
-        {t('secureArea.logoutButton')}
+        {t('text', { ns: 'logout_button' })}
       </button>
     </div>
   )

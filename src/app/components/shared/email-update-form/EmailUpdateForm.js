@@ -47,7 +47,6 @@ const EmailUpdateForm = props => {
       successCallback(res.data);
       closeCallback(null);
     } catch (err) {
-      console.log(err);
       errorService.updateError(err);
       closeCallback(null);
     }
@@ -59,7 +58,7 @@ const EmailUpdateForm = props => {
         <div id="email-form">
           <form noValidate={true}>
             <div id="email-form-title">
-              <div><h1>{t('accountUpdate.email.title')}</h1></div>
+              <div><h1>{t('title', { ns: 'email_update' })}</h1></div>
               <div
                 id="close-icon"
                 onClick={handleCloseIconClick}
@@ -70,7 +69,7 @@ const EmailUpdateForm = props => {
 
             <div id="email-form-content">
               <div className="field">
-                <label className="label" htmlFor="field">{t('accountUpdate.email.label')}</label>
+                <label className="label" htmlFor="field">{t('label', { ns: 'email_update' })}</label>
                 <div className="control has-icons-left">
                   <input
                     placeholder={initialValue}
@@ -98,7 +97,7 @@ const EmailUpdateForm = props => {
                     className="button is-fullwidth"
                     onClick={handleUpdateButtonClick}
                   >
-                    {t('accountUpdate.email.button')}
+                    {t('button', { ns: 'email_update' })}
                   </button>
                 </div>
               </div>

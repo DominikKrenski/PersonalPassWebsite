@@ -85,11 +85,11 @@ const RegistrationForm = () => {
         {/* FORM HEADER */}
         <div id="registration-form-header" className="columns is-multiline is-mobile">
           <div className="column is-two-thirds">
-            <p>{t('registrationForm.header')}</p>
+            <p>{t('header', { ns: 'registration_form' })}</p>
           </div>
 
           <div className="column is-one-third">
-            <p>{t('registrationForm.or')} <Link to="/signin">{t('registrationForm.loginLink')}</Link></p>
+            <p>{t('or', { ns: 'registration_form' })} <Link to="/signin">{t('loginLink', { ns: 'registration_form' })}</Link></p>
           </div>
         </div>
 
@@ -97,7 +97,7 @@ const RegistrationForm = () => {
 
         {/* EMAIL FIELD */}
         <div className="field" id="email-field">
-          <label className="label" htmlFor="email">{t('registrationForm.emailLabel')}</label>
+          <label className="label" htmlFor="email">{t('emailLabel', { ns: 'registration_form' })}</label>
           <div className="control has-icons-left">
             <input
               className={`input ${errors.email ? "error" : ""}`}
@@ -118,7 +118,7 @@ const RegistrationForm = () => {
 
         {/* PASSWORD FIELD */}
         <div className="field" id="password-field">
-          <label className="label" htmlFor="password">{t('registrationForm.passwordLabel')}</label>
+          <label className="label" htmlFor="password">{t('passwordLabel', { ns: 'registration_form' })}</label>
           <div className="control has-icons-left has-icons-right">
             <input
               className={`input ${errors.password ? "error" : ""}`}
@@ -143,37 +143,37 @@ const RegistrationForm = () => {
         {/* PASSWORD REQUIREMENTS FIELD */}
         {requirementsVisible &&
           <div id="password-requirements" className="field">
-            <p>{t('registrationForm.requirements.header')}</p>
+            <p>{t('requirements.header', { ns: 'registration_form' })}</p>
             <ul>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.minLength}
-                /> {t('registrationForm.requirements.minLength')}
+                /> {t('requirements.minLength', { ns: 'registration_form' })}
               </li>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.atLeastOneDigit}
-                /> {t('registrationForm.requirements.digit')}
+                /> {t('requirements.digit', { ns: 'registration_form' })}
               </li>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.atLeastOneLowercase}
-                /> {t('registrationForm.requirements.lowercase')}
+                /> {t('requirements.lowercase', { ns: 'registration_form' })}
               </li>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.atLeastOneUppercase}
-                /> {t('registrationForm.requirements.uppercase')}
+                /> {t('requirements.uppercase', { ns: 'registration_form' })}
               </li>
               <li>
                 <StatusIcon
                   validated={isFormValidated}
                   error={errors.password?.notEmail}
-                /> {t('registrationForm.requirements.email')}
+                /> {t('requirements.email', { ns: 'registration_form' })}
               </li>
             </ul>
           </div>
@@ -181,7 +181,7 @@ const RegistrationForm = () => {
 
         {/* PASSWORD CONFIRM FIELD */}
         <div className="field" id="password-confirm-field">
-          <label className="label" htmlFor="passwordConfirm">{t('registrationForm.confirmLabel')}</label>
+          <label className="label" htmlFor="passwordConfirm">{t('confirmLabel', { ns: 'registration_form' })}</label>
           <div className="control has-icons-left">
             <input
               className={`input ${errors.passwordConfirm ? "error" : ""}`}
@@ -202,7 +202,7 @@ const RegistrationForm = () => {
 
         {/* REMINDER FIELD */}
         <div className="field" id="reminder-field">
-          <label className="label" htmlFor="reminder">{t('registrationForm.reminderLabel')}</label>
+          <label className="label" htmlFor="reminder">{t('reminderLabel', { ns: 'registration_form' })}</label>
           <div className="control has-icons-left">
             <input
               className={`input ${errors.reminder ? "error" : ""}`}
@@ -224,7 +224,7 @@ const RegistrationForm = () => {
         {/* REGISTRATION BUTTON */}
         <div id="registration-button" className="field">
           <div className="control">
-            <button type="submit" className="button is-fullwidth">{t('registrationForm.button')}</button>
+            <button type="submit" className="button is-fullwidth">{t('button', { ns: 'registration_form' })}</button>
           </div>
         </div>
       </form>
