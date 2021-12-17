@@ -1,0 +1,58 @@
+@import '../../../../../node_modules/bulma/sass/grid/columns.sass';
+@import '../../../../../node_modules/bulma/sass/utilities/_all.sass';
+@import '../../../../../node_modules/bulma/sass/elements/button.sass';
+@import '../../../../assets/scss/colors';
+@import '../../../../assets/scss/fonts';
+
+#confirmation-wrapper {
+  position: absolute;
+  z-index: 9999999999;
+  min-height: 200px;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  margin: 0px;
+  background-color: $modal-background-color;
+}
+
+#confirmation-header {
+  padding: 10px;
+  background-color: $red;
+  color: $white;
+
+  h1 {
+    color: $white;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-family: 'Anton';
+  }
+}
+
+#confirmation {
+  margin-top: 20px;
+  background-color: $white-dark;
+  padding: 0px;
+}
+
+#confirmation-body {
+  padding: 10px;
+  font-size: 1.1rem;
+  text-align: center;
+  color: $blue-dark;
+}
+
+#confirmation-footer {
+  text-align: right;
+  padding-right: 10px;
+  padding-bottom: 10px;
+
+  button {
+    font-weight: bold;
+  }
+
+  button:last-child {
+    background-color: $red;
+    margin-left: 15px;
+  }
+}
