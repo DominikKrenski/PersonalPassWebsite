@@ -38,6 +38,17 @@ class DateService {
   displayDate(date, timezone) {
     return dayjs(date, 'D/M/YYYY[T]HH:mm:ss.SSS[Z]').tz(timezone).format('D/M/YYYY HH:mm:ss');
   }
+
+  /**
+   *
+   * @param {string} date date in server format
+   * @returns {string} date in format required by application
+   */
+  convertServerDateToFormDate(date) {
+    let splitted = date.split('/');
+    splitted = splitted.reverse();
+    return splitted.join('-');
+  }
 }
 
 /**
