@@ -13,6 +13,21 @@ i18n
     interpolation: {
       escapeValue: false
     },
+    ns: [
+      'home_banner',
+      'home_info',
+      'home_navigation',
+      'login_form',
+      'registration_form',
+      'app_counter',
+      'confirmation',
+      'logout_button',
+      'secure_nav',
+      'password_hint',
+      'account',
+      'email_update',
+      'password_update'
+    ],
     detection: {
       // order and from where user language should be detected
       order: ['querystring', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
