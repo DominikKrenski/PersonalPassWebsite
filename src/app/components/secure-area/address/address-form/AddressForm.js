@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import httpClient from '../../../../utils/HttpClient';
 import accessService from '../../../../utils/AccessService';
+import dateService from '../../../../utils/DateService';
 import encryptionService from '../../../../utils/EncryptionService';
 import errorService from '../../../../utils/ErrorService';
 import useForm from '../../../../hooks/useForm';
@@ -12,10 +14,9 @@ import ValidationMessage from '../../../shared/validation-message/ValidationMess
 import './AddressForm.local.scss';
 
 const AddressForm = props => {
-  const { closeCallback, successCallback } = props;
+  const { closeCallback, successCallback, address, type } = props;
 
   const [accessData, setAccessData] = useState(null);
-
 
   useEffect(() => {
     const accessSubscription = accessService.getAccessData().subscribe(data => setAccessData(data));
@@ -23,7 +24,134 @@ const AddressForm = props => {
     return () => accessSubscription.unsubscribe();
   }, []);
 
+
+  const handleCancelButtonClick = () => {
+    closeCallback(false);
+  }
+
+  const setInitialValues = () => {
+    const values = {
+      ...(address.entry.entryTitle && { entryTitle: address.entry.entryTitle }),
+      ...(address.entry.firstName && { firstName: address.entry.firstName }),
+      ...(address.entry.middleName && { middleName: address.entry.middleName }),
+      ...(address.entry.lastName && { lastName: address.entry.lastName }),
+      ...(address.entry.birthday && { birthday: dateService.convertServerDateToFormDate(address.entry.birthday)}),
+      ...(address.entry.company && { company: address.entry.company }),
+      ...(address.entry.addressOne && { addressOne: address.entry.addressOne }),
+      ...(address.entry.addressTwo && { addressTwo: address.entry.addressTwo }),
+      ...(address.entry.city && { city: address.entry.city }),
+      ...(address.entry.country && { country: address.entry.country }),
+      ...(address.entry.state && { state: address.entry.state }),
+      ...(address.entry.email && { email: address.entry.email }),
+      ...(address.entry.phone && { phone: address.entry.phone }),
+      ...(address.entry.mobilePhone && { mobilePhone: address.entry.mobilePhone }),
+      ...(address.entry.notes && { notes: address.entry.notes })
+    }
+
+    return values;
+  }
+
+  let submitFunc = null;
+  let tableTitle = null;
+  let tableFooter = null;
+  let initialValues = {};
+
+  if (type === 'add') {
+    tableTitle = 'Add Address';
+
+    submitFunc = async data => {
+      try {
+        const encryptedAddress = await encryptionService.encryptData(JSON.stringify(data), accessData.masterKey);
+        const res = await httpClient.post(urls.addresses, { 'data': `${encryptedAddress.vector}.${encryptedAddress.encryptedData}` });
+        successCallback(true);
+        closeCallback(false);
+      } catch (err) {
+        errorService.updateError(err);
+        closeCallback(false);
+      }
+    }
+
+    tableFooter = (
+      <tfoot>
+        <tr>
+          <td colSpan={2}>
+            <div className="field is-grouped is-grouped-right">
+              <p className="control">
+                <button className="button is-small is-rounded" onClick={handleCancelButtonClick}>
+                  Cancel
+                </button>
+              </p>
+              <p className="control">
+                <button id="send-button" type="submit" className="button is-small is-rounded">
+                  Add Address
+                </button>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    )
+  } else if (type === 'edit') {
+    tableTitle = `Update: ${address.entry.entryTitle}`;
+
+    initialValues = setInitialValues();
+
+    submitFunc = async data => {
+      try {
+        const encryptedAddress = await encryptionService.encryptData(JSON.stringify(data), accessData.masterKey);
+        const res = await httpClient.put(`${urls.addresses}/${address.id}`, { 'data': `${encryptedAddress.vector}.${encryptedAddress.encryptedData}` });
+        successCallback(true);
+        closeCallback(false);
+      } catch (err) {
+        errorService.updateError(err);
+        closeCallback(false);
+      }
+    }
+
+    tableFooter = (
+      <tfoot>
+        <tr>
+          <td colSpan={2}>
+            <div className="field is-grouped is-grouped-right">
+              <p className="control">
+                <button className="button is-small is-rounded" onClick={handleCancelButtonClick}>
+                  Cancel
+                </button>
+              </p>
+              <p className="control">
+                <button id="send-button" type="submit" className="button is-small is-rounded">
+                  Update Address
+                </button>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    )
+  } else {
+    tableTitle = `${address.entry.entryTitle}`;
+
+    initialValues = setInitialValues();
+
+    tableFooter = (
+      <tfoot>
+        <tr>
+          <td colSpan={2}>
+            <div className="field is-grouped is-grouped-right">
+              <p className="control">
+                <button className="button is-small is-rounded" onClick={handleCancelButtonClick}>
+                  Close
+                </button>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    )
+  }
+
   const [handleChange, handleSubmit, data, errors] = useForm({
+    ...(Object.keys(initialValues) && { 'initialValues': initialValues }),
     validators: {
       entryTitle: {
         required: true,
@@ -122,32 +250,15 @@ const AddressForm = props => {
     }
   });
 
-  const submit = async data => {
-    try {
-      // encrypt all data with master key
-      const encryptedAddress = await encryptionService.encryptData(JSON.stringify(data), accessData.masterKey);
-      const res = await httpClient.post(urls.addresses, { 'data':  `${encryptedAddress.vector}.${encryptedAddress.encryptedData}`});
-      successCallback(res.data);
-      closeCallback(false);
-    } catch (err) {
-      errorService.updateError(err);
-      closeCallback(false);
-    }
-  }
-
-  const handleCancelButtonClick = () => {
-    closeCallback(false);
-  }
-
   return (
     <div id="address-form-wrapper">
       <div className="column is-half is-offset-one-quarter">
         <div id="address-form">
-          <form noValidate={true} autoComplete="off" onSubmit={handleSubmit(submit)}>
+          <form noValidate={true} autoComplete="off" onSubmit={handleSubmit(submitFunc)}>
             <table className="table is-bordered is-fullwidth is-striped">
               <thead>
                 <tr>
-                  <th colSpan={2}><h1>Add Address</h1></th>
+                  <th colSpan={2}><h1>{tableTitle}</h1></th>
                 </tr>
               </thead>
               <tbody>
@@ -161,6 +272,7 @@ const AddressForm = props => {
                           type="text"
                           name="entryTitle"
                           value={data.entryTitle || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('entryTitle')}
                         />
                       </div>
@@ -181,6 +293,7 @@ const AddressForm = props => {
                           type="text"
                           name="firstName"
                           value={data.firstName || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('firstName')}
                         />
                       </div>
@@ -202,6 +315,7 @@ const AddressForm = props => {
                           type="text"
                           name="middleName"
                           value={data.middleName || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('middleName')}
                         />
                       </div>
@@ -223,6 +337,7 @@ const AddressForm = props => {
                           type="text"
                           name="lastName"
                           value={data.lastName || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('lastName')}
                         />
                       </div>
@@ -244,6 +359,7 @@ const AddressForm = props => {
                           type="date"
                           name="birthday"
                           value={data.birthday || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('birthday')}
                         />
                       </div>
@@ -265,6 +381,7 @@ const AddressForm = props => {
                           type="text"
                           name="company"
                           value={data.company || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('company')}
                         />
                       </div>
@@ -286,6 +403,7 @@ const AddressForm = props => {
                           type="text"
                           name="addressOne"
                           value={data.addressOne || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('addressOne')}
                         />
                       </div>
@@ -307,6 +425,7 @@ const AddressForm = props => {
                           type="text"
                           name="addressTwo"
                           value={data.addressTwo || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('addressTwo')}
                         />
                       </div>
@@ -328,6 +447,7 @@ const AddressForm = props => {
                           type="text"
                           name="city"
                           value={data.city || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('city')}
                         />
                       </div>
@@ -349,6 +469,7 @@ const AddressForm = props => {
                           type="text"
                           name="country"
                           value={data.country || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('country')}
                         />
                       </div>
@@ -370,6 +491,7 @@ const AddressForm = props => {
                           type="text"
                           name="state"
                           value={data.state || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('state')}
                         />
                       </div>
@@ -391,6 +513,7 @@ const AddressForm = props => {
                           type="email"
                           name="email"
                           value={data.email || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('email')}
                         />
                       </div>
@@ -412,6 +535,7 @@ const AddressForm = props => {
                           type="text"
                           name="phone"
                           value={data.phone || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('phone')}
                         />
                       </div>
@@ -433,6 +557,7 @@ const AddressForm = props => {
                           type="text"
                           name="mobilePhone"
                           value={data.mobilePhone || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('mobilePhone')}
                         />
                       </div>
@@ -454,6 +579,7 @@ const AddressForm = props => {
                           type="text"
                           name="notes"
                           value={data.notes || ''}
+                          disabled={type === 'show' ? true : false}
                           onChange={handleChange('notes')}
                         />
                       </div>
@@ -465,30 +591,41 @@ const AddressForm = props => {
                   </td>
                 </tr>
               </tbody>
-              <tfoot>
-                <tr>
-                  <td colSpan={2}>
-                    <div className="field is-grouped is-grouped-right">
-                      <p className="control">
-                        <button className="button is-small is-rounded" onClick={handleCancelButtonClick}>
-                          Cancel
-                        </button>
-                      </p>
-                      <p className="control">
-                        <button id="send-button" type="submit" className="button is-small is-rounded">
-                          Add Address
-                        </button>
-                      </p>
-                    </div>
-                  </td>
-                </tr>
-              </tfoot>
+              {tableFooter}
             </table>
           </form>
         </div>
       </div>
     </div>
   )
+}
+
+AddressForm.propTypes = {
+  type: PropTypes.oneOf(['add', 'edit', 'show']).isRequired,
+  successCallback: PropTypes.func.isRequired,
+  closeCallback: PropTypes.func.isRequired,
+  address: PropTypes.exact({
+    id: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    entry: PropTypes.exact({
+      entryTitle: PropTypes.string.isRequired,
+      firstName: PropTypes.string,
+      middleName: PropTypes.string,
+      lastName: PropTypes.string,
+      birthday: PropTypes.string,
+      company: PropTypes.string,
+      addressOne: PropTypes.string,
+      addressTwo: PropTypes.string,
+      city: PropTypes.string,
+      country: PropTypes.string,
+      state: PropTypes.string,
+      email: PropTypes.string,
+      phone: PropTypes.string,
+      mobilePhone: PropTypes.string,
+      notes: PropTypes.string
+    })
+  })
 }
 
 export default AddressForm;
