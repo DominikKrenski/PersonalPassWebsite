@@ -1,0 +1,18 @@
+{
+  "header": "Create an account",
+  "or": "or",
+  "loginLink": "Log In",
+  "emailLabel": "Email",
+  "passwordLabel": "Password",
+  "confirmLabel": "Confirm your password",
+  "reminderLabel": "Reminder (optional)",
+  "button": "Register",
+  "requirements": {
+    "header": "Our minimum password requirements:",
+    "minLength": "At least 12 characters long",
+    "digit": "At least 1 number",
+    "lowercase": "At least 1 lowercase letter",
+    "uppercase": "At least 1 uppercase letter",
+    "email": "Not your email"
+  }
+}

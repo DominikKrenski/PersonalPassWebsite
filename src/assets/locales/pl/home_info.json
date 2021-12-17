@@ -1,0 +1,18 @@
+{
+  "algorithm": {
+    "title": "Bezpieczne algorytmy",
+    "text": "PersonalPass szyfruje dane za pomocą algorytmów AES-256 oraz PBKDF2, aby zapewnić całkowite bezpieczeństwo w sieci. Tworzysz konto za pomocą adresu email i silnego hasła do wygenerowania lokalnie unikalnego klucza szyfrującego."
+  },
+  "encryption": {
+    "title": "Lokalne szyfrowanie",
+    "text": "Twoje dane są szyfrowane i deszyfrowane w całości na Twoim urządzeniu. Dane przechowywane na naszych serwerach są niedostępne również dla PersonalPass. Twoje hasło oraz klucze wykorzystywane w całym procesie nigdy nie zostaną do nas przesłane."
+  },
+  "openSource": {
+    "title": "Open Source",
+    "text": "PersonalPass jest projektem o otwartym kodzie źródowym więc każdy może zweryfikować kod chroniący dane."
+  },
+  "anyDevice": {
+    "title": "Na każdym urządzeniu",
+    "text": "Nasze dedykowane aplikacje na system Android oraz komputery pozwalają na przechowywanie danych wszędzie. Nasze szybkie aplikacje sieciowe sprawią, że szyfrowanie danych stanie się przyjemnym doświadczeniem."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "header": "Ustawienia konta",
+  "loginTable": {
+    "header": "Dane logowania",
+    "emailAccount": "Adres email",
+    "masterPassword": "Hasło",
+    "masterPasswordReminder": "Wskazówka",
+    "buttons": {
+      "changeEmail": "Zmień adres",
+      "sendTestEmail": "Wyślij testowy email",
+      "changeMasterPassword": "Zmień hasło",
+      "masterPassReminderHidden": "Pokaż wskazówkę",
+      "masterPassReminderVisible": "Ukryj wskazówkę"
+    }
+  },
+  "infoTable": {
+    "header": "Informacje o koncie",
+    "createdAt": "Utworzone",
+    "updatedAt": "Ostatnio modyfikowane",
+    "language": "Język",
+    "timeZone": "Strefa czasowa",
+    "langSelect": {
+      "en": "Angielski",
+      "pl": "Polski"
+    },
+    "deleteButton": "Usuń konto"
+  },
+  "timeZones": [
+    "Międzynarodowa linia zmiany daty",
+    "Midway, Samoa",
+    "Hawaje",
+    "Alaska",
+    "Czas Pacyficzny (US i Kanada)",
+    "Arizona",
+    "Czas centralny (US i Kanada), Guadalahara, Meksyk",
+    "Czas wschodni (US i Kanada)",
+    "Czas atlantycki (Kanada), Manaus, Santiago",
+    "Grenlandia, Brazylia, Montevideo",
+    "Uniwersalny czas koordynowany",
+    "Azory",
+    "Czas standardowy: Dublin, Edynburg, Lisbona, Londyn",
+    "Amsterdam, Berlin, Rzym, Wiedeń, Praga, Bruksela",
+    "Amman, Ateny, Istanbuł, Bejrut, Kair, Jerozolima",
+    "Kuwejt, Nairobi, Moskwa, Petersburg, Wołgograd",
+    "Abu Zabi, Muskat, Tbilisi, Iżewsk",
+    "Islamabad, Karaczi, Taszkient, Jekaterynburg",
+    "Astana, Dhaka, Nowosybirsk",
+    "Bangkok, Hanoi, Dżakarta, Krasnojarsk",
+    "Pekin, Hongkong, Singapur, Taipei, Irkuck",
+    "Seul, Osaka, Sapporo, Tokio, Hobart",
+    "Canberra, Melbourne, Sydney, Hobart",
+    "Magadan, Wyspy Salomona, Nowa Kaledonia",
+    "Auckland, Wellington"
+  ],
+  "appInfo": {
+    "message": "Email wysłany! Pamiętaj, konieczne może być sprawdzenie folderu spam."
+  }
+}

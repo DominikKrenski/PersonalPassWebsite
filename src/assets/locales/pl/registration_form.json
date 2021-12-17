@@ -1,0 +1,18 @@
+{
+  "header": "Utwórz konto",
+  "or": "lub",
+  "loginLink": "Zaloguj",
+  "emailLabel": "Adres email",
+  "passwordLabel": "Hasło",
+  "confirmLabel": "Potwierdź hasło",
+  "reminderLabel": "Wskazówka (opcjonalne)",
+  "button": "Zarejestruj",
+  "requirements": {
+    "header": "Nasze minimalne wymagania:",
+    "minLength": "Przynajmniej 12 znaków",
+    "digit": "Przynajmniej 1 cyfra",
+    "lowercase": "Przynajmniej 1 mała litera",
+    "uppercase": "Przynajmniej 1 wielka litera",
+    "email": "Różnić się od adresu email"
+  }
+}
