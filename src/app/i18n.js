@@ -26,7 +26,10 @@ i18n
       'password_hint',
       'account',
       'email_update',
-      'password_update'
+      'password_update',
+      'address_form',
+      'data_table',
+      'data_row'
     ],
     detection: {
       // order and from where user language should be detected
