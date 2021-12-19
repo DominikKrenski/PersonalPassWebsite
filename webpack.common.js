@@ -36,7 +36,13 @@ const copyPluginOpts = {
     { from: './src/assets/locales/en/email_update.json', to: 'assets/locales/en/email_update.json', force: true },
     { from: './src/assets/locales/pl/email_update.json', to: 'assets/locales/pl/email_update.json', force: true },
     { from: './src/assets/locales/en/password_update.json', to: 'assets/locales/en/password_update.json', force: true },
-    { from: './src/assets/locales/pl/password_update.json', to: 'assets/locales/pl/password_update.json', force: true }
+    { from: './src/assets/locales/pl/password_update.json', to: 'assets/locales/pl/password_update.json', force: true },
+    { from: './src/assets/locales/en/data_table.json', to: 'assets/locales/en/data_table.json', force: true },
+    { from: './src/assets/locales/pl/data_table.json', to: 'assets/locales/pl/data_table.json', force: true },
+    { from: './src/assets/locales/en/address_form.json', to: 'assets/locales/en/address_form.json', force: true },
+    { from: './src/assets/locales/pl/address_form.json', to: 'assets/locales/pl/address_form.json', force: true },
+    { from: './src/assets/locales/en/data_row.json', to: 'assets/locales/en/data_row.json', force: true },
+    { from: './src/assets/locales/pl/data_row.json', to: 'assets/locales/pl/data_row.json', force: true }
   ]
 }
 
