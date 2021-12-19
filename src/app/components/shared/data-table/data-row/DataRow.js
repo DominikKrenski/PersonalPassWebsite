@@ -1,9 +1,12 @@
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import '../DataTable.local.scss';
 
 const DataRow = props => {
   const { id, data, showButtonClick, editButtonClick, deleteButtonClick } = props;
+
+  const { t } = useTranslation();
 
   return (
     <tr>
@@ -15,21 +18,21 @@ const DataRow = props => {
           value={data.id}
           onClick={showButtonClick}
         >
-          Show
+          {t('showButton', { ns: 'data_row' })}
         </button>
         <button
           className="button is-info is-inverted is-small"
           value={data.id}
           onClick={editButtonClick}
         >
-          Edit
+          {t('editButton', { ns: 'data_row' })}
         </button>
         <button
           className="button is-danger is-inverted is-small"
           value={data.id}
           onClick={deleteButtonClick}
         >
-          Delete
+          {t('deleteButton', { ns: 'data_row' })}
         </button>
       </td>
     </tr>

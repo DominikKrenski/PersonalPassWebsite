@@ -1,0 +1,23 @@
+{
+  "addTableTitle": "Add Address",
+  "editTableTitle": "Update: ",
+  "cancelButton": "Cancel",
+  "addButton": "Add Address",
+  "editButton": "Update Address",
+  "closeButton": "Close",
+  "entryTitle": "Entry Title",
+  "firstName": "First Name",
+  "middleName": "Middle Name",
+  "lastName": "Last Name",
+  "birthday": "Birthday",
+  "company": "Company",
+  "addressOne": "Address 1",
+  "addressTwo": "Address 2",
+  "city": "City",
+  "country": "Country",
+  "state": "State",
+  "email": "Email Address",
+  "phone": "Phone",
+  "mobilePhone": "Mobile Phone",
+  "notes": "Notes"
+}

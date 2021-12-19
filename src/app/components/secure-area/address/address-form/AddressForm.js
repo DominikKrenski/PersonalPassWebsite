@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import httpClient from '../../../../utils/HttpClient';
@@ -15,6 +16,8 @@ import './AddressForm.local.scss';
 
 const AddressForm = props => {
   const { closeCallback, successCallback, address, type } = props;
+
+  const { t } = useTranslation();
 
   const [accessData, setAccessData] = useState(null);
 
@@ -52,17 +55,15 @@ const AddressForm = props => {
   }
 
   let submitFunc = null;
-  let tableTitle = null;
+  let tableHeader = null;
   let tableFooter = null;
   let initialValues = {};
 
   if (type === 'add') {
-    tableTitle = 'Add Address';
-
     submitFunc = async data => {
       try {
         const encryptedAddress = await encryptionService.encryptData(JSON.stringify(data), accessData.masterKey);
-        const res = await httpClient.post(urls.addresses, { 'data': `${encryptedAddress.vector}.${encryptedAddress.encryptedData}` });
+        await httpClient.post(urls.addresses, { 'data': `${encryptedAddress.vector}.${encryptedAddress.encryptedData}` });
         successCallback(true);
         closeCallback(false);
       } catch (err) {
@@ -71,6 +72,10 @@ const AddressForm = props => {
       }
     }
 
+    tableHeader = (
+      <th colSpan={2}><h1>{t('addTableTitle', { ns: 'address_form' })}</h1></th>
+    )
+
     tableFooter = (
       <tfoot>
         <tr>
@@ -78,12 +83,12 @@ const AddressForm = props => {
             <div className="field is-grouped is-grouped-right">
               <p className="control">
                 <button className="button is-small is-rounded" onClick={handleCancelButtonClick}>
-                  Cancel
+                  {t('cancelButton', { ns: 'address_form' })}
                 </button>
               </p>
               <p className="control">
                 <button id="send-button" type="submit" className="button is-small is-rounded">
-                  Add Address
+                  {t('addButton', { ns: 'address_form' })}
                 </button>
               </p>
             </div>
@@ -92,8 +97,6 @@ const AddressForm = props => {
       </tfoot>
     )
   } else if (type === 'edit') {
-    tableTitle = `Update: ${address.entry.entryTitle}`;
-
     initialValues = setInitialValues();
 
     submitFunc = async data => {
@@ -108,6 +111,10 @@ const AddressForm = props => {
       }
     }
 
+    tableHeader = (
+      <th colSpan={2}><h1>{t('editTableTitle', { ns: 'address_form' })} {address.entry.entryTitle}</h1></th>
+    )
+
     tableFooter = (
       <tfoot>
         <tr>
@@ -115,12 +122,12 @@ const AddressForm = props => {
             <div className="field is-grouped is-grouped-right">
               <p className="control">
                 <button className="button is-small is-rounded" onClick={handleCancelButtonClick}>
-                  Cancel
+                  {t('cancelButton', { ns: 'address_form' })}
                 </button>
               </p>
               <p className="control">
                 <button id="send-button" type="submit" className="button is-small is-rounded">
-                  Update Address
+                  {t('editButton', { ns: 'address_form' })}
                 </button>
               </p>
             </div>
@@ -129,9 +136,11 @@ const AddressForm = props => {
       </tfoot>
     )
   } else {
-    tableTitle = `${address.entry.entryTitle}`;
-
     initialValues = setInitialValues();
+
+    tableHeader = (
+      <th colSpan={2}><h1>{address.entry.entryTitle}</h1></th>
+    )
 
     tableFooter = (
       <tfoot>
@@ -140,7 +149,7 @@ const AddressForm = props => {
             <div className="field is-grouped is-grouped-right">
               <p className="control">
                 <button className="button is-small is-rounded" onClick={handleCancelButtonClick}>
-                  Close
+                  {t('closeButton', { ns: 'address_form' })}
                 </button>
               </p>
             </div>
@@ -258,12 +267,13 @@ const AddressForm = props => {
             <table className="table is-bordered is-fullwidth is-striped">
               <thead>
                 <tr>
-                  <th colSpan={2}><h1>{tableTitle}</h1></th>
+                  {tableHeader}
+                  {/*<th colSpan={2}><h1>{t(tableTitle, { ns: 'address_form' })} {address.entry.entryTitle}</h1></th>*/}
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Entry Title <span>*</span></td>
+                  <td>{t('entryTitle', { ns: 'address_form' })} <span>*</span></td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -284,7 +294,7 @@ const AddressForm = props => {
                   </td>
                 </tr>
                 <tr>
-                  <td>First Name</td>
+                  <td>{t('firstName', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -306,7 +316,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Middle Name</td>
+                  <td>{t('middleName', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -328,7 +338,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Last Name</td>
+                  <td>{t('lastName', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -350,7 +360,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Birthday</td>
+                  <td>{t('birthday', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -372,7 +382,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Company</td>
+                  <td>{t('company', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -394,7 +404,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Address 1</td>
+                  <td>{t('addressOne', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -416,7 +426,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Address 2</td>
+                  <td>{t('addressTwo', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -438,7 +448,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>City</td>
+                  <td>{t('city', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -460,7 +470,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Country</td>
+                  <td>{t('country', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -482,7 +492,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>State</td>
+                  <td>{t('state', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -504,7 +514,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Email Address</td>
+                  <td>{t('email', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -526,7 +536,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Phone</td>
+                  <td>{t('phone', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -548,7 +558,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Mobile Phone</td>
+                  <td>{t('mobilePhone', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">
@@ -570,7 +580,7 @@ const AddressForm = props => {
                 </tr>
 
                 <tr>
-                  <td>Notes</td>
+                  <td>{t('notes', { ns: 'address_form' })}</td>
                   <td>
                     <div className="field">
                       <div className="control">

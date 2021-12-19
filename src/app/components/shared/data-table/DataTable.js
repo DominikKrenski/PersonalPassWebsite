@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import DataRow from './data-row/DataRow';
@@ -6,6 +7,8 @@ import './DataTable.local.scss';
 
 const DataTable = props => {
   const { arr , showButtonClick, editButtonClick, deleteButtonClick } = props;
+
+  const { t } = useTranslation();
 
   const rows = arr.map((item, i) => {
     return (
@@ -26,8 +29,8 @@ const DataTable = props => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>TITLE</th>
-            <th>ACTIONS</th>
+            <th>{t('titleHeader', { ns: 'data_table' })}</th>
+            <th>{t('actionsHeader', { ns: 'data_table' })}</th>
           </tr>
         </thead>
         <tbody>
