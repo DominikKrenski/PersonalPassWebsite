@@ -48,22 +48,8 @@ DataRow.propTypes = {
     id: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
-    entry: PropTypes.exact({
-      entryTitle: PropTypes.string.isRequired,
-      firstName: PropTypes.string,
-      middleName: PropTypes.string,
-      lastName: PropTypes.string,
-      birthday: PropTypes.string,
-      company: PropTypes.string,
-      addressOne: PropTypes.string,
-      addressTwo: PropTypes.string,
-      city: PropTypes.string,
-      country: PropTypes.string,
-      state: PropTypes.string,
-      email: PropTypes.string,
-      phone: PropTypes.string,
-      mobilePhone: PropTypes.string,
-      notes: PropTypes.string
+    entry: PropTypes.shape({
+      entryTitle: PropTypes.string.isRequired
     }).isRequired
   }).isRequired
 }
