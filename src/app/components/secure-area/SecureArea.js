@@ -9,6 +9,7 @@ import AppFooter from '../shared/app-footer/AppFooter';
 import Items from './items/Items';
 import Account from './account/Account';
 import Address from './address/Address';
+import Site from './site/Site';
 
 import './SecureArea.local.scss';
 
@@ -37,6 +38,9 @@ const SecureArea = () => {
           </Route>
           <Route path={`${path}/address`}>
             <Address />
+          </Route>
+          <Route path={`${path}/website`}>
+            <Site />
           </Route>
         </Switch>
       </div>
