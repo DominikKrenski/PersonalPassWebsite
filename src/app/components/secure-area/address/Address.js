@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import accessService from '../../../utils/AccessService';
@@ -25,6 +26,8 @@ const Address = () => {
   const [confirmationVisible, setConfirmationVisible] = useState(false);
   const [accessData, setAccessData] = useState(null); // data required for encrypt/decrypt entries
   const [apiError, setApiError] = useState(null); // error that may be throws by application
+
+  const {t} = useTranslation();
 
   useEffect(() => {
     errorService.clearError();
@@ -142,9 +145,9 @@ const Address = () => {
       {
         confirmationVisible &&
         <Confirmation
-          msg="Do you really want to delete this address?"
-          cancelButtonText="Cancel"
-          confirmButtonText="Delete Address"
+          msg={t('message', { ns: 'address' })}
+          cancelButtonText={t('cancelButton', { ns: 'address' })}
+          confirmButtonText={t('confirmButton', { ns: 'address' })}
           cancelCallback={handleCancelButtonClick}
           confirmCallback={handleConfirmButtonClick}
         />
