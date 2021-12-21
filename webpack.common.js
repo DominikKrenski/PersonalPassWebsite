@@ -39,10 +39,16 @@ const copyPluginOpts = {
     { from: './src/assets/locales/pl/password_update.json', to: 'assets/locales/pl/password_update.json', force: true },
     { from: './src/assets/locales/en/data_table.json', to: 'assets/locales/en/data_table.json', force: true },
     { from: './src/assets/locales/pl/data_table.json', to: 'assets/locales/pl/data_table.json', force: true },
+    { from: './src/assets/locales/en/address.json', to: 'assets/locales/en/address.json', force: true },
+    { from: './src/assets/locales/pl/address.json', to: 'assets/locales/pl/address.json', force: true },
     { from: './src/assets/locales/en/address_form.json', to: 'assets/locales/en/address_form.json', force: true },
     { from: './src/assets/locales/pl/address_form.json', to: 'assets/locales/pl/address_form.json', force: true },
     { from: './src/assets/locales/en/data_row.json', to: 'assets/locales/en/data_row.json', force: true },
-    { from: './src/assets/locales/pl/data_row.json', to: 'assets/locales/pl/data_row.json', force: true }
+    { from: './src/assets/locales/pl/data_row.json', to: 'assets/locales/pl/data_row.json', force: true },
+    { from: './src/assets/locales/en/site_form.json', to: 'assets/locales/en/site_form.json', force: true },
+    { from: './src/assets/locales/pl/site_form.json', to: 'assets/locales/pl/site_form.json', force: true },
+    { from: './src/assets/locales/en/site.json', to: 'assets/locales/en/site.json', force: true },
+    { from: './src/assets/locales/pl/site.json', to: 'assets/locales/pl/site.json', force: true }
   ]
 }
 
