@@ -8,6 +8,7 @@ import dateService from '../../../../utils/DateService';
 import encryptionService from '../../../../utils/EncryptionService';
 import errorService from '../../../../utils/ErrorService';
 import useForm from '../../../../hooks/useForm';
+import types from '../../../../utils/types';
 import urls from '../../../../utils/urls';
 
 import ValidationMessage from '../../../shared/validation-message/ValidationMessage';
@@ -63,7 +64,13 @@ const AddressForm = props => {
     submitFunc = async data => {
       try {
         const encryptedAddress = await encryptionService.encryptData(JSON.stringify(data), accessData.masterKey);
-        await httpClient.post(urls.addresses, { 'data': `${encryptedAddress.vector}.${encryptedAddress.encryptedData}` });
+        await httpClient.post(
+          urls.data,
+          {
+            entry: `${encryptedAddress.vector}.${encryptedAddress.encryptedData}`,
+            type: types.address
+          }
+        );
         successCallback(true);
         closeCallback(false);
       } catch (err) {
@@ -102,7 +109,12 @@ const AddressForm = props => {
     submitFunc = async data => {
       try {
         const encryptedAddress = await encryptionService.encryptData(JSON.stringify(data), accessData.masterKey);
-        const res = await httpClient.put(`${urls.addresses}/${address.id}`, { 'data': `${encryptedAddress.vector}.${encryptedAddress.encryptedData}` });
+        await httpClient.put(
+          `${urls.data}/${address.id}`,
+          {
+            entry: `${encryptedAddress.vector}.${encryptedAddress.encryptedData}`
+          }
+        );
         successCallback(true);
         closeCallback(false);
       } catch (err) {

@@ -6,6 +6,7 @@ import accessService from '../../../utils/AccessService';
 import encryptionService from '../../../utils/EncryptionService';
 import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
+import types from '../../../utils/types';
 import urls from '../../../utils/urls';
 
 import AddressForm from './address-form/AddressForm';
@@ -46,7 +47,7 @@ const Address = () => {
     (async () => {
       try {
         await accessService.passAccessData();
-        const res = await httpClient.get(urls.addresses);
+        const res = await httpClient.get(`${urls.data}?type=${types.address}`);
         setServerData(res.data);
       } catch (err) {
         errorService.updateError(err);
@@ -59,7 +60,7 @@ const Address = () => {
     (async () => {
       if (successfulResponse) {
         try {
-          const res = await httpClient.get(urls.addresses);
+          const res = await httpClient.get(`${urls.data}?type=${types.address}`);
           setServerData(res.data);
         } catch (err) {
           errorService.updateError(err);
@@ -75,9 +76,9 @@ const Address = () => {
       if (serverData && serverData.length > 0) {
         try {
           arr = await Promise.all(serverData.map(async item => {
-            const { publicId, address, createdAt, updatedAt } = item;
+            const { publicId, entry, createdAt, updatedAt } = item;
 
-            const addressChunks = address.split('.');
+            const addressChunks = entry.split('.');
             const decryptedAddress = await encryptionService.decryptData(addressChunks[1], addressChunks[0], accessData.masterKey);
 
             return {
@@ -128,7 +129,7 @@ const Address = () => {
 
   const handleConfirmButtonClick = async () => {
     try {
-      await httpClient.delete(`${urls.addresses}/${currentAddress.id}`);
+      await httpClient.delete(`${urls.data}/${currentAddress.id}`);
       setConfirmationVisible(false);
       setSuccessfulResponse(true);
     } catch (err) {
