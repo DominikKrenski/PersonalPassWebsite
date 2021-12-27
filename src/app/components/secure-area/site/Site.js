@@ -6,6 +6,7 @@ import accessService from '../../../utils/AccessService';
 import encryptionService from '../../../utils/EncryptionService';
 import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
+import types from '../../../utils/types';
 import urls from '../../../utils/urls';
 
 import SiteForm from './site-form/SiteForm';
@@ -47,7 +48,7 @@ const Site = () => {
       async () => {
         try {
           await accessService.passAccessData();
-          const res = await httpClient.get(urls.sites);
+          const res = await httpClient.get(`${urls.data}?type=${types.site}`);
           setServerData(res.data);
         } catch (err) {
           errorService.updateError(err);
@@ -62,9 +63,9 @@ const Site = () => {
       if (serverData && serverData.length > 0) {
         try {
           arr = await Promise.all(serverData.map(async item => {
-            const { publicId, site, createdAt, updatedAt } = item;
+            const { publicId, entry, createdAt, updatedAt } = item;
 
-            const siteChunks = site.split('.');
+            const siteChunks = entry.split('.');
             const decryptedSite = await encryptionService.decryptData(siteChunks[1], siteChunks[0], accessData.masterKey);
 
             return {
@@ -88,7 +89,7 @@ const Site = () => {
     (async () => {
       if (successfulResponse) {
         try {
-          const res = await httpClient.get(urls.sites);
+          const res = await httpClient.get(`${urls.data}?type=${types.site}`);
           setServerData(res.data);
         } catch (err) {
           errorService.updateError(err);
@@ -128,7 +129,7 @@ const Site = () => {
 
   const handleConfirmButtonClick = async () => {
     try {
-      await httpClient.delete(`${urls.sites}/${currentSite.id}`);
+      await httpClient.delete(`${urls.data}/${currentSite.id}`);
       setConfirmationVisible(false);
       setSuccessfulResponse(true);
     } catch(err) {

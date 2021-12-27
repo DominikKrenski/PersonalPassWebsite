@@ -7,6 +7,7 @@ import accessService from '../../../../utils/AccessService';
 import encryptionService from '../../../../utils/EncryptionService';
 import errorService from '../../../../utils/ErrorService';
 import useForm from '../../../../hooks/useForm';
+import types from '../../../../utils/types';
 import urls from '../../../../utils/urls';
 
 import ValidationMessage from '../../../shared/validation-message/ValidationMessage';
@@ -48,7 +49,13 @@ const SiteForm = props => {
     submitFunc = async data => {
       try {
         const encryptedSite = await encryptionService.encryptData(JSON.stringify(data), accessData.masterKey);
-        await httpClient.post(urls.sites, { 'data': `${encryptedSite.vector}.${encryptedSite.encryptedData}` });
+        await httpClient.post(
+          urls.data,
+          {
+            entry: `${encryptedSite.vector}.${encryptedSite.encryptedData}`,
+            type: types.site
+          }
+        );
         successCallback(true);
         closeCallback(false);
       } catch (err) {
@@ -87,7 +94,12 @@ const SiteForm = props => {
     submitFunc = async data => {
       try {
         const encryptedSite = await encryptionService.encryptData(JSON.stringify(data), accessData.masterKey);
-        await httpClient.put(`${urls.sites}/${site.id}`, { 'data': `${encryptedSite.vector}.${encryptedSite.encryptedData}` });
+        await httpClient.put(
+          `${urls.data}/${site.id}`,
+          {
+            entry: `${encryptedSite.vector}.${encryptedSite.encryptedData}`
+          }
+        );
         successCallback(true);
         closeCallback(false)
       } catch (err) {
