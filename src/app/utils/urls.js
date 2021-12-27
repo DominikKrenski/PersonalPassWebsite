@@ -16,8 +16,7 @@ const urls = {
   updateEmail: '/accounts/email',
   testEmail: '/accounts/test-email',
   sendHint: '/accounts/hint',
-  addresses: '/addresses',
-  sites: '/sites'
+  data: '/data'
 }
 
 export default urls;
