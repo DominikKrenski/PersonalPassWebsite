@@ -148,21 +148,14 @@ const useForm = (options) => {
         sanitizedValues[field] = sanitizeField(field, sanitizers[field]);
       });
 
-      func(sanitizedValues);
-
-      /*setData({
+      const dataToSend = {
         ...data,
         ...sanitizedValues
-      });*/
+      }
+
+      func(dataToSend);
     }
   }, [errors]);
-
-  /*useEffect(() => {
-    if (isSubmitted) {
-      console.log(data);
-      func(data);
-    }
-  }, [data]);*/
 
   return [
     handleChange,
