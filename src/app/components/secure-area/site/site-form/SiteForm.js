@@ -246,7 +246,7 @@ SiteForm.propTypes = {
   type: PropTypes.oneOf(['add', 'edit', 'show']).isRequired,
   successCallback: PropTypes.func.isRequired,
   closeCallback: PropTypes.func.isRequired,
-  site: PropTypes.exact({
+  site: PropTypes.shape({
     id: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
