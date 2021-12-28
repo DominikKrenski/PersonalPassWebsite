@@ -87,12 +87,12 @@ const Note = () => {
               updatedAt: updatedAt
             }
           }));
+
+          arr.sort((a, b) => a.entry.entryTitle.toLocaleLowerCase().localeCompare(b.entry.entryTitle.toLocaleLowerCase()));
+          setDecodedData(arr);
         } catch(err) {
           errorService.updateError(err);
         }
-
-        arr.sort((a, b) => a.entry.entryTitle.toLocaleLowerCase().localeCompare(b.entry.entryTitle.toLocaleLowerCase()));
-        setDecodedData(arr);
       }
     })();
   }, [serverData]);

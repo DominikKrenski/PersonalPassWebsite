@@ -91,10 +91,10 @@ const Address = () => {
         } catch (err) {
           errorService.updateError(err);
         }
-      }
 
-      arr.sort((a,b) => a.entry.entryTitle.toLocaleLowerCase().localeCompare(b.entry.entryTitle.toLocaleLowerCase()));
-      setDecodedData(arr);
+        arr.sort((a,b) => a.entry.entryTitle.toLocaleLowerCase().localeCompare(b.entry.entryTitle.toLocaleLowerCase()));
+        setDecodedData(arr);
+      }
     })();
   }, [serverData]);
 
