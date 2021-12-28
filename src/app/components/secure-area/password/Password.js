@@ -105,6 +105,7 @@ const Password = () => {
   const handleShowButtonClick = e => {
     const password = decodedData.find(el => el.id === e.target.value);
     setCurrentPassword(password);
+    setSuccessfulResponse(false);
     setShowFormVisible(true);
   }
 
