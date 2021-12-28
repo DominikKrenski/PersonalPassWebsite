@@ -34,7 +34,9 @@ i18n
       'site',
       'site_form',
       'password',
-      'password_form'
+      'password_form',
+      'note',
+      'note_form'
     ],
     detection: {
       // order and from where user language should be detected
