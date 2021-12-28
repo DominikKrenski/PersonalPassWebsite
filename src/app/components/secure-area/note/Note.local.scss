@@ -1,0 +1,22 @@
+@import '../../../../assets/scss/colors';
+
+#notes {
+  position: relative;
+  margin: 0px;
+  padding-top: 27px;
+  color: $blue-dark;
+
+  h1 {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    margin-bottom: 30px;
+  }
+}
+
+#add-note-icon {
+  position: absolute;
+  z-index: 9999;
+  right: 20px;
+  bottom: 20px;
+  color: $red;
+}

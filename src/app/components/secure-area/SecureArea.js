@@ -11,6 +11,7 @@ import Account from './account/Account';
 import Address from './address/Address';
 import Site from './site/Site';
 import Password from './password/Password';
+import Note from './note/Note';
 
 import './SecureArea.local.scss';
 
@@ -45,6 +46,9 @@ const SecureArea = () => {
           </Route>
           <Route path={`${path}/password`}>
             <Password />
+          </Route>
+          <Route path={`${path}/note`}>
+            <Note />
           </Route>
         </Switch>
       </div>
