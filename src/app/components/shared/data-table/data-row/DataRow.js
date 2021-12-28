@@ -44,7 +44,7 @@ DataRow.propTypes = {
   showButtonClick: PropTypes.func.isRequired,
   editButtonClick: PropTypes.func.isRequired,
   deleteButtonClick: PropTypes.func.isRequired,
-  data: PropTypes.exact({
+  data: PropTypes.shape({
     id: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,
     updatedAt: PropTypes.string.isRequired,
