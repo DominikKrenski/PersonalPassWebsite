@@ -1,0 +1,10 @@
+{
+  "addFormHeader": "Add note",
+  "editFormHeader": "Edit note",
+  "showFormHeader": "Note",
+  "entryTitleLabel": "Title",
+  "cancelButton": "Cancel",
+  "addButton": "Add note",
+  "editButton": "Update note",
+  "closeButton": "Close"
+}

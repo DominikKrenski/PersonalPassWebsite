@@ -1,6 +1,7 @@
 {
   "addTableTitle": "Dodaj adres",
-  "editTableTitle": "Edycja: ",
+  "editTableTitle": "Edytuj adres ",
+  "showTableTitle": "Adres",
   "cancelButton": "Anuluj",
   "addButton": "Dodaj adres",
   "editButton": "Aktualizuj adres",

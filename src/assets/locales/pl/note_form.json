@@ -1,0 +1,10 @@
+{
+  "addFormHeader": "Dodaj notatkę",
+  "editFormHeader": "Edytuj notatkę",
+  "showFormHeader": "Notatka",
+  "entryTitleLabel": "Tytuł",
+  "cancelButton": "Anuluj",
+  "addButton": "Dodaj notatkę",
+  "editButton": "Aktualizuj notatkę",
+  "closeButton": "Zamknij"
+}

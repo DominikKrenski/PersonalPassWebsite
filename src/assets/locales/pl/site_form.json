@@ -1,6 +1,7 @@
 {
   "addTableTitle": "Dodaj witrynę",
-  "editTableTitle": "Aktualizuj",
+  "editTableTitle": "Aktualizuj witrynę",
+  "showTableTitle": "Witryna",
   "cancelButton": "Anuluj",
   "addButton": "Dodaj witrynę",
   "editButton": "Aktualizuj witrynę",

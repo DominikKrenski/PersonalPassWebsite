@@ -1,9 +1,10 @@
 {
-  "addTableTitle": "Add Website",
-  "editTableTitle": "Update",
+  "addTableTitle": "Add website",
+  "editTableTitle": "Update website",
+  "showTableTitle": "Website",
   "cancelButton": "Cancel",
-  "addButton": "Add Website",
-  "editButton": "Update Website",
+  "addButton": "Add website",
+  "editButton": "Update website",
   "closeButton": "Close",
   "entryTitle": "Entry Title"
 }
