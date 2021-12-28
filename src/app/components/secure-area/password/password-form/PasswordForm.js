@@ -132,9 +132,9 @@ const PasswordForm = props => {
 
     formFooter = (
       <div className="field is-grouped is-grouped-right">
-        <p className="button is-small is-rounded" onClick={handleCancelButtonClick}>
+        <button className="button is-small is-rounded" onClick={handleCancelButtonClick}>
           {t('closeButton', { ns: 'password_form' })}
-        </p>
+        </button>
       </div>
     )
   }
