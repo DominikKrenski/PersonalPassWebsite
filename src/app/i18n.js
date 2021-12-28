@@ -36,7 +36,8 @@ i18n
       'password',
       'password_form',
       'note',
-      'note_form'
+      'note_form',
+      'items'
     ],
     detection: {
       // order and from where user language should be detected

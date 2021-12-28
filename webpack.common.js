@@ -56,7 +56,9 @@ const copyPluginOpts = {
     { from: './src/assets/locales/en/note.json', to: 'assets/locales/en/note.json', force: true },
     { from: './src/assets/locales/pl/note.json', to: 'assets/locales/pl/note.json', force: true },
     { from: './src/assets/locales/en/note_form.json', to: 'assets/locales/en/note_form.json', force: true },
-    { from: './src/assets/locales/pl/note_form.json', to: 'assets/locales/pl/note_form.json', force: true }
+    { from: './src/assets/locales/pl/note_form.json', to: 'assets/locales/pl/note_form.json', force: true },
+    { from: './src/assets/locales/en/items.json', to: 'assets/locales/en/items.json', force: true },
+    { from: './src/assets/locales/pl/items.json', to: 'assets/locales/pl/items.json', force: true }
   ]
 }
 
