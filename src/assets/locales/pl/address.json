@@ -1,4 +1,5 @@
 {
+  "header": "Adresy",
   "message": "Czy na pewno usunąć adres?",
   "cancelButton": "Anuluj",
   "confirmButton": "Usuń adres"

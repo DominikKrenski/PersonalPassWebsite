@@ -1,4 +1,5 @@
 {
+  "header": "Notes",
   "message": "Do your really want to delete this note?",
   "cancelButton": "Cancel",
   "confirmButton": "Delete note"

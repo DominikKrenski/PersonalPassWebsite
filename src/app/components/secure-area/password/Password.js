@@ -181,7 +181,7 @@ const Password = () => {
         />
       }
 
-      <h1>Passwords</h1>
+      <h1>{t('header', { ns: 'password' })}</h1>
 
       {
         decodedData.length > 0 &&

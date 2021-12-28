@@ -181,7 +181,7 @@ const Site = () => {
         />
       }
 
-      <h1>Websites</h1>
+      <h1>{t('header', { ns: 'site' })}</h1>
 
       {
         decodedData.length > 0 &&

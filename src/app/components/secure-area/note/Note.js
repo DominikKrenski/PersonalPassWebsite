@@ -181,7 +181,7 @@ const Note = () => {
         />
       }
 
-      <h1>Notes</h1>
+      <h1>{t('header', { ns: 'note' })}</h1>
 
       {
         decodedData.length > 0 &&

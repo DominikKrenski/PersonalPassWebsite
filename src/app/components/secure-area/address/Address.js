@@ -183,7 +183,7 @@ const Address = () => {
         />
       }
 
-      <h1>Addresses</h1>
+      <h1>{t('header', { ns: 'address' })}</h1>
 
       {
         decodedData.length > 0 &&

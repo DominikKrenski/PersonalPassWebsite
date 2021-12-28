@@ -1,4 +1,5 @@
 {
+  "header": "Addresses",
   "message": "Do your really want to delete this address?",
   "cancelButton": "Cancel",
   "confirmButton": "Delete address"
