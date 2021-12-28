@@ -94,7 +94,7 @@ const Account = () => {
 
       { apiError && <AppError error={apiError} /> }
 
-      <h1>{t('header', { ns: 'header' })}</h1>
+      <h1>{t('header', { ns: 'account' })}</h1>
 
       <table className="table is-bordered is-fullwidth">
         <thead>
