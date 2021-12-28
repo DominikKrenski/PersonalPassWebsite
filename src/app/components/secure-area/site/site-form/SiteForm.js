@@ -136,7 +136,7 @@ const SiteForm = props => {
     initialValues = setInitialValues();
 
     tableHeader = (
-      <th colSpan={2}><h1>{site.entry.entryTitle}</h1></th>
+      <th colSpan={2}><h1>{t('showTableTitle', { ns: 'site_form' })}</h1></th>
     )
 
     tableFooter = (
