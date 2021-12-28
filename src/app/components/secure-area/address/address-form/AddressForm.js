@@ -124,7 +124,7 @@ const AddressForm = props => {
     }
 
     tableHeader = (
-      <th colSpan={2}><h1>{t('editTableTitle', { ns: 'address_form' })} {address.entry.entryTitle}</h1></th>
+      <th colSpan={2}><h1>{t('editTableTitle', { ns: 'address_form' })}</h1></th>
     )
 
     tableFooter = (
@@ -151,7 +151,7 @@ const AddressForm = props => {
     initialValues = setInitialValues();
 
     tableHeader = (
-      <th colSpan={2}><h1>{address.entry.entryTitle}</h1></th>
+      <th colSpan={2}><h1>{t('showTableTitle', { ns: 'address_form' })}</h1></th>
     )
 
     tableFooter = (
