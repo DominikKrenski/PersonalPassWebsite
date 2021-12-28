@@ -32,7 +32,9 @@ i18n
       'data_table',
       'data_row',
       'site',
-      'site_form'
+      'site_form',
+      'password',
+      'password_form'
     ],
     detection: {
       // order and from where user language should be detected
