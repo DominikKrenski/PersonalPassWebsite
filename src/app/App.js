@@ -67,12 +67,12 @@ const App = () => {
         <Route path="/password-hint">
           <PasswordHint />
         </Route>
-        <Route path="/secure">
+        {/*<Route path="/secure">
           <SecureArea />
-        </Route>
-        {/*<SecureRoute path="/secure">
+        </Route>*/}
+        <SecureRoute path="/secure">
           <SecureArea />
-        </SecureRoute>*/}
+        </SecureRoute>
       </Switch>
     </Router>
     </Suspense>
