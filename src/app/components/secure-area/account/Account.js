@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import HashLoader from 'react-spinners/HashLoader';
+
 
 import urls from '../../../utils/urls';
 import accessService from '../../../utils/AccessService';
@@ -25,17 +27,23 @@ const Account = () => {
   const [emailFormVisible, setEmailFormVisible] = useState(null);
   const [appInfoVisible, setAppInfoVisible] = useState(false);
   const [apiError, setApiError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
   const history = useHistory();
 
+  const spinnerColor = "#e20000";
+
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
         await accessService.passAccessData();
         const res = await httpClient.get(urls.accountDetails);
+        setLoading(false);
         setAccountData(res.data);
       } catch (err) {
+        setLoading(false);
         errorService.updateError(err);
       }
     })();
@@ -83,9 +91,12 @@ const Account = () => {
 
   const handleSendTestEmailClick = async () => {
     try {
+      setLoading(false);
       await httpClient.get(urls.testEmail);
+      setLoading(false);
       setAppInfoVisible(true);
     } catch (err) {
+      setLoading(false);
       errorService.updateError(err);
     }
   }
@@ -100,10 +111,13 @@ const Account = () => {
 
   const handleConfirmButtonClick = async () => {
     try {
+      setLoading(false);
       await httpClient.delete(`${urls.accountDetails}`);
       await accessService.deleteAllAccessData();
+      setLoading(false);
       history.push('/');
     } catch (err) {
+      setLoading(false);
       errorService.updateError(err);
       setConfirmationVisible(false);
     }
@@ -126,6 +140,13 @@ const Account = () => {
           cancelCallback={handleCancelButtonClick}
           confirmCallback={handleConfirmButtonClick}
         />
+      }
+
+      {
+        loading &&
+        <div id="spinner-wrapper">
+          <HashLoader loading={loading} color={spinnerColor} size={150} />
+        </div>
       }
 
       <h1>{t('header', { ns: 'account' })}</h1>

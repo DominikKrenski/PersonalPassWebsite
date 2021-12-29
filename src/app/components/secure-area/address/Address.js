@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HashLoader from 'react-spinners/HashLoader';
 
 import accessService from '../../../utils/AccessService';
 import encryptionService from '../../../utils/EncryptionService';
@@ -27,8 +28,11 @@ const Address = () => {
   const [confirmationVisible, setConfirmationVisible] = useState(false);
   const [accessData, setAccessData] = useState(null); // data required for encrypt/decrypt entries
   const [apiError, setApiError] = useState(null); // error that may be throws by application
+  const [loading, setLoading] = useState(false);
 
   const {t} = useTranslation();
+
+  const spinnerColor = "#e20000";
 
   useEffect(() => {
     errorService.clearError();
@@ -75,6 +79,8 @@ const Address = () => {
 
       if (serverData && serverData.length > 0) {
         try {
+          setLoading(true);
+
           arr = await Promise.all(serverData.map(async item => {
             const { publicId, entry, createdAt, updatedAt } = item;
 
@@ -89,12 +95,16 @@ const Address = () => {
             }
           }));
         } catch (err) {
+          setLoading(false);
           errorService.updateError(err);
         }
 
         arr.sort((a,b) => a.entry.entryTitle.toLocaleLowerCase().localeCompare(b.entry.entryTitle.toLocaleLowerCase()));
-        setDecodedData(arr);
+
       }
+
+      setLoading(false);
+      setDecodedData(arr);
     })();
   }, [serverData]);
 
@@ -181,6 +191,13 @@ const Address = () => {
           address={currentAddress}
           type="show"
         />
+      }
+
+{
+        loading &&
+        <div id="spinner-wrapper">
+          <HashLoader loading={loading} color={spinnerColor} size={150} />
+        </div>
       }
 
       <h1>{t('header', { ns: 'address' })}</h1>

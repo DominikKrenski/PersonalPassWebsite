@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HashLoader from 'react-spinners/HashLoader';
 
 import useForm from '../../../hooks/useForm';
 
@@ -18,7 +19,10 @@ const LoginForm = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
+  const spinnerColor = "#e20000";
+
   const [passwordFieldType, setPasswordFieldType] = useState('password');
+  const [loading, setLoading] = useState(false);
 
   const [handleChange, handleSubmit, data, errors] = useForm({
     validators: {
@@ -34,6 +38,7 @@ const LoginForm = () => {
 
   const submit = async data => {
     try {
+      setLoading(true);
       // get salt related to given email
       const saltRes = await httpClient.post(urls.salt, {email: data.email});
 
@@ -55,9 +60,11 @@ const LoginForm = () => {
       // encrypt and save all data
       await accessService.saveAccessData(user.sub, accessToken, refreshToken, derivationKey);
 
+      setLoading(false);
       // redirect to secure area
       history.push('/secure');
     } catch (err) {
+      setLoading(false);
       errorService.updateError(err);
     }
   }
@@ -72,6 +79,16 @@ const LoginForm = () => {
 
   return (
     <div id="login-form-wrapper" className="column is-half is-offset-one-quarter">
+
+      {
+        loading &&
+        <div id="spinner-wrapper">
+          <HashLoader loading={loading} color={spinnerColor} size={150} />
+        </div>
+      }
+
+      {/*<HashLoader loading={loading} css={override} size={150} />*/}
+
       <form noValidate={true} autoComplete="off" onSubmit={handleSubmit(submit)}>
         {/* FORM HEADER */}
         <div id="login-form-header" className="columns is-multiline is-mobile">

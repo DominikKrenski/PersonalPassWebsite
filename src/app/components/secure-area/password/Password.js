@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HashLoader from 'react-spinners/HashLoader';
 
 import accessService from '../../../utils/AccessService';
 import encryptionService from '../../../utils/EncryptionService';
@@ -27,8 +28,11 @@ const Password = () => {
   const [confirmationVisible, setConfirmationVisible] = useState(false);
   const [accessData, setAccessData] = useState(null);
   const [apiError, setApiError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
+
+  const spinnerColor = "#e20000";
 
   useEffect(() => {
     errorService.clearError();
@@ -74,6 +78,7 @@ const Password = () => {
 
       if (serverData && serverData.length > 0) {
         try {
+          setLoading(true);
           arr = await Promise.all(serverData.map(async item => {
             const { publicId, entry, createdAt, updatedAt } = item;
 
@@ -89,11 +94,14 @@ const Password = () => {
           }));
 
           arr.sort((a, b) => a.entry.entryTitle.toLocaleLowerCase().localeCompare(b.entry.entryTitle.toLocaleLowerCase()));
-          setDecodedData(arr);
         } catch(err) {
           errorService.updateError(err);
+          setLoading(false);
         }
       }
+
+      setLoading(false);
+      setDecodedData(arr);
     })();
   }, [serverData]);
 

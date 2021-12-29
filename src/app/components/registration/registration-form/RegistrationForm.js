@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import HashLoader from 'react-spinners/HashLoader';
 
 import ValidationMessage from '../../shared/validation-message/ValidationMessage';
 import StatusIcon from '../status-icon/StatusIcon';
@@ -20,14 +21,22 @@ const RegistrationForm = () => {
   const [requirementsVisible, setRequirementsVisible] = useState(false);
   const [isFormValidated, setFormValidated] = useState(false);
   const [renderCount, setRenderCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
+
+  const spinnerColor = "#e20000";
 
   const submit = async data => {
     try {
+      setLoading(true);
       const registrationData = await encryptionService.prepareRegistrationData(data);
-      const res = await httpClient.post(urls.signup, registrationData);
+      await httpClient.post(urls.signup, registrationData);
+
+      setLoading(false);
+
       history.push('/signin');
     } catch (err) {
+      setLoading(false);
       errorService.updateError(err);
     }
   }
@@ -81,6 +90,14 @@ const RegistrationForm = () => {
 
   return (
     <div id="registration-form-wrapper" className="column is-half is-offset-one-quarter">
+
+      {
+        loading &&
+        <div id="spinner-wrapper">
+          <HashLoader loading={loading} color={spinnerColor} size={150} />
+        </div>
+      }
+
       <form noValidate={true} autoComplete="off" onSubmit={handleSubmit(submit)}>
         {/* FORM HEADER */}
         <div id="registration-form-header" className="columns is-multiline is-mobile">

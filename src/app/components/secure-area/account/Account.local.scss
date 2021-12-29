@@ -57,3 +57,17 @@
     font-weight: bold;
   }
 }
+
+#spinner-wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 99999;
+  background-color: $modal-background-color;
+  color: $red;
+}
