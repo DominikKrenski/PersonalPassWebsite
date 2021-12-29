@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { useTranslation } from 'react-i18next';
 
 import urls from '../../../utils/urls';
@@ -10,6 +11,7 @@ import httpClient from '../../../utils/HttpClient';
 import i18n from '../../../i18n';
 
 import EmailUpdateForm from '../../shared/email-update-form/EmailUpdateForm';
+import Confirmation from '../../shared/confirmation/Confirmation';
 import AppInfo from '../../shared/app-info/AppInfo';
 import AppError from '../../shared/app-error/AppError';
 
@@ -18,12 +20,14 @@ import './Account.local.scss';
 const Account = () => {
   const [accountData, setAccountData] = useState(null);
   const [reminderVisible, setReminderVisible] = useState(false);
+  const [confirmationVisible, setConfirmationVisible] = useState(false);
   const [currentTimeZone, setCurrentTimeZone] = useState(null);
   const [emailFormVisible, setEmailFormVisible] = useState(null);
   const [appInfoVisible, setAppInfoVisible] = useState(false);
   const [apiError, setApiError] = useState(null);
 
   const { t } = useTranslation();
+  const history = useHistory();
 
   useEffect(() => {
     (async () => {
@@ -86,6 +90,25 @@ const Account = () => {
     }
   }
 
+  const handleDeleteButtonClick = () => {
+    setConfirmationVisible(true);
+  }
+
+  const handleCancelButtonClick = () => {
+    setConfirmationVisible(false);
+  }
+
+  const handleConfirmButtonClick = async () => {
+    try {
+      await httpClient.delete(`${urls.accountDetails}`);
+      await accessService.deleteAllAccessData();
+      history.push('/');
+    } catch (err) {
+      errorService.updateError(err);
+      setConfirmationVisible(false);
+    }
+  }
+
   return (
     <div id="account-details" className="column is-10">
       { emailFormVisible && <EmailUpdateForm opts={emailFormVisible} /> }
@@ -93,6 +116,17 @@ const Account = () => {
       { appInfoVisible && <AppInfo msg={t('appInfo.message', { ns: 'account' })} closeCallback={setAppInfoVisible}/> }
 
       { apiError && <AppError error={apiError} /> }
+
+      {
+        confirmationVisible &&
+        <Confirmation
+          msg={t('message', { ns: 'account' })}
+          cancelButtonText={t('cancelButton', { ns: 'account' })}
+          confirmButtonText={t('confirmButton', { ns: 'account' })}
+          cancelCallback={handleCancelButtonClick}
+          confirmCallback={handleConfirmButtonClick}
+        />
+      }
 
       <h1>{t('header', { ns: 'account' })}</h1>
 
@@ -219,7 +253,15 @@ const Account = () => {
         </tbody>
         <tfoot>
           <tr>
-            <th colSpan={2}><button id="delete-account-button" className="button is-small">{t('infoTable.deleteButton', { ns: 'account' })}</button></th>
+            <th colSpan={2}>
+              <button
+                id="delete-account-button"
+                className="button is-small"
+                onClick={handleDeleteButtonClick}
+              >
+                {t('infoTable.deleteButton', { ns: 'account' })}
+              </button>
+            </th>
           </tr>
         </tfoot>
       </table>

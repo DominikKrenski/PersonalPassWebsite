@@ -54,5 +54,9 @@
   ],
   "appInfo": {
     "message": "Email sent! Remember, you may need to check your spam folder."
-  }
+  },
+
+  "message": "Do your really want to delete account?",
+  "cancelButton": "Cancel",
+  "confirmButton": "Delete account"
 }

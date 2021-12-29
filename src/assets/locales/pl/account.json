@@ -54,5 +54,9 @@
   ],
   "appInfo": {
     "message": "Email wysłany! Pamiętaj, konieczne może być sprawdzenie folderu spam."
-  }
+  },
+
+  "message": "Czy chcesz usunąć konto?",
+  "cancelButton": "Anuluj",
+  "confirmButton": "Usuń konto"
 }
