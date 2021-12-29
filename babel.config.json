@@ -23,6 +23,7 @@
       {
         "include": ".local.(sa|sc|c)ss$"
       }
-    ]
+    ],
+    ["@emotion"]
   ]
 }
