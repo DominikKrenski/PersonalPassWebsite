@@ -60,7 +60,7 @@ class HttpClient {
       });
     });
 
-    this.#instance.interceptors.response.use(undefined , async err => {
+    this.#instance.interceptors.response.use(undefined, async err => {
       const originalConfig = err.config;
 
       if (err.response) {
