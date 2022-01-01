@@ -151,7 +151,7 @@ const Account = () => {
 
       <h1>{t('header', { ns: 'account' })}</h1>
 
-      <table className="table is-bordered is-fullwidth">
+      <table id="login-details-table" className="table is-bordered is-fullwidth">
         <thead>
           <tr>
             <th colSpan={2}>{t('loginTable.header', { ns: 'account' })}</th>
@@ -230,7 +230,7 @@ const Account = () => {
             <td>{t('infoTable.language', { ns: 'account' })}</td>
             <td>
               <div className="select is-success is-small">
-                <select value={i18n.language} onChange={handleLanguageChange}>
+                <select value={i18n.language === 'pl-PL' || i18n.language === 'pl' ? 'pl' : 'en'} onChange={handleLanguageChange}>
                   <option value="en">{t('infoTable.langSelect.en', { ns: 'account' })}</option>
                   <option value="pl">{t('infoTable.langSelect.pl', { ns: 'account' })}</option>
                 </select>
