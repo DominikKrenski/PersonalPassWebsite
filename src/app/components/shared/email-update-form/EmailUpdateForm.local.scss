@@ -56,6 +56,10 @@
     border-bottom-color: $blue-dark;
     background-color: $white-dark;
   }
+
+  .error {
+    border-bottom-color: $orange;
+  }
 }
 
 #email-update-button {

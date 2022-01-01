@@ -17,8 +17,10 @@ const EmailUpdateForm = props => {
 
   const [handleChange, handleSubmit, data, errors] = useForm({
     validators: {
-      required: true,
-      email: true
+      email: {
+        required: true,
+        email: true
+      }
     }
   });
 
@@ -64,7 +66,7 @@ const EmailUpdateForm = props => {
                 <div className="control has-icons-left">
                   <input
                     placeholder={initialValue}
-                    className="input"
+                    className={`input ${errors.email ? "error": ""}`}
                     type="email"
                     name="email"
                     value={data.email || ''}
