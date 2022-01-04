@@ -2,7 +2,6 @@ describe('REGISTRATION PAGE DISPLAY', () => {
   it('should display registration form', () => {
     cy.visit('/signup');
     cy.get('form').should('have.length', 1);
-    cy.get('button').should('have.text', 'Register');
     cy.get('password-requirements').should('not.exist');
   });
 

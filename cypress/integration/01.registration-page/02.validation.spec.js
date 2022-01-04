@@ -1,5 +1,3 @@
-import { expect } from "chai";
-
 describe('REGISTRATION FORM VALIDATION', () => {
 
   beforeEach(() => {
@@ -15,8 +13,8 @@ describe('REGISTRATION FORM VALIDATION', () => {
       cy
         .get('#email-field li')
         .then(rows => {
-          cy.wrap(rows[0]).should('have.text', 'Field is required');
-          cy.wrap(rows[1]).should('have.text', 'Email is not valid');
+          cy.wrap(rows[0]).should('have.text', 'Pole jest wymagane');
+          cy.wrap(rows[1]).should('have.text', 'Email nie jest poprawny');
         });
 
       // password validation errors
@@ -30,7 +28,7 @@ describe('REGISTRATION FORM VALIDATION', () => {
           cy.wrap(spans[4]).should('have.class', 'success');
         });
 
-      cy.get('#password-confirm-field li').should('have.text', 'Field is required');
+      cy.get('#password-confirm-field li').should('have.text', 'Pole jest wymagane');
     });
 
     it('should display required error if email is not touched', () => {
@@ -38,8 +36,8 @@ describe('REGISTRATION FORM VALIDATION', () => {
       cy
         .get('#email-field li')
         .then(rows => {
-          cy.wrap(rows[0]).should('have.text', 'Field is required');
-          cy.wrap(rows[1]).should('have.text', 'Email is not valid');
+          cy.wrap(rows[0]).should('have.text', 'Pole jest wymagane');
+          cy.wrap(rows[1]).should('have.text', 'Email nie jest poprawny');
         });
     });
 
@@ -49,8 +47,8 @@ describe('REGISTRATION FORM VALIDATION', () => {
       cy
         .get('#email-field li')
         .then(rows => {
-          cy.wrap(rows[0]).should('have.text', 'Field is required');
-          cy.wrap(rows[1]).should('have.text', 'Email is not valid');
+          cy.wrap(rows[0]).should('have.text', 'Pole jest wymagane');
+          cy.wrap(rows[1]).should('have.text', 'Email nie jest poprawny');
         });
     });
 
@@ -60,8 +58,8 @@ describe('REGISTRATION FORM VALIDATION', () => {
       cy
         .get('#email-field li')
         .then(rows => {
-          cy.wrap(rows[0]).should('have.text', 'Field is required');
-          cy.wrap(rows[1]).should('have.text', 'Email is not valid');
+          cy.wrap(rows[0]).should('have.text', 'Pole jest wymagane');
+          cy.wrap(rows[1]).should('have.text', 'Email nie jest poprawny');
         });
     });
 
@@ -74,7 +72,7 @@ describe('REGISTRATION FORM VALIDATION', () => {
     it('should display error message if email is dominik.yahoo', () => {
       cy.get('input[name="email"]').type('dominik.yahoo');
       cy.get('button').click();
-      cy.get('#email-field li').should('have.text', 'Email is not valid');
+      cy.get('#email-field li').should('have.text', 'Email nie jest poprawny');
     });
 
     it('should not display error message if email is dominik@gmail', () => {
@@ -251,7 +249,7 @@ describe('REGISTRATION FORM VALIDATION', () => {
       cy
         .get('#password-confirm-field li')
         .then(li => {
-          cy.wrap(li).should('have.text', 'Field is required')
+          cy.wrap(li).should('have.text', 'Pole jest wymagane')
         });
     });
 
@@ -263,7 +261,7 @@ describe('REGISTRATION FORM VALIDATION', () => {
       cy
         .get('#password-confirm-field li')
         .then(li => {
-          cy.wrap(li).should('have.text', 'Fields are not equal');
+          cy.wrap(li).should('have.text', 'Pola nie są jednakowe');
         })
     });
 
@@ -273,7 +271,7 @@ describe('REGISTRATION FORM VALIDATION', () => {
 
       cy
         .get('#password-confirm-field li')
-        .should('have.text', 'Field is required');
+        .should('have.text', 'Pole jest wymagane');
     });
 
     it('fields should be equal if password is empty and passwordConfirm filled in', () => {
