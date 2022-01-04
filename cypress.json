@@ -1,4 +1,5 @@
 {
   "projectId": "rsyj49",
-  "baseUrl": "https://personal-pass.dev"
+  "baseUrl": "https://personal-pass.dev",
+  "defaultCommandTimeout": 20000
 }
