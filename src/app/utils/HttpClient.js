@@ -7,6 +7,7 @@
 import accessService from './AccessService';
 import dateService from './DateService';
 import urls from './urls';
+import i18n from '../i18n';
 
 /**
  * Axios instance
@@ -56,7 +57,7 @@ class HttpClient {
       return Promise.reject({
         status: 'Internal Server Error',
         timestamp: dateService.getTimestamp(),
-        message: 'Something went wrong. Please, try later.'
+        message: this.#prepareErrorResponse('Something went wrong. Please, try later.')
       });
     });
 
@@ -66,7 +67,7 @@ class HttpClient {
       if (err.response) {
         // server responded with status code falls out of range of 2xx
         if (err.response.status < 500) {
-          console.log('Server responded with status code > 2xx');
+          console.log('Server responded with status code > 2xx but < 5xx');
 
           if (originalConfig.url !== urls.refresh && err.response.status === 403 && err.response.data.message === 'Access token expired') {
             const refreshRes = await this.get(urls.refresh);
@@ -74,13 +75,16 @@ class HttpClient {
             return this.#instance(originalConfig);
           }
 
+          // translate error response
+          err.response.data.message = this.#prepareErrorResponse(err.response.data.message);
+
           return Promise.reject(err.response.data);
         } else {
           console.log('Server responded with status code > 500');
           return Promise.reject({
             status: 'Internal Server Error',
             timestamp: err.response.data.timestamp,
-            message: 'Something went wrong. Please, try later.'
+            message: this.#prepareErrorResponse('Something went wrong. Please, try later.')
           });
         }
       } else {
@@ -89,7 +93,7 @@ class HttpClient {
         return Promise.reject({
           status: 'Internal Server Error',
           timestamp: dateService.getTimestamp(),
-          message: 'Something went wrong. Please, try later.'
+          message: this.#prepareErrorResponse('Something went wrong. Please, try later.')
         })
       }
     });
@@ -137,6 +141,30 @@ class HttpClient {
    */
   delete(url, opts) {
     return this.#instance.delete(url, opts);
+  }
+
+  #prepareErrorResponse(msg) {
+    if (i18n.language === 'pl' || i18n.language === 'pl-PL') {
+      let message;
+
+      if (msg.includes('Account with given email already exist')) {
+        message = 'Istnieje już konto powiązane z danym adresem email';
+      } else if (msg.includes('Account does not exist')) {
+        message = 'Konto nie istnieje';
+      } else if (msg.includes('Email or password invalid')) {
+        message = 'Adres email lub hasło nie jest poprawne';
+      } else if (msg.includes('Token is invalid')) {
+        message = 'Token jest nieprawidłowy';
+      } else if (msg.includes('Security Exception. Server detected that the same token has been used again')) {
+        message = 'Wyjątek bezpieczeństwa. Serwer wykrył, że ten sam token został wykorzystany ponownie'
+      } else {
+        message = 'Coś poszło nie tak. Spróbuj ponownie później'
+      }
+
+      return message;
+    }
+
+    return msg;
   }
 }
 
