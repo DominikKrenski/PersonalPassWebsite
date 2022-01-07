@@ -1,0 +1,9 @@
+{
+  "formHeader": "Change master password",
+  "oldPassLabel": "Current password",
+  "newPass": "New password",
+  "confirmPass": "Confirm new password",
+  "reminder": "Reminder",
+  "cancelButton": "Cancel",
+  "confirmButton": "Change password"
+}
