@@ -58,7 +58,9 @@ const copyPluginOpts = {
     { from: './src/assets/locales/en/note_form.json', to: 'assets/locales/en/note_form.json', force: true },
     { from: './src/assets/locales/pl/note_form.json', to: 'assets/locales/pl/note_form.json', force: true },
     { from: './src/assets/locales/en/items.json', to: 'assets/locales/en/items.json', force: true },
-    { from: './src/assets/locales/pl/items.json', to: 'assets/locales/pl/items.json', force: true }
+    { from: './src/assets/locales/pl/items.json', to: 'assets/locales/pl/items.json', force: true },
+    { from: './src/assets/locales/en/pass_update_form.json', to: 'assets/locales/en/pass_update_form.json', force: true },
+    { from: './src/assets/locales/pl/pass_update_form.json', to: 'assets/locales/pl/pass_update_form.json', force: true }
   ]
 }
 
@@ -102,11 +104,5 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(htmlPluginOpts),
     new CopyPlugin(copyPluginOpts)
-
-    //new CopyPlugin({
-    //  patterns: [
-    //    { from: path.join(__dirname, '/src/assets/locales/en/translation.json'), to: 'copied/', force: true }
-    //  ]
-    //})
   ]
 }
