@@ -86,6 +86,7 @@ const PasswordUpdateForm = props => {
       if(data.oldPassword === data.newPassword) {
         setLoading(false);
         successCallback();
+        return;
       }
 
       // generate new master key

@@ -22,6 +22,6 @@ describe('REGISTRATION PROCESS', () => {
     cy.get('input[name="passwordConfirm"]').type('DKrenski@05_08_1984!');
     cy.get('button[type="submit"]').click();
 
-    cy.get('#server-error-body p').should('have.text', 'Account with given email already exists');
+    cy.get('#server-error-body p').should('have.text', 'Istnieje już konto powiązane z danym adresem email');
   });
 })

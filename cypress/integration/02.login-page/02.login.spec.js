@@ -69,7 +69,7 @@ describe('LOGIN FUNCTIONALITY', () => {
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
 
-    cy.get('#server-error-body p').should('have.text', 'Account does not exist');
+    cy.get('#server-error-body p').should('have.text', 'Konto nie istnieje');
   });
 
   it('should return error response if password is invalid', () => {
@@ -77,6 +77,6 @@ describe('LOGIN FUNCTIONALITY', () => {
     cy.get('input[name="password"]').type('DKrenski@05_08_1984!');
     cy.get('button[type="submit"]').click();
 
-    cy.get('#server-error-body p').should('have.text', 'Email or password invalid');
+    cy.get('#server-error-body p').should('have.text', 'Adres email lub hasło nie jest poprawne');
   })
 });

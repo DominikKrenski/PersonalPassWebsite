@@ -9,7 +9,7 @@ describe('ITEMS FUNCTIONALITY', () => {
     cy.get('button[type="submit"]').click();
   });
 
-  /*it('should display nine entries', () => {
+  it('should display nine entries', () => {
     cy
       .get('#data-table table tbody tr')
       .then(rows => {
@@ -183,7 +183,7 @@ describe('ITEMS FUNCTIONALITY', () => {
         cy.get('input[name="entryTitle"]').should('have.value', 'a.NOTE');
         cy.get('textarea[name="message"]').should('have.value', 'Zaktualizowana notatka');
       });
-  });*/
+  });
 
   it('should delete specific entries', () => {
     cy

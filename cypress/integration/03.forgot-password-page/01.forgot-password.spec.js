@@ -44,7 +44,7 @@ describe('FORGOT PASSWORD FUNCTIONALITY', () => {
     cy.get('input[name="email"]').type('dominik.krenski@yahoo.com');
     cy.get('button').click();
 
-    cy.get('#server-error-body p').should('have.text', 'Account does not exist');
+    cy.get('#server-error-body p').should('have.text', 'Konto nie istnieje');
   });
 
   it('should send email with password hint and redirect to /signin', () => {
