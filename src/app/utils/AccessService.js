@@ -177,6 +177,53 @@ class AccessService {
     });
   }
 
+  /**
+   * Updated all data related to master key change.
+   *
+   * @param {TypedArray} newDerivationKey new derivation key in binary format
+   */
+  async changeMasterKey(newDerivationKey) {
+    const { accessToken, refreshToken } = this.#subject.getValue();
+    const accountId = sessionService.get('account_id');
+
+    if (!accessToken || !refreshToken || !accountId) {
+      throw new Error('One of required data is missing');
+    }
+
+    const account = await dbService.accounts.where('account_id').equals(accountId).first();
+
+    if (!account) {
+      throw new Error('Account data is missing');
+    }
+
+    // encrypt derivation key
+    const encryptedDerivationKey = await encryptionService.encryptMasterKey(newDerivationKey, process.env.PRIVATE_KEY);
+
+    // encrypt access token
+    const encryptedAccessToken = await encryptionService.encryptData(accessToken, newDerivationKey);
+
+    // encrypt refresh token
+    const encryptedRefreshToken = await encryptionService.encryptData(refreshToken, newDerivationKey);
+
+    // set appropriate vectors is SessionStorage
+    sessionService.set('private_vector', encryptedDerivationKey.vector);
+    sessionService.set('access_vector', encryptedAccessToken.vector);
+    sessionService.set('refresh_vector', encryptedRefreshToken.vector);
+
+    // update account in IndexedDB
+    await dbService.accounts.update(accountId, {
+      master_key: encryptedDerivationKey.masterKey,
+      access_token: encryptedAccessToken.encryptedData,
+      refresh_token: encryptedRefreshToken.encryptedData
+    });
+
+    this.#subject.next({
+      masterKey: newDerivationKey,
+      accessToken: accessToken,
+      refreshToken: refreshToken
+    });
+  }
+
   async deleteAllAccessData() {
     await dbService.accounts.where('account_id').equals(sessionService.get('account_id')).delete();
 
