@@ -13,6 +13,15 @@
  */
 
 /**
+ * Object defining result of generating derivation key for new password
+ *
+ * @typedef {Object} UpdatePasswordData
+ * @property {TypedArray} derivationKey - derivation key in byte format
+ * @property {string} derivationKeyHash - double SHA-256 hash of derivation key in HEX format
+ * @property {string} salt - salt in HEX format
+ */
+
+/**
  * Object defining result of data encryption
  *
  * @typedef {Object} DataEncryption
@@ -365,6 +374,24 @@ class EncryptionService {
   }
 
   /**
+   * Prepare data for password update process
+   *
+   * @param {string} password password to derive bits from
+   * @returns
+   */
+  async prepareUpdatePasswordData(password) {
+    const salt = this.#generateRandomValues(16);
+    const derivationKey = await this.#generateDerivationKey(password, salt);
+    const derivationKeyHash = await this.#generateDerivationKeyHash(derivationKey);
+
+    return {
+      derivationKey: derivationKey,
+      derivationKeyHash: this.#convertTypedArrayIntoHex(derivationKeyHash),
+      salt: this.#convertTypedArrayIntoHex(salt)
+    }
+  }
+
+  /**
    * Prepare data for registration process
    *
    * @param {InputRegistrationData} data registration data
@@ -413,6 +440,20 @@ class EncryptionService {
    */
   convertBase64ToString(data) {
     return decodeURIComponent(escape(window.atob(data)));
+  }
+
+  /**
+   * Compares two master keys
+   *
+   * @param {ArrayBuffer} oldKey old master key
+   * @param {ArrayBuffer} newKey new master key
+   * @returns true if keys are equal; false otherwise
+   */
+  compareMasterKeys(oldKey, newKey) {
+    const oldArray = new Uint8Array(oldKey);
+    const newArray = new Uint8Array(newKey);
+
+    return oldArray.every((el, idx) => el === newArray[idx]);
   }
 }
 
