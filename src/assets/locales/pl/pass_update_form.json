@@ -1,0 +1,9 @@
+{
+  "formHeader": "Zmień hasło",
+  "oldPassLabel": "Aktualne hasło",
+  "newPass": "Nowe hasło",
+  "confirmPass": "Potwierdź nowe hasło",
+  "reminder": "Wskazówka",
+  "cancelButton": "Anuluj",
+  "confirmButton": "Zmień hasło"
+}

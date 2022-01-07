@@ -16,6 +16,7 @@ const urls = {
   updateEmail: '/accounts/email',
   testEmail: '/accounts/test-email',
   sendHint: '/accounts/hint',
+  accountSalt: '/accounts/salt',
   data: '/data'
 }
 
