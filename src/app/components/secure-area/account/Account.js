@@ -13,6 +13,7 @@ import httpClient from '../../../utils/HttpClient';
 import i18n from '../../../i18n';
 
 import EmailUpdateForm from '../../shared/email-update-form/EmailUpdateForm';
+import PasswordUpdateForm from './password-update-form/PasswordUpdateForm';
 import Confirmation from '../../shared/confirmation/Confirmation';
 import AppInfo from '../../shared/app-info/AppInfo';
 import AppError from '../../shared/app-error/AppError';
@@ -25,6 +26,7 @@ const Account = () => {
   const [confirmationVisible, setConfirmationVisible] = useState(false);
   const [currentTimeZone, setCurrentTimeZone] = useState(null);
   const [emailFormVisible, setEmailFormVisible] = useState(null);
+  const [passwordFormVisible, setPasswordFormVisible] = useState(null);
   const [appInfoVisible, setAppInfoVisible] = useState(false);
   const [apiError, setApiError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -123,9 +125,38 @@ const Account = () => {
     }
   }
 
+  const handleUpdatePasswordClick = () => {
+    setPasswordFormVisible(true);
+  }
+
+  const handleClosePasswordForm = () => {
+    setPasswordFormVisible(false);
+  }
+
+  const handleSuccessfulPasswordUpdate = async () => {
+    try {
+      setLoading(true);
+      await accessService.passAccessData();
+      const res = await httpClient.get(urls.accountDetails);
+      setPasswordFormVisible(false);
+      setLoading(false);
+      setAccountData(res.data);
+    } catch (err) {
+      setLoading(false);
+      errorService.updateError(err);
+    }
+  }
+
   return (
     <div id="account-details" className="column is-10">
       { emailFormVisible && <EmailUpdateForm opts={emailFormVisible} /> }
+
+      { passwordFormVisible &&
+        <PasswordUpdateForm
+          successCallback={handleSuccessfulPasswordUpdate}
+          closeCallback={handleClosePasswordForm}
+        />
+        }
 
       { appInfoVisible && <AppInfo msg={t('appInfo.message', { ns: 'account' })} closeCallback={setAppInfoVisible}/> }
 
@@ -186,6 +217,7 @@ const Account = () => {
             <td>
               <button
                 className="button is-outlined is-primary is-small"
+                onClick={handleUpdatePasswordClick}
                 >
                   {t('loginTable.buttons.changeMasterPassword', { ns: 'account' })}
                 </button>
