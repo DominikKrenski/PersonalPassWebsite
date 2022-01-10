@@ -2,6 +2,7 @@ const { merge } = require('webpack-merge');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 const commonConfig = require('./webpack.common');
 
@@ -58,7 +59,8 @@ const prodConfig = {
     }
   },
   plugins: [
-    new MiniCssExtractPlugin(miniCssPluginOpts)
+    new MiniCssExtractPlugin(miniCssPluginOpts),
+    new Dotenv()
   ]
 }
 
