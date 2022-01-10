@@ -1,2 +1,28 @@
-FROM nginx:1.21.3-alpine
-COPY dist/ /usr/share/nginx/html
+FROM nginx:1.21.5
+
+ARG UID=102
+ARG GUID=102
+
+RUN groupadd --gid $GUID --system app \
+    && useradd --gid $GUID --system --shell /bin/false --uid $UID app \
+    && mkdir -p /var/tmp/nginx/client_temp /var/tmp/nginx/proxy_temp \
+       /var/tmp/nginx/fastcgi_temp /var/tmp/nginx/uwsgi_temp /var/tmp/nginx/scgi_temp \
+    && mkdir /var/run/nginx \
+    && chown -R app:app /var/tmp/nginx \
+    && chown app:app /var/run/nginx \
+    && chown -R app:app /var/log/nginx \
+    && chown -R app:app /usr/share/nginx/html \
+    && rm /usr/share/nginx/html/* \
+    && rm /etc/nginx/conf.d/default.conf \
+    && rm /etc/nginx/nginx.conf
+
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./dist/ /usr/share/nginx/html
+COPY .env /usr/share/nginx/html/.env
+
+EXPOSE 8080
+
+USER $UID
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
