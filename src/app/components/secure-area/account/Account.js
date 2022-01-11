@@ -173,7 +173,6 @@ const Account = () => {
   const handleSuccessfulPasswordUpdate = async () => {
     try {
       setLoading(true);
-      await accessService.passAccessData();
       const res = await httpClient.get(urls.accountDetails);
       setPasswordFormVisible(false);
       setLoading(false);
