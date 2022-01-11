@@ -187,11 +187,11 @@ class AccessService {
    *
    * @param {TypedArray} newDerivationKey new derivation key in binary format
    */
-  async changeMasterKey(newDerivationKey, keyHex) {
-    const { accessToken, refreshToken } = this.#subject.getValue();
+  async changeMasterKey(newDerivationKey) {
+    const { accessToken, refreshToken, keyHex } = this.#subject.getValue();
     const accountId = sessionService.get('account_id');
 
-    if (!accessToken || !refreshToken || !accountId) {
+    if (!accessToken || !refreshToken || !keyHex || !accountId) {
       throw new Error('One of required data is missing');
     }
 
@@ -225,6 +225,7 @@ class AccessService {
 
     this.#subject.next({
       masterKey: newDerivationKey,
+      keyHex: keyHex,
       accessToken: accessToken,
       refreshToken: refreshToken
     });
