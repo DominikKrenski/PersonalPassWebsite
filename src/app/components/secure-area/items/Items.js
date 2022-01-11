@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import HashLoader from 'react-spinners/HashLoader';
 
 import accessService from '../../../utils/AccessService';
+import sessionService from '../../../utils/SessionService';
 import encryptionService from '../../../utils/EncryptionService';
 import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
@@ -35,6 +36,12 @@ const Items = () => {
   const spinnerColor = "#e20000";
 
   useEffect(() => {
+    window.addEventListener('beforeunload', handlePageReload);
+
+    return () => window.removeEventListener('beforeunload', handlePageReload);
+  }, [accessData]);
+
+  useEffect(() => {
     errorService.clearError();
     const errorSubscription = errorService.getError().subscribe(err => setApiError(err));
 
@@ -50,14 +57,30 @@ const Items = () => {
   useEffect(() => {
     (async () => {
       try {
-        await accessService.passAccessData();
-        const res = await httpClient.get(`${urls.data}/all`);
-        setServerData(res.data);
+        const restored = sessionService.get('tmp');
+
+        if (restored) {
+          await accessService.passAccessData(restored);
+          sessionService.remove('tmp');
+        }
       } catch (err) {
         errorService.updateError(err);
       }
     })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (accessData) {
+          const res = await httpClient.get(`${urls.data}/all`);
+          setServerData(res.data);
+        }
+      } catch (err) {
+        errorService.updateError(err);
+      }
+    })();
+  }, [accessData]);
 
   useEffect(() => {
     (async () => {
@@ -105,6 +128,11 @@ const Items = () => {
       setDecodedData(arr);
     })();
   }, [serverData]);
+
+  const handlePageReload = e => {
+    e.preventDefault();
+    sessionService.set('tmp', accessData.keyHex);
+  }
 
   const handleShowButtonClick = e => {
     const data = decodedData.find(el => el.id === e.target.value);

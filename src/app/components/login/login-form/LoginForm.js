@@ -51,14 +51,16 @@ const LoginForm = () => {
       // send login request
       const res = await httpClient.post(urls.signin, loginData);
 
+      const { accessToken, refreshToken, key } = res.data;
+
       // get user from access token
-      const accessToken = res.data.accessToken;
-      const refreshToken = res.data.refreshToken;
+      //const accessToken = res.data.accessToken;
+      //const refreshToken = res.data.refreshToken;
 
       const user = JSON.parse(encryptionService.convertBase64ToString(accessToken.split(".")[1]));
 
       // encrypt and save all data
-      await accessService.saveAccessData(user.sub, accessToken, refreshToken, derivationKey);
+      await accessService.saveAccessData(user.sub, accessToken, refreshToken, derivationKey, key);
 
       setLoading(false);
       // redirect to secure area

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HashLoader from 'react-spinners/HashLoader';
 
 import accessService from '../../../utils/AccessService';
+import sessionService from '../../../utils/SessionService';
 import encryptionService from '../../../utils/EncryptionService';
 import errorService from '../../../utils/ErrorService';
 import httpClient from '../../../utils/HttpClient';
@@ -35,6 +36,12 @@ const Site = () => {
   const spinnerColor = "#e20000";
 
   useEffect(() => {
+    window.addEventListener('beforeunload', handlePageReload);
+
+    return () => window.removeEventListener('beforeunload', handlePageReload);
+  }, [accessData]);
+
+  useEffect(() => {
     errorService.clearError();
     const errorSubscription = errorService.getError().subscribe(err => setApiError(err));
 
@@ -48,17 +55,34 @@ const Site = () => {
   }, []);
 
   useEffect(() => {
-    (
-      async () => {
-        try {
-          await accessService.passAccessData();
+    (async () => {
+      try {
+        if (!accessData) {
+          const restored = sessionService.get('tmp');
+
+          if (restored) {
+            await accessService.passAccessData(restored);
+            sessionService.remove('tmp');
+          }
+        }
+      } catch (err) {
+        errorService.updateError(err);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        if (accessData) {
           const res = await httpClient.get(`${urls.data}?type=${types.site}`);
           setServerData(res.data);
-        } catch (err) {
-          errorService.updateError(err);
         }
-      })();
-  }, []);
+      } catch (err) {
+        errorService.updateError(err);
+      }
+    })();
+  }, [accessData]);
 
   useEffect(() => {
     (async () => {
@@ -105,6 +129,11 @@ const Site = () => {
       }
     })();
   }, [successfulResponse]);
+
+  const handlePageReload = e => {
+    e.preventDefault();
+    sessionService.set('tmp', accessData.keyHex);
+  }
 
   const handleAddSiteClick = () => {
     setSuccessfulResponse(false);

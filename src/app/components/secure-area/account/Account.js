@@ -6,6 +6,7 @@ import HashLoader from 'react-spinners/HashLoader';
 
 import urls from '../../../utils/urls';
 import accessService from '../../../utils/AccessService';
+import sessionService from '../../../utils/SessionService';
 import localService from '../../../utils/LocalService';
 import dateService from '../../../utils/DateService';
 import errorService from '../../../utils/ErrorService';
@@ -28,6 +29,7 @@ const Account = () => {
   const [emailFormVisible, setEmailFormVisible] = useState(null);
   const [passwordFormVisible, setPasswordFormVisible] = useState(null);
   const [appInfoVisible, setAppInfoVisible] = useState(false);
+  const [accessData, setAccessData] = useState(false);
   const [apiError, setApiError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -37,19 +39,49 @@ const Account = () => {
   const spinnerColor = "#e20000";
 
   useEffect(() => {
+    window.addEventListener('beforeunload', handlePageReload);
+
+    return () => window.removeEventListener('beforeunload', handlePageReload);
+  }, [accessData]);
+
+  useEffect(() => {
+    const accessSubscription = accessService.getAccessData().subscribe(data => setAccessData(data));
+
+    return () => accessSubscription.unsubscribe();
+  });
+
+  useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
-        await accessService.passAccessData();
-        const res = await httpClient.get(urls.accountDetails);
-        setLoading(false);
-        setAccountData(res.data);
+        if (!accessData) {
+          const restored = sessionService.get('tmp');
+
+          if (restored) {
+            await accessService.passAccessData(restored);
+            sessionService.remove('tmp');
+          }
+        }
+      } catch (err) {
+        errorService.updateError(err);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+       if (accessData) {
+         setLoading(true);
+         const res = await httpClient.get(urls.accountDetails);
+         setLoading(false);
+         setAccountData(res.data);
+       }
       } catch (err) {
         setLoading(false);
         errorService.updateError(err);
       }
     })();
-  }, []);
+  }, [accessData]);
 
   useEffect(() => {
     errorService.clearError();
@@ -65,6 +97,11 @@ const Account = () => {
 
     return () => errorSubscription.unsubscribe();
   }, []);
+
+  const handlePageReload = e => {
+    e.preventDefault();
+    sessionService.set('tmp', accessData.keyHex);
+  }
 
   const handleShowReminderClick = () => {
     if (reminderVisible) {
