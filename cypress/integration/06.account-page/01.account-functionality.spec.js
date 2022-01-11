@@ -12,7 +12,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should display proper validation messages if new email has been not provided', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
     .get('button')
@@ -27,7 +27,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should display format error message if email is invalid', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
       .get('button')
@@ -44,7 +44,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should close change email form if new email is the same as the old one', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
       .get('button')
@@ -58,7 +58,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should change email address', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
       .get('button')
@@ -76,7 +76,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should display password reminder', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
       .get('button')
@@ -95,7 +95,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should hide password reminder', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
       .get('button')
@@ -122,7 +122,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should change display language to english', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
       .get('select')
@@ -139,7 +139,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should display delete account confirmation', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
       .get('button')
@@ -155,7 +155,7 @@ describe('ACCOUNT FUNCTIONALITY', () => {
 
   it('should delete account', () => {
     cy.get('#secure-nav ul li:last-child a').click();
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy
       .get('button')
