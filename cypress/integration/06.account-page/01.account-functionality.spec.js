@@ -8,30 +8,27 @@ describe('ACCOUNT FUNCTIONALITY', () => {
     cy.get('input[name="email"]').type('dominik.krenski@gmail.com');
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
-
-    cy.get('#secure-nav ul li:last-child a').click();
   });
 
   it('should display proper validation messages if new email has been not provided', () => {
-    cy
-      .get('#login-details-table tbody tr td:nth-child(2)')
-      .then(rows => {
-        cy.wrap(rows[0]).should('contain.text', 'dominik.krenski@gmail.com');
-      });
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
 
     cy
-      .get('button')
-      .then(buttons => {
-        cy.wrap(buttons[1]).click();
-        cy.get('button[type="submit"]').click();
-        cy.get('.validation-message ul li')
-      })
-      .then(msgs => {
-        expect(msgs).to.have.length(2);
-      })
+    .get('button')
+    .then(buttons => {
+      cy.wrap(buttons[1]).click();
+      cy.get('button[type="submit"]').click();
+      cy.get('.validation-message ul li')
+    }).then(msgs => {
+      expect(msgs).to.have.length(2);
+    })
   });
 
   it('should display format error message if email is invalid', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('button')
       .then(buttons => {
@@ -46,6 +43,9 @@ describe('ACCOUNT FUNCTIONALITY', () => {
   });
 
   it('should close change email form if new email is the same as the old one', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('button')
       .then(buttons => {
@@ -57,6 +57,9 @@ describe('ACCOUNT FUNCTIONALITY', () => {
   });
 
   it('should change email address', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('button')
       .then(buttons => {
@@ -72,6 +75,9 @@ describe('ACCOUNT FUNCTIONALITY', () => {
   });
 
   it('should display password reminder', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('button')
       .then(buttons => {
@@ -88,6 +94,9 @@ describe('ACCOUNT FUNCTIONALITY', () => {
   });
 
   it('should hide password reminder', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('button')
       .then(buttons => {
@@ -112,6 +121,9 @@ describe('ACCOUNT FUNCTIONALITY', () => {
   });
 
   it('should change display language to english', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('select')
       .then(selects => {
@@ -126,6 +138,9 @@ describe('ACCOUNT FUNCTIONALITY', () => {
   });
 
   it('should display delete account confirmation', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('button')
       .then(buttons => {
@@ -139,6 +154,9 @@ describe('ACCOUNT FUNCTIONALITY', () => {
   });
 
   it('should delete account', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('button')
       .then(buttons => {

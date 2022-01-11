@@ -7,15 +7,17 @@ describe('PASSWORD FUNCTIONALITY', () => {
     cy.get('input[name="email"]').type('dominik.krenski@gmail.com');
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
+  });
 
+  it('should display two passwords', () => {
     cy
       .get('#secure-nav ul a')
       .then(anchors => {
         cy.wrap(anchors[1]).click();
       });
-  });
 
-  it('should display two passwords', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table tbody tr td:nth-child(2)')
       .then(rows => {
@@ -26,6 +28,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display three error messages if title, user and password are not set', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-password-icon').click();
     cy.get('button[type="submit"]').click();
     cy
@@ -36,6 +46,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display error message if title is not set', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-password-icon').click();
     cy.get('input[name="username"]').type('dominik.krenski');
     cy.get('input[name="password"]').type('Dominik1984');
@@ -48,6 +66,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display error message if username is not set', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-password-icon').click();
     cy.get('input[name="entryTitle"]').type('CHOMIKUJ');
     cy.get('input[name="password"]').type('Dominik1984');
@@ -60,6 +86,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display error message if password is not set', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-password-icon').click();
     cy.get('input[name="entryTitle"]').type('CHOMIKUJ');
     cy.get('input[name="username"]').type('dominik.krenski');
@@ -72,6 +106,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should add new password', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-password-icon').click();
     cy.get('input[name="entryTitle"]').type('CHOMIKUJ');
     cy.get('input[name="username"]').type('dominik.krenski');
@@ -87,6 +129,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
 
   it('should display ENERGA 24', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-primary')
       .then(btns => {
         cy.wrap(btns[0]).click();
@@ -100,6 +150,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
 
   it('should display GMAIL', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-primary')
       .then(btns => {
         cy.wrap(btns[1]).click();
@@ -112,6 +170,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should update ENERGA 24', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-info')
       .then(btns => {
@@ -135,6 +201,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should delete all passwords', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[1]).click();
+      });
+
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-danger')
       .then(btns => {

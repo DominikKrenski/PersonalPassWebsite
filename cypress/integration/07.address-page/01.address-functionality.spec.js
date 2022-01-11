@@ -8,14 +8,17 @@ describe('ADDRESS FUNCTIONALITY', () => {
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
 
+  });
+
+  it('should display three addresses', () => {
     cy
       .get('#secure-nav ul a')
       .then(anchors => {
         cy.wrap(anchors[2]).click();
       });
-  });
 
-  it('should display three addresses', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table tbody tr td:nth-child(2)')
       .then(tds => {
@@ -27,12 +30,28 @@ describe('ADDRESS FUNCTIONALITY', () => {
   });
 
   it('should display error message if title is not set', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-address-icon').click();
     cy.get('button[type="submit"]').click();
     cy.get('.validation-message').should('have.text', 'Pole jest wymagane');
   });
 
   it('should create address entry', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-address-icon').click();
     cy.get('input[name="entryTitle"]').type('ADRES TESTOWY');
     cy.get('input[name="firstName"]').type('Marcelina');
@@ -52,6 +71,14 @@ describe('ADDRESS FUNCTIONALITY', () => {
   });
 
   it('should display ADRES DOMOWY', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-primary')
       .then(buttons => {
@@ -76,6 +103,14 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should display MAMA', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-primary')
       .then(buttons => {
         cy.wrap(buttons[1]).click();
@@ -99,6 +134,14 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should display TEŚCIOWA', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-primary')
       .then(buttons => {
         cy.wrap(buttons[2]).click();
@@ -121,6 +164,14 @@ describe('ADDRESS FUNCTIONALITY', () => {
   });
 
   it('should update ADRES DOMOWY', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-info')
       .then(buttons => {
@@ -154,6 +205,14 @@ describe('ADDRESS FUNCTIONALITY', () => {
   });
 
   it('should update TEŚCIOWA', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-info')
       .then(buttons => {
@@ -189,6 +248,14 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should delete address MAMA', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-danger')
       .then(buttons => {
         cy.wrap(buttons[1]).click();
@@ -202,6 +269,14 @@ describe('ADDRESS FUNCTIONALITY', () => {
   });
 
   it('should delete addresses ADRES DOMOWY and TEŚCIOWA', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[2]).click();
+      });
+
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-danger')
       .then(buttons => {

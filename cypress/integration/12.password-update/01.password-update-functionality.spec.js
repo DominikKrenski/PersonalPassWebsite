@@ -8,10 +8,12 @@ describe('UPDATE PASSWORD FUNCTIONALITY', () => {
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
 
-    cy.get('#secure-nav ul li:last-child a').click();
   });
 
   it('should not update password if old and new are the same', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
     .get('#login-details-table button')
     .then(btns => {
@@ -33,6 +35,9 @@ describe('UPDATE PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display proper error message if old password is wrong', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('#login-details-table button')
       .then(btns => {
@@ -49,6 +54,9 @@ describe('UPDATE PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should change password without reminder', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('#login-details-table button')
       .then(btns => {
@@ -69,6 +77,9 @@ describe('UPDATE PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should change password along with reminder', () => {
+    cy.get('#secure-nav ul li:last-child a').click();
+    cy.wait(2000);
+
     cy
       .get('#login-details-table button')
       .then(btns => {

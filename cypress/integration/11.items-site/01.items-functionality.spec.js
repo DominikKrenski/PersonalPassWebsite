@@ -10,6 +10,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should display nine entries', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table table tbody tr')
       .then(rows => {
@@ -18,6 +20,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it ('should display TEŚCIOWA', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
@@ -41,6 +45,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should display ENERGA 24', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
@@ -54,6 +60,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should display NOTATKA 1', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
@@ -64,6 +72,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should display UCZELNIA', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
@@ -74,6 +84,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should update UCZELNIA', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-info')
       .then(btns => {
@@ -97,6 +109,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should update TEŚCIOWA', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-info')
       .then(btns => {
@@ -136,6 +150,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should should update NOTATKA 1', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-info')
       .then(btns => {
@@ -164,6 +180,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should update NOTATKA 1', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-info')
       .then(btns => {
@@ -186,6 +204,8 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should delete specific entries', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-danger')
       .then(btns => {

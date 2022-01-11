@@ -7,15 +7,17 @@ describe('SITE FUNCTIONALITY', () => {
     cy.get('input[name="email"]').type('dominik.krenski@gmail.com');
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
+  });
 
+  it('should display two sites', () => {
     cy
       .get('#secure-nav ul a')
       .then(anchors => {
         cy.wrap(anchors[3]).click();
       });
-  });
 
-  it('should display two sites', () => {
+    cy.wait(2000);
+
     cy
       .get('#data-table tbody tr td:nth-child(2)')
       .then(rows => {
@@ -26,6 +28,14 @@ describe('SITE FUNCTIONALITY', () => {
   });
 
   it('should display two error messages if title and url are not set', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-site-icon').click();
     cy.get('button[type="submit"]').click();
     cy
@@ -36,6 +46,14 @@ describe('SITE FUNCTIONALITY', () => {
   });
 
   it('should display one error message if title is not set', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-site-icon').click();
     cy.get('input[name="url"]').type('https://play24.pl');
     cy.get('button[type="submit"]').click();
@@ -43,6 +61,14 @@ describe('SITE FUNCTIONALITY', () => {
   });
 
   it('should display one error message if url is not set', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-site-icon').click();
     cy.get('input[name="entryTitle"]').type('PLAY');
     cy.get('button[type="submit"]').click();
@@ -50,6 +76,14 @@ describe('SITE FUNCTIONALITY', () => {
   });
 
   it('should create new password', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
     cy.get('#add-site-icon').click();
     cy.get('input[name="entryTitle"]').type('PLAY');
     cy.get('input[name="url"]').type('https://play24.pl');
@@ -64,6 +98,14 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should display STRONA DOMOWA', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-primary')
       .then(btns => {
         cy.wrap(btns[0]).click();
@@ -74,6 +116,14 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should display UCZELNIA', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-primary')
       .then(btns => {
         cy.wrap(btns[1]).click();
@@ -83,6 +133,14 @@ describe('SITE FUNCTIONALITY', () => {
   });
 
   it('should update STRONA DOMOWA', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-info')
       .then(btns => {
@@ -103,6 +161,14 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should update UCZELNIA', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-info')
       .then(btns => {
         cy.wrap(btns[1]).click();
@@ -121,6 +187,14 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should delete STRONA DOMOWA', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-danger')
       .then(btns => {
         cy.wrap(btns[0]).click();
@@ -135,6 +209,14 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should delete UCZELNIA', () => {
     cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
+    cy
       .get('#data-table button.is-danger')
       .then(btns => {
         cy.wrap(btns[1]).click();
@@ -145,6 +227,14 @@ describe('SITE FUNCTIONALITY', () => {
   });
 
   it('should delete all sites', () => {
+    cy
+      .get('#secure-nav ul a')
+      .then(anchors => {
+        cy.wrap(anchors[3]).click();
+      });
+
+    cy.wait(2000);
+
     cy
       .get('#data-table button.is-danger')
       .then(btns => {
