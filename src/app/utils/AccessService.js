@@ -10,6 +10,7 @@
  * @typedef {Object} AccessData
  * @property {string} accessToken - decrypted access token
  * @property {string} refreshToken - decrypted refresh token
+ * @property {string} keyHex - private key in HEX format
  * @property {Uint8Array} masterKey - decrypted master key
  */
 
@@ -68,7 +69,7 @@ class AccessService {
    * @param {string} refreshToken refresh token from server
    * @param {Uint8Array} derivationKey derivation key stored as raw bytes array
    */
-  async saveAccessData(accountId, accessToken, refreshToken, derivationKey) {
+  async saveAccessData(accountId, accessToken, refreshToken, derivationKey, keyHex) {
     // clear all data from session storage
     sessionService.clear();
 
@@ -76,7 +77,8 @@ class AccessService {
     sessionService.set('account_id', accountId);
 
     // encrypt derivation key
-    const encryptedMaster = await encryptionService.encryptMasterKey(derivationKey, process.env.PRIVATE_KEY);
+    //const encryptedMaster = await encryptionService.encryptMasterKey(derivationKey, process.env.PRIVATE_KEY);
+    const encryptedMaster = await encryptionService.encryptMasterKey(derivationKey, keyHex);
 
     // encrypt access token
     const encryptedAccessToken = await encryptionService.encryptData(accessToken, derivationKey);
@@ -96,12 +98,14 @@ class AccessService {
       access_token: encryptedAccessToken.encryptedData,
       refresh_token: encryptedRefreshToken.encryptedData
     });
+
+    await this.passAccessData(keyHex);
   }
 
   /**
    * Decrypts master key, access and refresh token and pass them to all subscribers
    */
-  async passAccessData() {
+  async passAccessData(keyHex) {
     // get refresh_vector HEX from SessionStorage
     const refreshVectorHEX = sessionService.get('refresh_vector');
 
@@ -114,7 +118,7 @@ class AccessService {
     // get account_id from SessionStorage
     const accountId = sessionService.get('account_id');
 
-    // check if all of above constants are not null
+    // check if all of the above constants are not null
     if (!(refreshVectorHEX && accessVectorHEX && privateVectorHEX && accountId)) {
       throw new Error('One of required constants is missing');
     }
@@ -122,8 +126,8 @@ class AccessService {
     // get encrypted master key in HEX format from IndexedDB
     const account = await dbService.accounts.where('account_id').equals(accountId).first();
 
-    // decrypt master key to Unit8Array
-    const masterKey = await encryptionService.decryptMasterKey(account['master_key'], process.env.PRIVATE_KEY, privateVectorHEX);
+    // decrypt master key to Uint8Array
+    const masterKey = await encryptionService.decryptMasterKey(account['master_key'], keyHex, privateVectorHEX);
 
     // decrypt access token
     const accessToken = await encryptionService.decryptData(account['access_token'], accessVectorHEX, masterKey);
@@ -131,9 +135,10 @@ class AccessService {
     // decrypt refresh token
     const refreshToken = await encryptionService.decryptData(account['refresh_token'], refreshVectorHEX, masterKey);
 
-    // pass descoded stuff to other components
+    // pass decoded stuff to other components
     this.#subject.next({
       masterKey: masterKey,
+      keyHex: keyHex,
       accessToken: accessToken,
       refreshToken: refreshToken
     });
@@ -182,7 +187,7 @@ class AccessService {
    *
    * @param {TypedArray} newDerivationKey new derivation key in binary format
    */
-  async changeMasterKey(newDerivationKey) {
+  async changeMasterKey(newDerivationKey, keyHex) {
     const { accessToken, refreshToken } = this.#subject.getValue();
     const accountId = sessionService.get('account_id');
 
@@ -197,7 +202,8 @@ class AccessService {
     }
 
     // encrypt derivation key
-    const encryptedDerivationKey = await encryptionService.encryptMasterKey(newDerivationKey, process.env.PRIVATE_KEY);
+    //const encryptedDerivationKey = await encryptionService.encryptMasterKey(newDerivationKey, process.env.PRIVATE_KEY);
+    const encryptedDerivationKey = await encryptionService.encryptMasterKey(newDerivationKey, keyHex);
 
     // encrypt access token
     const encryptedAccessToken = await encryptionService.encryptData(accessToken, newDerivationKey);
