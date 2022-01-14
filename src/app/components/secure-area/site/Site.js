@@ -237,8 +237,8 @@ const Site = () => {
         />
       }
 
-      <div id="add-site-icon">
-        <FontAwesomeIcon icon="plus-circle" size="3x" onClick={handleAddSiteClick} />
+      <div id="add-site-icon" onClick={handleAddSiteClick}>
+        <FontAwesomeIcon icon="plus-circle" size="3x" />
       </div>
     </div>
   )
