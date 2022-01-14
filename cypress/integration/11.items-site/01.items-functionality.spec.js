@@ -10,8 +10,6 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should display nine entries', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table table tbody tr')
       .then(rows => {
@@ -20,12 +18,10 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it ('should display TEŚCIOWA', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
-        cy.wrap(btns[7]).click();
+        cy.wrap(btns[7]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'TEŚCIOWA');
         cy.get('input[name="firstName"]').should('have.value', 'Bogumiła');
         cy.get('input[name="middleName"]').should('have.value', 'Elżbieta');
@@ -45,12 +41,10 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should display ENERGA 24', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
-        cy.wrap(btns[2]).click();
+        cy.wrap(btns[2]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'ENERGA 24');
         cy.get('input[name="url"]').should('have.value', 'https://energa24.pl');
         cy.get('input[name="username"]').should('have.value', 'krenska.dorota');
@@ -60,77 +54,70 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should display NOTATKA 1', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
-        cy.wrap(btns[5]).click();
+        cy.wrap(btns[5]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'NOTATKA 1');
         cy.get('textarea[name="message"]').should('have.value', 'Zwykła testowa notatka.');
       });
   });
 
   it('should display UCZELNIA', () => {
-    cy.wait(2000);
 
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
-        cy.wrap(btns[8]).click();
+        cy.wrap(btns[8]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'UCZELNIA');
         cy.get('input[name="url"]').should('have.value', 'https://pg.edu.gda.pl');
       });
   });
 
   it('should update UCZELNIA', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-info')
       .then(btns => {
-        cy.wrap(btns[8]).click();
+        cy.wrap(btns[8]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('POLITECHNIKA GDAŃSKA');
         cy.get('input[name="url"]').clear().type('https://pg.gda.pl');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
         cy.wait(2000);
 
         cy.get('#secure-nav a');
       })
       .then(links => {
-        cy.wrap(links[3]).click();
+        cy.wrap(links[3]).click({force: true});
         cy.get('#data-table button.is-primary');
       })
       .then(btns => {
-        cy.wrap(btns[0]).click();
+        cy.wrap(btns[0]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'POLITECHNIKA GDAŃSKA');
         cy.get('input[name="url"]').should('have.value', 'https://pg.gda.pl');
       });
   });
 
   it('should update TEŚCIOWA', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-info')
       .then(btns => {
-        cy.wrap(btns[7]).click();
+        cy.wrap(btns[7]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('1. TEŚCIOWA');
         cy.get('input[name="middleName"]').clear().type('Ewa');
         cy.get('input[name="city"]').clear().type('Radzyń Chełmiński');
         cy.get('input[name="country"]').type('Polska');
         cy.get('input[name="notes"]').clear();
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
         cy.wait(2000);
 
         cy.get('#secure-nav a');
       })
       .then(links => {
-        cy.wrap(links[2]).click();
+        cy.wrap(links[2]).click({force: true});
         cy.get('#data-table button.is-primary');
       })
       .then(btns => {
-        cy.wrap(btns[0]).click();
+        cy.wrap(btns[0]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', '1. TEŚCIOWA');
         cy.get('input[name="firstName"]').should('have.value', 'Bogumiła');
         cy.get('input[name="middleName"]').should('have.value', 'Ewa');
@@ -150,27 +137,25 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should should update NOTATKA 1', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-info')
       .then(btns => {
-        cy.wrap(btns[2]).click();
+        cy.wrap(btns[2]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('1. Energa');
         cy.get('input[name="url"]').clear();
         cy.get('input[name="password"]').clear().type('DKrenski@05_08_1984!');
         cy.get('textarea[name="notes"]').clear().type('Bardzo drogi prąd');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
         cy.wait(2000);
 
         cy.get('#secure-nav a');
       })
       .then(links => {
-        cy.wrap(links[1]).click();
+        cy.wrap(links[1]).click({force: true});
         cy.get('#data-table button.is-primary');
       })
       .then(btns => {
-        cy.wrap(btns[0]).click();
+        cy.wrap(btns[0]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', '1. Energa');
         cy.get('input[name="url"]').should('have.value', '');
         cy.get('input[name="username"]').should('have.value', 'krenska.dorota');
@@ -180,20 +165,18 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should update NOTATKA 1', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-info')
       .then(btns => {
-        cy.wrap(btns[5]).click();
+        cy.wrap(btns[5]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('a.NOTE');
         cy.get('textarea[name="message"]').clear().type('Zaktualizowana notatka');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
         cy.wait(2000);
         cy.get('#secure-nav a');
       })
       .then(links => {
-        cy.wrap(links[4]).click();
+        cy.wrap(links[4]).click({force: true});
         cy.get('#data-table button.is-primary');
       })
       .then(btns => {
@@ -204,25 +187,23 @@ describe('ITEMS FUNCTIONALITY', () => {
   });
 
   it('should delete specific entries', () => {
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-danger')
       .then(btns => {
-        cy.wrap(btns[1]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(btns[1]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
 
         cy.wrap(btns[4]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
 
         cy.wrap(btns[6]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
 
-        cy.wrap(btns[3]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(btns[3]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
 
         cy.get('#data-table tbody tr')
@@ -234,11 +215,11 @@ describe('ITEMS FUNCTIONALITY', () => {
       })
       .then(links => {
         // check passwords
-        cy.wrap(links[1]).click();
+        cy.wrap(links[1]).click({force: true});
         cy.get('#data-table tbody tr td:nth-child(2)').should('have.text', 'ENERGA 24');
 
         // check addressess
-        cy.wrap(links[2]).click();
+        cy.wrap(links[2]).click({force: true});
         cy
           .get('#data-table tbody tr td:nth-child(2)')
           .each(entry => {
@@ -246,11 +227,11 @@ describe('ITEMS FUNCTIONALITY', () => {
           });
 
         // check websites
-        cy.wrap(links[3]).click();
+        cy.wrap(links[3]).click({force: true});
         cy.get('#data-table tbody tr td:nth-child(2)').should('have.text', 'UCZELNIA');
 
         // check notes
-        cy.wrap(links[4]).click();
+        cy.wrap(links[4]).click({force: true});
         cy.get('#data-table tbody tr td:nth-child(2)').should('have.text', 'NOTATKA 1');
       });
   });

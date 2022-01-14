@@ -40,4 +40,4 @@ describe('APP COUNTER FUNCTIONALITY', () => {
         expect(wnd.sessionStorage.getItem('access_vector')).is.null;
       });
   });
-})
+});

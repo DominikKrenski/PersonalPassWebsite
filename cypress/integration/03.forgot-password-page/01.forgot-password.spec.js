@@ -10,15 +10,15 @@ describe('FORGOT PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display proper form', () => {
-    cy.get('#password-hint a').click();
+    cy.get('#password-hint a').click({force: true});
     cy.url().should('contain', '/password-hint');
     cy.get('input').should('have.prop', 'name', 'email');
   });
 
   it('should change input class if email was not provided', () => {
-    cy.get('#password-hint a').click();
+    cy.get('#password-hint a').click({force: true});
     cy.url().should('contain', '/password-hint');
-    cy.get('button').click();
+    cy.get('button').click({force: true});
 
     cy.get('input[name="email"]').should('have.class', 'error');
     cy.on('window:alert', txt => {
@@ -27,10 +27,10 @@ describe('FORGOT PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should change input class if email is not valid', () => {
-    cy.get('#password-hint a').click();
+    cy.get('#password-hint a').click({force: true});
     cy.url().should('contain', '/password-hint');
     cy.get('input[name="email"]').type('dominik@');
-    cy.get('button').click();
+    cy.get('button').click({force: true});
 
     cy.get('input[name="email"]').should('have.class', 'error');
     cy.on('window:alert', txt => {
@@ -39,19 +39,19 @@ describe('FORGOT PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display error message if given email does not exist', () => {
-    cy.get('#password-hint a').click();
+    cy.get('#password-hint a').click({force: true});
     cy.url().should('contain', '/password-hint');
     cy.get('input[name="email"]').type('dominik.krenski@yahoo.com');
-    cy.get('button').click();
+    cy.get('button').click({force: true});
 
     cy.get('#server-error-body p').should('have.text', 'Konto nie istnieje');
   });
 
   it('should send email with password hint and redirect to /signin', () => {
-    cy.get('#password-hint a').click();
+    cy.get('#password-hint a').click({force: true});
     cy.url().should('contain', '/password-hint');
     cy.get('input[name="email"]').type('dominik.krenski@gmail.com');
-    cy.get('button').click();
+    cy.get('button').click({force: true});
     cy.url().should('contain', '/signin');
   })
 })

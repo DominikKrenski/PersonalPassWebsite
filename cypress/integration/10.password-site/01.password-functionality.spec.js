@@ -7,17 +7,15 @@ describe('PASSWORD FUNCTIONALITY', () => {
     cy.get('input[name="email"]').type('dominik.krenski@gmail.com');
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
-  });
 
-  it('should display two passwords', () => {
     cy
       .get('#secure-nav ul a')
       .then(anchors => {
-        cy.wrap(anchors[1]).click();
+        cy.wrap(anchors[1]).click({force: true});
       });
+  });
 
-    cy.wait(2000);
-
+  it('should display two passwords', () => {
     cy
       .get('#data-table tbody tr td:nth-child(2)')
       .then(rows => {
@@ -28,16 +26,8 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display three error messages if title, user and password are not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-password-icon').click();
-    cy.get('button[type="submit"]').click();
+    cy.get('#add-password-icon').click({force: true});
+    cy.get('button[type="submit"]').click({force: true});
     cy
       .get('.validation-message')
       .then(msgs => {
@@ -46,18 +36,10 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display error message if title is not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-password-icon').click();
+    cy.get('#add-password-icon').click({force: true});
     cy.get('input[name="username"]').type('dominik.krenski');
     cy.get('input[name="password"]').type('Dominik1984');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
     cy
       .get('.validation-message')
       .then(msgs => {
@@ -66,18 +48,10 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display error message if username is not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-password-icon').click();
+    cy.get('#add-password-icon').click({force: true});
     cy.get('input[name="entryTitle"]').type('CHOMIKUJ');
     cy.get('input[name="password"]').type('Dominik1984');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
     cy
       .get('.validation-message')
       .then(msgs => {
@@ -86,18 +60,10 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display error message if password is not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-password-icon').click();
+    cy.get('#add-password-icon').click({force: true});
     cy.get('input[name="entryTitle"]').type('CHOMIKUJ');
     cy.get('input[name="username"]').type('dominik.krenski');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
     cy
       .get('.validation-message')
       .then(msgs => {
@@ -106,20 +72,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should add new password', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-password-icon').click();
+    cy.get('#add-password-icon').click({force: true});
     cy.get('input[name="entryTitle"]').type('CHOMIKUJ');
     cy.get('input[name="username"]').type('dominik.krenski');
     cy.get('input[name="password"]').type('Dominik1984');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
+
     cy.wait(2000);
+
     cy
       .get('#data-table table tbody tr')
       .then(rows => {
@@ -129,17 +89,9 @@ describe('PASSWORD FUNCTIONALITY', () => {
 
   it('should display ENERGA 24', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-primary')
       .then(btns => {
-        cy.wrap(btns[0]).click();
+        cy.wrap(btns[0]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'ENERGA 24');
         cy.get('input[name="url"]').should('have.value', 'https://energa24.pl');
         cy.get('input[name="username"]').should('have.value', 'krenska.dorota');
@@ -149,14 +101,6 @@ describe('PASSWORD FUNCTIONALITY', () => {
   });
 
   it('should display GMAIL', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
     cy
       .get('#data-table button.is-primary')
       .then(btns => {
@@ -171,21 +115,14 @@ describe('PASSWORD FUNCTIONALITY', () => {
 
   it('should update ENERGA 24', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-info')
       .then(btns => {
-        cy.wrap(btns[0]).click();
+        cy.wrap(btns[0]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('PRĄD');
         cy.get('input[name="url"]').clear();
         cy.get('textarea[name="notes"]').type(' coraz to wyższe');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
+
         cy.wait(2000);
 
         cy.get('#data-table button.is-primary')
@@ -202,22 +139,18 @@ describe('PASSWORD FUNCTIONALITY', () => {
 
   it('should delete all passwords', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[1]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-danger')
       .then(btns => {
-        cy.wrap(btns[0]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(btns[0]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
+
         cy.wait(2000);
-        cy.get('#data-table button.is-danger').click();
-        cy.get('#confirmation-footer button.is-danger').click();
+
+        cy.get('#data-table button.is-danger').click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
+
         cy.wait(2000);
+
         cy.get('#data-table').should('not.exist');
       });
   });

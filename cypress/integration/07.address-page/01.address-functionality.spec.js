@@ -8,17 +8,14 @@ describe('ADDRESS FUNCTIONALITY', () => {
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
 
-  });
-
-  it('should display three addresses', () => {
     cy
       .get('#secure-nav ul a')
       .then(anchors => {
-        cy.wrap(anchors[2]).click();
+        cy.wrap(anchors[2]).click({force: true});
       });
+  });
 
-    cy.wait(2000);
-
+  it('should display three addresses', () => {
     cy
       .get('#data-table tbody tr td:nth-child(2)')
       .then(tds => {
@@ -30,36 +27,20 @@ describe('ADDRESS FUNCTIONALITY', () => {
   });
 
   it('should display error message if title is not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-address-icon').click();
+    cy.get('#add-address-icon').click({force: true});
     cy.get('button[type="submit"]').click();
     cy.get('.validation-message').should('have.text', 'Pole jest wymagane');
   });
 
   it('should create address entry', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-address-icon').click();
+    cy.get('#add-address-icon').click({force: true});
     cy.get('input[name="entryTitle"]').type('ADRES TESTOWY');
     cy.get('input[name="firstName"]').type('Marcelina');
     cy.get('input[name="lastName"]').type('Zawadzka');
     cy.get('input[name="city"]').type('Bydgoszcz');
     cy.get('input[name="state"]').type('kujawsko-pomorskie');
     cy.get('input[name="notes"]').type('Śmierć odeń gorzką nie więcej być może.');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
 
     cy.wait(2000);
 
@@ -72,17 +53,9 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should display ADRES DOMOWY', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-primary')
       .then(buttons => {
-        cy.wrap(buttons[0]).click();
+        cy.wrap(buttons[0]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'ADRES DOMOWY');
         cy.get('input[name="firstName"]').should('have.value', 'Dominik');
         cy.get('input[name="middleName"]').should('have.value', '');
@@ -103,17 +76,9 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should display MAMA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-primary')
       .then(buttons => {
-        cy.wrap(buttons[1]).click();
+        cy.wrap(buttons[1]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'MAMA');
         cy.get('input[name="firstName"]').should('have.value', 'Helena');
         cy.get('input[name="middleName"]').should('have.value', '');
@@ -134,17 +99,9 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should display TEŚCIOWA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-primary')
       .then(buttons => {
-        cy.wrap(buttons[2]).click();
+        cy.wrap(buttons[2]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'TEŚCIOWA');
         cy.get('input[name="firstName"]').should('have.value', 'Bogumiła');
         cy.get('input[name="middleName"]').should('have.value', 'Elżbieta');
@@ -165,19 +122,11 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should update ADRES DOMOWY', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-info')
       .then(buttons => {
-        cy.wrap(buttons[0]).click();
+        cy.wrap(buttons[0]).click({force: true});
         cy.get('input[name="company"]').clear().type('LUFTHANSA LTD.');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
       });
 
       cy.wait(2000);
@@ -185,7 +134,7 @@ describe('ADDRESS FUNCTIONALITY', () => {
       cy
         .get('#data-table button.is-primary')
         .then(buttons => {
-          cy.wrap(buttons[0]).click();
+          cy.wrap(buttons[0]).click({force: true});
           cy.get('input[name="entryTitle"]').should('have.value', 'ADRES DOMOWY');
           cy.get('input[name="firstName"]').should('have.value', 'Dominik');
           cy.get('input[name="middleName"]').should('have.value', '');
@@ -206,28 +155,21 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should update TEŚCIOWA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-info')
       .then(buttons => {
-        cy.wrap(buttons[2]).click();
+        cy.wrap(buttons[2]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('TEŚCIOWA - UPDATED');
         cy.get('input[name="middleName"]').clear().type('Ewa');
         cy.get('input[name="country"]').type('Polska');
         cy.get('input[name="city"]').type('Radzyń Chełmiński');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
 
         cy.wait(2000);
+
         cy.get('#data-table button.is-primary');
       })
       .then(buttons => {
-        cy.wrap(buttons[2]).click();
+        cy.wrap(buttons[2]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'TEŚCIOWA - UPDATED');
         cy.get('input[name="firstName"]').should('have.value', 'Bogumiła');
         cy.get('input[name="middleName"]').should('have.value', 'Ewa');
@@ -248,18 +190,10 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should delete address MAMA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-danger')
       .then(buttons => {
-        cy.wrap(buttons[1]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(buttons[1]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
         cy.get('#data-table table tbody tr');
       })
@@ -270,18 +204,10 @@ describe('ADDRESS FUNCTIONALITY', () => {
 
   it('should delete addresses ADRES DOMOWY and TEŚCIOWA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[2]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-danger')
       .then(buttons => {
-        cy.wrap(buttons[2]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(buttons[2]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
         cy.get('#data-table table tbody tr')
       })
@@ -290,8 +216,8 @@ describe('ADDRESS FUNCTIONALITY', () => {
         cy.get('#data-table button.is-danger')
       })
       .then(buttons => {
-        cy.wrap(buttons[0]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(buttons[0]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
         cy.get('#data-table table tbody tr');
       })
@@ -299,6 +225,4 @@ describe('ADDRESS FUNCTIONALITY', () => {
         expect(rows).to.have.length(1);
       });
   });
-
-
 });

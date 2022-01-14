@@ -7,17 +7,15 @@ describe('NOTE FUNCTIONALITY', () => {
     cy.get('input[name="email"]').type('dominik.krenski@gmail.com');
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
-  });
 
-  it('should display two notes', () => {
     cy
       .get('#secure-nav ul a')
       .then(anchors => {
-        cy.wrap(anchors[4]).click();
+        cy.wrap(anchors[4]).click({force: true});
       });
+  });
 
-    cy.wait(2000);
-
+  it('should display two notes', () => {
     cy
       .get('#data-table tbody tr td:nth-child(2)')
       .then(tds => {
@@ -28,16 +26,8 @@ describe('NOTE FUNCTIONALITY', () => {
   });
 
   it('should display two error messages if title and note are not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-note-icon').click();
-    cy.get('button[type="submit"]').click();
+    cy.get('#add-note-icon').click({force: true});
+    cy.get('button[type="submit"]').click({force: true});
     cy
       .get('.validation-message')
       .each(msg => {
@@ -46,49 +36,27 @@ describe('NOTE FUNCTIONALITY', () => {
   });
 
   it('should display one error message if title is not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-note-icon').click();
+    cy.get('#add-note-icon').click({force: true});
     cy.get('textarea[name="message"]').type('stupid message');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
     cy.get('.validation-message').should('have.text', 'Pole jest wymagane');
   });
 
   it('should display one error message if message is not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-note-icon').click();
+    cy.get('#add-note-icon').click({force: true});
     cy.get('input[name="entryTitle"]').type('DUMMY');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
     cy.get('.validation-message').should('have.text', 'Pole jest wymagane');
   });
 
   it('should create new note', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-note-icon').click();
+    cy.get('#add-note-icon').click({force: true});
     cy.get('input[name="entryTitle"]').type('DUMMY');
     cy.get('textarea[name="message"]').type('dummy message');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
+
     cy.wait(2000);
+
     cy
       .get('#data-table table tbody tr')
       .then(rows => {
@@ -97,14 +65,6 @@ describe('NOTE FUNCTIONALITY', () => {
   });
 
   it('should display Dante Alighieri - Boska komedia', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
     const msg = "Prze­ze mnie dro­ga w mia­sto utra­pie­nia,\n" +
     "Prze­ze mnie dro­ga w wie­ku­iste męki,\n" +
     "Prze­ze mnie dro­ga w na­ród za­tra­ce­nia.\n" +
@@ -118,7 +78,7 @@ describe('NOTE FUNCTIONALITY', () => {
     cy
       .get('#data-table button.is-primary')
       .then(buttons => {
-        cy.wrap(buttons[0]).click();
+        cy.wrap(buttons[0]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'Dante Alighieri - Boska komedia');
         cy.get('textarea[name="message"]').should('have.value', msg);
       });
@@ -126,17 +86,9 @@ describe('NOTE FUNCTIONALITY', () => {
 
   it('should display NOTATKA 1', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-primary')
       .then(buttons => {
-        cy.wrap(buttons[1]).click();
+        cy.wrap(buttons[1]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'NOTATKA 1');
         cy.get('textarea[name="message"]').should('have.value', 'Zwykła testowa notatka.');
       });
@@ -144,27 +96,19 @@ describe('NOTE FUNCTIONALITY', () => {
 
   it('should update Dante Alighieri - Boska komedia', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-info')
       .then(buttons => {
-        cy.wrap(buttons[0]).click();
+        cy.wrap(buttons[0]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('Dante Alighieri');
         cy.get('textarea[name="message"]').clear().type('Updated text');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
 
         cy.wait(2000);
 
         cy
           .get('#data-table button.is-primary')
           .then(buttons => {
-            cy.wrap(buttons[0]).click();
+            cy.wrap(buttons[0]).click({force: true});
             cy.get('input[name="entryTitle"]').should('have.value', 'Dante Alighieri');
             cy.get('textarea[name="message"]').should('have.value', 'Updated text');
           });
@@ -173,27 +117,19 @@ describe('NOTE FUNCTIONALITY', () => {
 
   it('should update NOTATKA 1', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-info')
       .then(buttons => {
-        cy.wrap(buttons[1]).click();
+        cy.wrap(buttons[1]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('a. Notatka');
         cy.get('textarea[name="message"]').clear().type('New message.');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
 
         cy.wait(2000);
 
         cy
           .get('#data-table button.is-primary')
           .then(buttons => {
-            cy.wrap(buttons[0]).click();
+            cy.wrap(buttons[0]).click({force: true});
             cy.get('input[name="entryTitle"]').should('have.value', 'a. Notatka');
             cy.get('textarea[name="message"]').should('have.value', "New message.");
           });
@@ -202,17 +138,9 @@ describe('NOTE FUNCTIONALITY', () => {
 
   it('should delete NOTATKA 1', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-danger')
       .then(buttons => {
-        cy.wrap(buttons[1]).click();
+        cy.wrap(buttons[1]).click({force: true});
         cy.get('#confirmation-footer button.is-danger').click();
         cy.wait(2000);
         cy.get('#data-table table tbody tr')
@@ -224,23 +152,15 @@ describe('NOTE FUNCTIONALITY', () => {
 
   it('should delete all notes', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[4]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-danger')
       .then(buttons => {
-        cy.wrap(buttons[1]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(buttons[1]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
-        cy.get('#data-table button.is-danger').click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.get('#data-table button.is-danger').click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
         cy.wait(2000);
         cy.get('#data-table').should('not.exist');
-      })
-  })
-})
+      });
+  });
+});

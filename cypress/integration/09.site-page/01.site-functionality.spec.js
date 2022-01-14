@@ -7,17 +7,15 @@ describe('SITE FUNCTIONALITY', () => {
     cy.get('input[name="email"]').type('dominik.krenski@gmail.com');
     cy.get('input[name="password"]').type('Dominik1984!');
     cy.get('button[type="submit"]').click();
-  });
 
-  it('should display two sites', () => {
     cy
       .get('#secure-nav ul a')
       .then(anchors => {
-        cy.wrap(anchors[3]).click();
+        cy.wrap(anchors[3]).click({force: true});
       });
+  });
 
-    cy.wait(2000);
-
+  it('should display two sites', () => {
     cy
       .get('#data-table tbody tr td:nth-child(2)')
       .then(rows => {
@@ -28,16 +26,8 @@ describe('SITE FUNCTIONALITY', () => {
   });
 
   it('should display two error messages if title and url are not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-site-icon').click();
-    cy.get('button[type="submit"]').click();
+    cy.get('#add-site-icon').click({force: true});
+    cy.get('button[type="submit"]').click({force: true});
     cy
       .get('.validation-message')
       .each(msg => {
@@ -46,49 +36,27 @@ describe('SITE FUNCTIONALITY', () => {
   });
 
   it('should display one error message if title is not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-site-icon').click();
+    cy.get('#add-site-icon').click({force: true});
     cy.get('input[name="url"]').type('https://play24.pl');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
     cy.get('.validation-message').should('have.text', 'Pole jest wymagane');
   });
 
   it('should display one error message if url is not set', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-site-icon').click();
+    cy.get('#add-site-icon').click({force: true});
     cy.get('input[name="entryTitle"]').type('PLAY');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
     cy.get('.validation-message').should('have.text', 'Pole jest wymagane');
   });
 
-  it('should create new password', () => {
-    cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy.get('#add-site-icon').click();
+  it('should create new site', () => {
+    cy.get('#add-site-icon').click({force: true});
     cy.get('input[name="entryTitle"]').type('PLAY');
     cy.get('input[name="url"]').type('https://play24.pl');
-    cy.get('button[type="submit"]').click();
+    cy.get('button[type="submit"]').click({force: true});
+
     cy.wait(2000);
+
     cy
       .get('#data-table table tbody tr')
       .then(rows => {
@@ -98,17 +66,9 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should display STRONA DOMOWA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-primary')
       .then(btns => {
-        cy.wrap(btns[0]).click();
+        cy.wrap(btns[0]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'STRONA DOMOWA');
         cy.get('input[name="url"]').should('have.value', 'https://dominik-krenski.ovh');
       });
@@ -116,17 +76,9 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should display UCZELNIA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-primary')
       .then(btns => {
-        cy.wrap(btns[1]).click();
+        cy.wrap(btns[1]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'UCZELNIA');
         cy.get('input[name="url"]').should('have.value', 'https://pg.edu.gda.pl');
       });
@@ -134,26 +86,19 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should update STRONA DOMOWA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-info')
       .then(btns => {
-        cy.wrap(btns[0]).click();
+        cy.wrap(btns[0]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('PERSONAL PASS');
         cy.get('input[name="url"]').clear().type('https://pass.dominik-krenski.ovh');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
+
         cy.wait(2000);
 
         cy.get('#data-table button.is-primary');
       })
       .then(btns => {
-        cy.wrap(btns[0]).click();
+        cy.wrap(btns[0]).click({force: true});
         cy.get('input[name="entryTitle"]').should('have.value', 'PERSONAL PASS');
         cy.get('input[name="url"]').should('have.value', 'https://pass.dominik-krenski.ovh');
       });
@@ -161,19 +106,12 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should update UCZELNIA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-info')
       .then(btns => {
-        cy.wrap(btns[1]).click();
+        cy.wrap(btns[1]).click({force: true});
         cy.get('input[name="entryTitle"]').clear().type('POLITECHNIKA GDAŃSKA');
-        cy.get('button[type="submit"]').click();
+        cy.get('button[type="submit"]').click({force: true});
+
         cy.wait(2000);
 
         cy.get('#data-table button.is-primary');
@@ -187,19 +125,13 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should delete STRONA DOMOWA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-danger')
       .then(btns => {
-        cy.wrap(btns[0]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(btns[0]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
+
         cy.wait(2000);
+
         cy.get('#data-table table tbody tr')
       })
       .then(rows => {
@@ -209,42 +141,32 @@ describe('SITE FUNCTIONALITY', () => {
 
   it('should delete UCZELNIA', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-danger')
       .then(btns => {
-        cy.wrap(btns[1]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(btns[1]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
+
         cy.wait(2000);
+
         cy.get('#data-table table tbody tr td:nth-child(2)').should('have.text', 'STRONA DOMOWA');
       });
   });
 
   it('should delete all sites', () => {
     cy
-      .get('#secure-nav ul a')
-      .then(anchors => {
-        cy.wrap(anchors[3]).click();
-      });
-
-    cy.wait(2000);
-
-    cy
       .get('#data-table button.is-danger')
       .then(btns => {
-        cy.wrap(btns[0]).click();
-        cy.get('#confirmation-footer button.is-danger').click();
+        cy.wrap(btns[0]).click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
+
         cy.wait(2000);
-        cy.get('#data-table button.is-danger').click();
-        cy.get('#confirmation-footer button.is-danger').click();
+
+        cy.get('#data-table button.is-danger').click({force: true});
+        cy.get('#confirmation-footer button.is-danger').click({force: true});
+
         cy.wait(2000);
+
         cy.get('#data-table').should('not.exist');
-      })
-  })
-})
+      });
+  });
+});
