@@ -21,6 +21,8 @@ COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY ./dist/ /usr/share/nginx/html
 COPY .env /usr/share/nginx/html/.env
 
+VOLUME /var/log/nginx
+
 EXPOSE 8080
 
 USER $UID
