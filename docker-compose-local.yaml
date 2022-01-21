@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: pass-website-local
+    restart: always
+    ports:
+     - "8080:8080"
+    volumes:
+    - "pass-website:/var/log/nginx"
+
+volumes:
+  pass-website:
